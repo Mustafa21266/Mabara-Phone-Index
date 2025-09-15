@@ -1,0 +1,24 @@
+export const REGISTER = 'REGISTER';
+export const LOGIN_ADMIN = 'LOGIN_ADMIN';
+export const LOGOUT_ADMIN = 'LOGOUT_ADMIN';
+export const EDIT_PROFILE = 'EDIT_PROFILE';
+
+
+
+export const GET_USER_DETAILS = 'GET_USER_DETAILS';
+
+//Article Constants
+export const CREATE_ARTICLE = 'CREATE_ARTICLE';
+export const UPDATE_ARTICLE = 'UPDATE_ARTICLE';
+export const DELETE_ARTICLE = 'DELETE_ARTICLE';
+export const GET_ALL_ARTICLES = 'GET_ALL_ARTICLES';
+export const SEARCH_ARTICLES = 'SEARCH_ARTICLES';
+
+export const GET_ALL_USERS = 'GET_ALL_USERS';
+
+
+export const EDIT_PROFILE_ADMIN = 'EDIT_PROFILE_ADMIN';
+export const DELETE_USER_ADMIN = 'DELETE_USER_ADMIN';
+
+export const FORGOT_PASSWORD = 'FORGOT_PASSWORD';
+export const RESET_PASSWORD = 'RESET_PASSWORD';

@@ -10,23 +10,28 @@ import { MDBDataTable } from "mdbreact";
 import MetaData from "../MetaData";
 import Loader from "../Loader";
 import { getAllSites } from "../../actions/siteActions";
+import { getAllFloors } from "../../actions/floorActions";
 class Dashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
       users: [],
       sites: [],
+      floors: [],
       loading: true,
     };
     store.dispatch(getAllUsers()).then(async (usersData) => {
       if (usersData.success === true) {
         store.dispatch(getAllSites()).then(async (sitesData) => {
+          store.dispatch(getAllFloors()).then(async (floorsData) => {
           console.log(sitesData)
           this.setState({
             users: usersData.users,
             sites: sitesData,
+            floors: floorsData,
             loading: false,
           });
+        })
         })
         } else {
           toast.error(usersData.message);
@@ -160,6 +165,67 @@ class Dashboard extends Component {
     });
     return data;
   }
+    setFloors() {
+    const data = {
+      columns: [
+        {
+          label: "ID",
+          field: "id",
+          sort: "asc",
+        },
+        {
+          label: "الأسم",
+          field: "name",
+          sort: "asc",
+        },
+        {
+          label: "رقم الطابق",
+          field: "number",
+          sort: "asc",
+        },
+        {
+          label: "المكان",
+          field: "site",
+          sort: "asc",
+        },
+        {
+          label: "تاريخ التسجيل",
+          field: "createdAt",
+          sort: "asc",
+        },
+        {
+          label: "Actions",
+          field: "actions",
+        },
+      ],
+      rows: [],
+    };
+    this.state.floors.forEach((floor) => {
+      data.rows = data.rows.concat({
+        id: floor._id,
+        name: floor.name,
+        number: floor.number,
+        site: floor.site,
+        createdAt: String(floor.createdAt).substring(0, 10),
+        actions: (
+          <Fragment>
+            <div className="row">
+              <div className="col-12 d-flex justify-content-center">
+                <Link
+                  to={`/admin/floor/update/${floor._id}`}
+                  className="btn btn-primary py-2 px-3"
+                >
+                  <i className="bi bi-pen"></i>
+                </Link>
+              </div>
+            </div>
+            <hr />
+          </Fragment>
+        ),
+      });
+    });
+    return data;
+  }
   render() {
     return (
       <Fragment>
@@ -238,7 +304,22 @@ class Dashboard extends Component {
                       aria-selected="false"
                       style={{color: 'white'}}
                     >
-                      المستخدمين
+                      الأماكن
+                    </a>
+                  </li>
+                                      <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      id="floor-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#floor"
+                      type="button"
+                      role="tab"
+                      aria-controls="floor"
+                      aria-selected="false"
+                      style={{color: 'white'}}
+                    >
+                      الطوابق
                     </a>
                   </li>
                 </ul>
@@ -338,6 +419,42 @@ class Dashboard extends Component {
                       >
                       </div>
                     </div>
+                    <br></br>
+                                        <div className="row">
+                      <div
+                        className="col-12 col-lg-6"
+                        style={{ textAlign: "center" }}
+                      >
+                        <div className="card">
+                          <br></br>
+                          <i
+                            className="bi bi-buildings"
+                            style={{ fontSize: "7rem" }}
+                          ></i>
+                          <div className="card-body">
+                            <h4 className="card-title text-center">
+                              {this.state.floors ? this.state.floors.length : 0}
+                            </h4>
+                            <p className="card-text text-center">الطوابق</p>
+                            <hr></hr>
+                            <a
+                              className="card-text text-center"
+                              type="button"
+                              onClick={(e) =>
+                                document.getElementById("floor-tab").click()
+                              }
+                            >
+                              عرض التفاصيل
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      <div
+                        className="col-12 col-lg-6"
+                        style={{ textAlign: "center" }}
+                      >
+                      </div>
+                    </div>
                   </div>
                   <div
                     className="tab-pane fade"
@@ -363,6 +480,22 @@ class Dashboard extends Component {
                   >
                     <MDBDataTable
                       data={this.setSites()}
+                      className="px-3"
+                      bordered
+                      striped
+                      hover
+                      responsive
+                      dir="rtl"
+                    />
+                  </div>
+                                    <div
+                    className="tab-pane fade"
+                    id="floor"
+                    role="tabpanel"
+                    aria-labelledby="floor-tab"
+                  >
+                    <MDBDataTable
+                      data={this.setFloors()}
                       className="px-3"
                       bordered
                       striped

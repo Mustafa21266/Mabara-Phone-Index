@@ -44,6 +44,8 @@ import NewPassword from "./components/User/NewPassword";
 import Cookies from 'js-cookie';
 import CreateSite from './components/Admin/CreateSite'
 import EditSite from './components/Admin/EditSite'
+import CreateFloor from './components/Admin/CreateFloor'
+import EditFloor from './components/Admin/EditFloor'
 class App extends Component {
   constructor(props) {
     super(props);
@@ -106,6 +108,12 @@ class App extends Component {
             </Route>
             <Route path="/admin/site/update/:id" exact>
               <EditSite />
+            </Route>
+            <Route path="/admin/floor/create" exact>
+              <CreateFloor />
+            </Route>
+            <Route path="/admin/floor/update/:id" exact>
+              <EditFloor />
             </Route>
             <Route path="/admin/pc/create" exact>
               <CreatePC />

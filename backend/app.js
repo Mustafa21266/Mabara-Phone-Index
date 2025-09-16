@@ -12,7 +12,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(cookieParser());
 app.use(fileUpload());
 
-const PORT = 3000;
+const PORT = 3001;
 
 
 const user = require("./routes/user");
@@ -21,6 +21,9 @@ const admin = require("./routes/admin");
 app.use("/api/v1", admin);
 const site = require("./routes/site");
 app.use("/api/v1", site);
+const floor = require("./routes/floor");
+app.use("/api/v1", floor);
+
 
 app.listen(PORT, (error) =>{
     if(!error)

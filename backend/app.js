@@ -23,6 +23,8 @@ const site = require("./routes/site");
 app.use("/api/v1", site);
 const floor = require("./routes/floor");
 app.use("/api/v1", floor);
+const extension = require("./routes/extension");
+app.use("/api/v1", extension);
 
 
 app.listen(PORT, (error) =>{

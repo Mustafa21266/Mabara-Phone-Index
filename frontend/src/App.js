@@ -24,7 +24,6 @@ import "froala-editor/js/froala_editor.pkgd.min.js";
 import "froala-editor/css/froala_style.min.css";
 import "froala-editor/css/froala_editor.pkgd.min.css";
 
-import CreatePC from "./components/Admin/CreatePC";
 // Require Font Awesome.
 // import 'font-awesome/css/font-awesome.css';
 import CreateArticle from "./components/Admin/CreateArticle";
@@ -36,7 +35,6 @@ import store from "./store";
 import { Fragment } from "react";
 import Dashboard from "./components/Admin/Dashboard";
 import { getAllArticles } from "./actions/articleActions";
-import { getAllPCs } from "./actions/pcActions";
 import EditUser from "./components/Admin/EditUser";
 import Loader from "./components/Loader";
 import ForgotPassword from "./components/User/ForgotPassword";
@@ -46,6 +44,11 @@ import CreateSite from './components/Admin/CreateSite'
 import EditSite from './components/Admin/EditSite'
 import CreateFloor from './components/Admin/CreateFloor'
 import EditFloor from './components/Admin/EditFloor'
+import CreateExtension from './components/Admin/CreateExtension'
+import EditExtension from './components/Admin/EditExtension'
+import { getAllSites } from "./actions/siteActions";
+import { getAllFloors } from "./actions/floorActions";
+import { getAllExtensions } from "./actions/extensionActions";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -59,17 +62,16 @@ class App extends Component {
     setTimeout(()=>{
     console.log(localStorage.getItem('token'))
     store.dispatch(getUserDetails(localStorage.getItem('token'))).then((data) => {
-              if (data.success) {
-                store.dispatch(getAllPCs()).then((data) => {
+              store.dispatch(getAllSites()).then((data) => {
+                store.dispatch(getAllFloors()).then((data) => {
+              store.dispatch(getAllExtensions()).then((data) => {
               if (data.success) {
                 this.setState({ refresh: true, loading: false });
               } else {
                 this.setState({ loading: false });
-              }
-    });
-              } else {
-                this.setState({ loading: false });
-              }
+              }})
+          });
+      });
     });
     },2000)
 
@@ -115,8 +117,11 @@ class App extends Component {
             <Route path="/admin/floor/update/:id" exact>
               <EditFloor />
             </Route>
-            <Route path="/admin/pc/create" exact>
-              <CreatePC />
+              <Route path="/admin/extension/create" exact>
+              <CreateExtension />
+            </Route>
+            <Route path="/admin/extension/update/:id" exact>
+              <EditExtension />
             </Route>
             <Route path="/admin/article/create" exact>
               <CreateArticle />

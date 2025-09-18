@@ -428,7 +428,7 @@ class Dashboard extends Component {
                         <div className="card">
                           <br></br>
                           <i
-                            className="bi bi-buildings"
+                            className="bi bi-house"
                             style={{ fontSize: "7rem" }}
                           ></i>
                           <div className="card-body">

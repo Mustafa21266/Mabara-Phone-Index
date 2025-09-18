@@ -1,14 +1,14 @@
 import {
-    CREATE_PC,
-    GET_ALL_PCS,
-    UPDATE_PC,
-    DELETE_PC,
-    SEARCH_PCS
-} from "../constants/pcConstants";
+    CREATE_FLOOR,
+    GET_ALL_FLOORS,
+    UPDATE_FLOOR,
+    DELETE_FLOOR,
+    SEARCH_FLOORS
+} from "../constants/floorConstants";
 
 const initialState = {
-    pc: {},
-    pcs: []
+    floor: {},
+    floors: []
 };
 
 // return Object.assign({}, state, {
@@ -19,41 +19,41 @@ const initialState = {
 //     message: action.payload.message
 // })
 
-function pcReducer(state = initialState, action) {
+function floorReducer(state = initialState, action) {
     switch (action.type) {
-        case CREATE_PC:
+        case CREATE_FLOOR:
             return Object.assign({}, state, {
-                pcs: state.pcs.concat(action.payload.pc),
+                floors: state.floors.concat(action.payload.floor),
                 success: action.payload.success,
                 message: action.payload.message
             })
-        case UPDATE_PC:
+        case UPDATE_FLOOR:
             return Object.assign({}, state, {
                 success: action.payload.success,
                 message: action.payload.message,
-                pcs: state.pcs.map(pc => {
-                    if (pc._id === action.payload.pc._id) {
-                        pc = action.payload.pc
-                        return pc
+                floors: state.floors.map(floor => {
+                    if (floor._id === action.payload.floor._id) {
+                        floor = action.payload.floor
+                        return floor
                     }
-                    return pc
+                    return floor
                 })
             })
-        case DELETE_PC:
+        case DELETE_FLOOR:
             return Object.assign({}, state, {
-                pc: action.payload.pc,
+                floor: action.payload.floor,
                 success: action.payload.success,
                 message: action.payload.message,
-                pcs: state.pcs.filter(pc => pc._id !== action.payload.pc._id)
+                floors: state.floors.filter(floor => floor._id !== action.payload.floor._id)
             })
-        case GET_ALL_PCS:
+        case GET_ALL_FLOORS:
             return Object.assign({}, state, {
-                pcs: action.payload.pcs
+                floors: action.payload.floors
             })
-        case SEARCH_PCS:
+        case SEARCH_FLOORS:
             return Object.assign({}, state, {
                 success: action.payload.success,
-                searchArticles: action.payload.pcs
+                searchArticles: action.payload.floors
             })
         default:
             return state;
@@ -61,4 +61,4 @@ function pcReducer(state = initialState, action) {
 
 };
 
-export default pcReducer;
+export default floorReducer;

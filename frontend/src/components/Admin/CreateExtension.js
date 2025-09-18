@@ -1,22 +1,24 @@
 import React, { Component } from "react";
 import { Fragment } from "react";
 import { Redirect } from "react-router-dom";
-import { createFloor } from "../../actions/floorActions";
+import { createExtension } from "../../actions/extensionActions";
 import store from "../../store";
 import { toast } from "material-react-toastify";
 import MetaData from "../MetaData";
 import Loader from "../Loader";
 
-class CreateFloor extends Component {
+class CreateExtension extends Component {
   formData = new FormData();
   constructor(props) {
     super(props);
     this.state = {
-      floorCreated: false,
-      nameArabic: '',
-      nameEnglish: '',
-      number: '',
-      site: '',
+      extensionCreated: false,
+      name: '',
+      extension: '',
+      site: store
+        .getState()
+        .site.sites[0]._id,
+      floor: '',
       loading: true,
     };
     // this.submitHandler = this.submitHandler.bind(this);
@@ -30,18 +32,18 @@ class CreateFloor extends Component {
     e.preventDefault();
     const formData = new FormData();
     document.getElementById("loader").style.display = "block";
-    formData.set("nameArabic", e.target.nameArabic.value);
-    formData.set("nameEnglish", e.target.nameEnglish.value);
-    formData.set("number", e.target.number.value);
+    formData.set("name", e.target.name.value);
+    formData.set("extension", e.target.extension.value);
     formData.set("site", e.target.site.value);
+    formData.set("floor", e.target.floor.value);
     store
-        .dispatch(createFloor(formData))
+        .dispatch(createExtension(formData))
         .then((data) => {
         if (data.success === true) {
             document.getElementById("loader").style.display = "none";
             toast.success(data.message);
             this.setState((state, props) => {
-            return { floorCreated: true };
+            return { extensionCreated: true };
             });
         } else {
             document.getElementById("loader").style.display = "none";
@@ -69,7 +71,7 @@ class CreateFloor extends Component {
         ) : (
           <Redirect to="/"></Redirect>
         )}
-        {this.state.floorCreated ? (
+        {this.state.extensionCreated ? (
           <Redirect to={`/`}></Redirect>
         ) : (
           ""
@@ -87,7 +89,7 @@ class CreateFloor extends Component {
           <Fragment>
                             <div className="container">
                               <div className="row animate__animated animate__fadeIn animate__slower">
-                                {this.state.floorCreated ? <Redirect to="/" /> : ""}
+                                {this.state.extensionCreated ? <Redirect to="/" /> : ""}
                                 <div className="col-12 col-lg-6 d-block mx-auto">
                                   <div className="login-container">
                                     <br></br>
@@ -99,60 +101,19 @@ class CreateFloor extends Component {
                                     <form onSubmit={(e) => this.onSubmitHandler(e)} dir="rtl">
                                       <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputFloorNameArabic1" className="col-sm-2 col-form-label text-center text-white">إسم الطابق بالعربية</label>
+                                        <label for="exampleInputExtensionName1" className="col-sm-2 col-form-label text-center text-white">إسم الإمتداد</label>
                                         <div className="col-sm-10">
                                         <input
                                           type="text"
                                           className="form-control"
-                                          id="exampleInputFloorNameArabic1"
-                                          placeholder="إسم الطابق بالعربية"
+                                          id="exampleInputExtensionName1"
+                                          placeholder="إسم الإمتداد"
                                           style={{ borderRadius: "25px" }}
-                                          name="nameArabic"
-                                          value={this.state.nameArabic}
+                                          name="name"
+                                          value={this.state.name}
                                           onChange={(e) =>
                                             this.setState((state, props) => {
-                                              return { nameArabic: e.target.value };
-                                            })
-                                          }
-                                          required
-                                        />
-                                                                    {/* <select
-                              defaultValue={this.state.role}
-                              onChange={(e) =>
-                                this.setState((state, props) => {
-                                  return { role: e.target.value };
-                                })
-                              }
-                              id="placeSelect"
-                              className="form-select"
-                              aria-label="Default select example"
-                              name="role"
-                              required
-                            >
-                              <option value="user">user</option>
-                              <option value="admin">admin</option>
-                              <option value="moderator">moderator</option>
-                            </select> */}
-                                        </div>
-                                        </div>
-                                        {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
-                                      </div>
-                                      <br></br>
-                                      <div className="form-group">
-                                        <div className="mb-3 row">
-                                        <label for="exampleInputFloorNameEnglish1" className="col-sm-2 col-form-label text-center text-white">إسم الطابق بالأنجليزية</label>
-                                        <div className="col-sm-10">
-                                        <input
-                                          type="text"
-                                          className="form-control"
-                                          id="exampleInputFloorNameEnglish1"
-                                          placeholder="إسم الطابق بالأنجليزية"
-                                          style={{ borderRadius: "25px" }}
-                                          name="nameEnglish"
-                                          value={this.state.nameEnglish}
-                                          onChange={(e) =>
-                                            this.setState((state, props) => {
-                                              return { nameEnglish: e.target.value };
+                                              return { name: e.target.value };
                                             })
                                           }
                                           required
@@ -181,38 +142,23 @@ class CreateFloor extends Component {
                                       <br></br>
                                <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputFloorNumber1" className="col-sm-2 col-form-label text-center text-white">رقم الطابق</label>
+                                        <label for="exampleInputExtensionExtension1" className="col-sm-2 col-form-label text-center text-white">رقم الإمتداد</label>
                                         <div className="col-sm-10">
-                            <select
-                              defaultValue={this.state.number}
-                              onChange={(e) =>
-                                this.setState((state, props) => {
-                                  return { number: e.target.value };
-                                })
-                              }
-                              id="exampleInputFloorNumber1"
-                              className="form-select"
-                              aria-label="Default select example"
-                              name="number"
-                              required
-                            >
-                              <option value="0">0</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                              <option value="9">9</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                            </select>
+                            <input
+                                          type="number"
+                                          className="form-control"
+                                          id="exampleInputExtensionExtension1"
+                                          placeholder="رقم الإمتداد"
+                                          style={{ borderRadius: "25px" }}
+                                          name="extension"
+                                          value={this.state.extension}
+                                          onChange={(e) =>
+                                            this.setState((state, props) => {
+                                              return { extension: e.target.value };
+                                            })
+                                          }
+                                          required
+                                        />
                                         </div>
                                         </div>
                                         {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
@@ -220,7 +166,7 @@ class CreateFloor extends Component {
                                       <br></br>
                                <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputFloorSite1" className="col-sm-2 col-form-label text-center text-white">مكان الطابق</label>
+                                        <label for="exampleInputExtensionSite1" className="col-sm-2 col-form-label text-center text-white">مكان الإمتداد</label>
                                         <div className="col-sm-10">
                             <select
                               defaultValue={this.state.site}
@@ -229,7 +175,7 @@ class CreateFloor extends Component {
                                   return { site: e.target.value };
                                 })
                               }
-                              id="exampleInputFloorSite1"
+                              id="exampleInputExtensionSite1"
                               className="form-select"
                               aria-label="Default select example"
                               name="site"
@@ -237,6 +183,35 @@ class CreateFloor extends Component {
                             >
                                 {store.getState().site.sites.map((site) => {
                                     return <option value={site._id}>{site.name}</option>
+                                })}
+                            </select>
+                                        </div>
+                                        </div>
+                                        {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
+                                      </div>
+                                       <br></br>
+                               <div className="form-group">
+                                        <div className="mb-3 row">
+                                        <label for="exampleInputExtensionFloor1" className="col-sm-2 col-form-label text-center text-white">طابق الإمتداد</label>
+                                        <div className="col-sm-10">
+                            <select
+                              defaultValue={this.state.floor}
+                              onChange={(e) =>
+                                this.setState((state, props) => {
+                                  return { floor: e.target.value };
+                                })
+                              }
+                              id="exampleInputExtensionFloor1"
+                              className="form-select"
+                              aria-label="Default select example"
+                              name="floor"
+                              required
+                            >
+                                {store.getState().floor.floors.map((floor) => {
+                                  console.log(floor.site, this.state.site)
+                                    if(floor.site === this.state.site){
+                                      return <option value={floor._id}>{floor.nameArabic} - {floor.nameEnglish}</option>
+                                    }
                                 })}
                             </select>
                                         </div>
@@ -277,4 +252,4 @@ class CreateFloor extends Component {
     );
   }
 }
-export default CreateFloor;
+export default CreateExtension;

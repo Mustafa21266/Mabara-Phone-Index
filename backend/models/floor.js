@@ -1,7 +1,13 @@
 const mongoose = require('mongoose');
 
 const floorSchema = new mongoose.Schema({
-    name: {
+    nameArabic: {
+        type: String,
+        trim: true,
+        required: [true, 'Please Enter Floor Name!'],
+        maxlength: [150, 'Floor Name cannot exceed 150 characters']
+    },
+    nameEnglish: {
         type: String,
         trim: true,
         required: [true, 'Please Enter Floor Name!'],

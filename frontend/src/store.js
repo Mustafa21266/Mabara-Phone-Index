@@ -3,12 +3,14 @@ import thunk from 'redux-thunk';
 import { composeWithDevTools } from 'redux-devtools-extension';
 import userReducer from './reducers/userReducer';
 import articleReducer from './reducers/articleReducer';
-import pcReducer from './reducers/pcReducer';
+import floorReducer from './reducers/floorReducer';
 import sitesReducer from './reducers/siteReducer';
+import extensionReducer from './reducers/extensionReducer';
 const reducer = combineReducers({
     auth: userReducer,
     article: articleReducer,
-    pc: pcReducer,
+    floor: floorReducer,
+    extension: extensionReducer,
     site: sitesReducer
 })
 

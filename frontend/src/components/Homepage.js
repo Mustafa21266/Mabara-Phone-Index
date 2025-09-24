@@ -236,11 +236,27 @@ class Homepage extends Component {
                 </div>
               </div>
               <br></br>
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                  <br></br>
-                  <br></br>
+              <br></br>
+              <hr></hr>
+<div class="mb-3 row" dir="rtl">
+    <label for="staticsearchTerm" class="col-sm-1 col-form-label text-center text-white">أبحث عن</label>
+    <div class="col-sm-11">
+      <input type="text" class="form-control" id="staticsearchTerm" onChange={(e) => 
+        this.setState({
+        extensions: store
+        .getState()
+        .extension.extensions.filter(ext => {
+          if(ext.name.toLowerCase().includes(`${e.target.value.trim()}`)){
+            return ext
+          }
+          if(ext.extension.includes(e.target.value.trim())){
+            return ext
+          }
+        })
+      })
+      }/>
+    </div>
+  </div>
                   <hr></hr>
               <dir className="row">
                 <dir className="col-12">

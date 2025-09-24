@@ -14,7 +14,9 @@ class Homepage extends Component {
     super(props);
     this.state = {
       loading: true,
-      extensions: []
+      extensions: [],
+      selectedSite: '',
+      selectedSiteFloor: []
     };
   }
   componentDidMount() {
@@ -24,10 +26,15 @@ class Homepage extends Component {
           loading: false,
           extensions: store
         .getState()
-        .extension.extensions
+        .extension.extensions.filter(ext => ext.site === "68cbbdf4c5b33217c021870e" && ext.floor === "68cbc5f0f812ad4960f48d6f"),
+        selectedSite: "68cbbdf4c5b33217c021870e",
+        selectedSiteFloor: store
+        .getState()
+        .floor.floors.filter(floor => floor.site === "68cbbdf4c5b33217c021870e")
         };
       });
-    }, 1000);
+      document.getElementById('capitalBtn').classList.toggle("active")
+    }, 3000);
   }
   async onChangeHandler(e, site) {
     e.preventDefault();
@@ -36,21 +43,34 @@ class Homepage extends Component {
       this.setState({
         extensions: store
         .getState()
-        .extension.extensions.filter(ext => ext.site === "68cbbdffc5b33217c0218711")
+        .extension.extensions.filter(ext => ext.site === "68cbbdffc5b33217c0218711"),
+        selectedSite: "68cbbdffc5b33217c0218711",
+        selectedSiteFloor: store
+        .getState()
+        .floor.floors.filter(floor => floor.site === "68cbbdffc5b33217c0218711")
       })
     }else if (site === "capital"){
       document.getElementById('capitalBtn').classList.toggle("active")
       this.setState({
         extensions: store
         .getState()
-        .extension.extensions.filter(ext => ext.site === "68cbbdf4c5b33217c021870e")
+        .extension.extensions.filter(ext => ext.site === "68cbbdf4c5b33217c021870e"),
+        selectedSite: "68cbbdf4c5b33217c021870e",
+        selectedSiteFloor: store
+        .getState()
+        .floor.floors.filter(floor => floor.site === "68cbbdf4c5b33217c021870e")
+
       })
     }else if (site === "shark"){
       document.getElementById('sharkBtn').classList.toggle("active")
       this.setState({
         extensions: store
         .getState()
-        .extension.extensions.filter(ext => ext.site === "68cbbe05c5b33217c0218714")
+        .extension.extensions.filter(ext => ext.site === "68cbbe05c5b33217c0218714"),
+        selectedSite: "68cbbe05c5b33217c0218714",
+        selectedSiteFloor: store
+        .getState()
+        .floor.floors.filter(floor => floor.site === "68cbbe05c5b33217c0218714")
       })
     }else {
       this.setState({
@@ -103,7 +123,7 @@ class Homepage extends Component {
                   <br></br>
                   <br></br>
                   <br></br>
-            <div className="container-fluid" style={{backgroundColor: '#3357A0',height: '1500px'}}>
+            <div className="container-fluid" style={{backgroundColor: '#3357A0'}}>
               <div className="row">
                 <div className="col-12 col-md-4 d-flex justify-content-center">
                   <button id="gharbBtn" type="button" class="btn btn-outline-light">
@@ -157,95 +177,50 @@ class Homepage extends Component {
                   <hr></hr>
               <dir className="row">
                 <dir className="col-12">
-                  <div id="carouselExampleControls" class="carousel slide" data-bs-ride="carousel">
-  <div class="carousel-inner">
-    <div class="carousel-item active">
-      <div class="card" style={{width: '200px'}}>
-    <img src="https://ucarecdn.com/05f649bf-b70b-4cf8-90f7-2588ce404a08/" className="d-block w-100" alt="https://ucarecdn.com/05f649bf-b70b-4cf8-90f7-2588ce404a08/" />
-    <div className="card-body">
-        <h5 className="card-title">Card title 2</h5>
-        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the
-            card's content.</p>
-        <a href="#" className="btn btn-primary">Go somewhere</a>
-    </div>
-</div>
-    </div>
-    <div className="carousel-item">
-      <div className="card" style={{width: '200px'}}>
-    <img src="https://ucarecdn.com/05f649bf-b70b-4cf8-90f7-2588ce404a08/" className="d-block w-100" alt="https://ucarecdn.com/05f649bf-b70b-4cf8-90f7-2588ce404a08/" />
-    <div className="card-body">
-        <h5 className="card-title">Card title 2</h5>
-        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the
-            card's content.</p>
-        <a href="#" className="btn btn-primary">Go somewhere</a>
-    </div>
-</div>
-    </div>
-    <div className="carousel-item">
-      <div className="card" style={{width: '200px'}}>
-    <img src="https://ucarecdn.com/05f649bf-b70b-4cf8-90f7-2588ce404a08/" className="d-block w-100" alt="https://ucarecdn.com/05f649bf-b70b-4cf8-90f7-2588ce404a08/" />
-    <div className="card-body">
-        <h5 className="card-title">Card title 2</h5>
-        <p className="card-text">Some quick example text to build on the card title and make up the bulk of the
-            card's content.</p>
-        <a href="#" className="btn btn-primary">Go somewhere</a>
-    </div>
-</div>
-    </div>
-  </div>
-  <button className="carousel-control-prev" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="prev">
-    <span className="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Previous</span>
-  </button>
-  <button className="carousel-control-next" type="button" data-bs-target="#carouselExampleControls" data-bs-slide="next">
-    <span className="carousel-control-next-icon" aria-hidden="true"></span>
-    <span className="visually-hidden">Next</span>
-  </button>
-</div>
-                  {/* <div id="carouselExampleControls" class="carousel slide carousel-fade" data-ride="carousel">
-  <div class="carousel-inner">
-    {this.state.extensions.map((ext, index) => {
-      console.log(ext , index)
-      if(index == 0){
-        return <Fragment>
-          <div class="carousel-item active">
-<div class="card">
+                  <ul class="nav nav-tabs" id="myTab" role="tablist"  dir="rtl">
+                    {this.state.selectedSiteFloor.map((floor,index) => {
+                      if(index === 0){
+                      return <li class="nav-item" role="presentation">
+    <button class="nav-link active" id={floor.nameEnglish + "-tab"} data-bs-toggle="tab" data-bs-target={`#${floor.nameEnglish}`} type="button" role="tab" aria-controls={`${floor.nameEnglish}`} aria-selected="true" onClick={(e) => {
+      this.setState({
+        extensions: store
+        .getState()
+        .extension.extensions.filter(ext => ext.floor === floor._id)
+      })
+    }}>{`${floor.nameArabic}`}</button>
+                        </li>
+                      }else {
+                      return <li class="nav-item" role="presentation">
+    <button class="nav-link" id={floor.nameEnglish + "-tab"} data-bs-toggle="tab" data-bs-target={`#${floor.nameEnglish}`} type="button" role="tab" aria-controls={`${floor.nameEnglish}`} aria-selected="true" onClick={(e) => {
+      this.setState({
+        extensions: store
+        .getState()
+        .extension.extensions.filter(ext => ext.floor === floor._id)
+      })
+    }}>{`${floor.nameArabic}`}</button>
+                        </li>
+                      }
+                    })}
+</ul>
+<div class="tab-content" id="myTabContent" dir="rtl">
+  {this.state.selectedSiteFloor.map((floor,index) => {
+    if(index === 0){
+      return <div class="tab-pane fade show active row d-flex justify-content-start" id={`${floor.nameEnglish}`} role="tabpanel" aria-labelledby={floor.nameEnglish + "-tab"}>
+        {this.state.extensions.map((ext, index) => {
+          return <div class="card col-12 col-md-3" style={{margin: '20px'}}>
   <div class="card-body">
-    <h5 class="card-title badge bg-primary text-dark text-center mx-auto" style={{fontSize: '56px', display: "block"}}>{ext.extension}</h5>
-<hr></hr>
-    <h6 class="card-subtitle mb-2 text-muted text-center mx-auto" style={{fontSize: '42px'}}>{ext.name}</h6>
+    <h5 class="card-title badge bg-primary text-center mx-auto d-block" style={{fontSize: '56px'}}>{ext.extension}</h5>
+    <h6 class="card-subtitle mb-2 text-muted  text-center mx-auto d-block">{ext.name}</h6>
   </div>
-</div>         
-          </div>
-          </ Fragment> 
-      }else {
-                return <Fragment>
-          <div class="carousel-item">
-<div class="card">
-  <div class="card-body">
-<h5 class="card-title badge bg-primary text-dark text-center mx-auto"  style={{fontSize: '56px', display: "block"}}>{ext.extension}</h5>
-<hr></hr>
-    <h6 class="card-subtitle mb-2 text-muted text-center mx-auto" style={{fontSize: '42px'}}>{ext.name}</h6>
-  </div>
-</div>           
-          </div>
-          </ Fragment>
-      }
-return 
-    })}
-  </div>
-  <a class="carousel-control-prev" href="#carouselExampleControls" role="button" data-slide="prev">
-    <span class="carousel-control-prev-icon" aria-hidden="true"></span>
-    <span class="sr-only">Previous</span>
-  </a>
-  <a class="carousel-control-next" href="#carouselExampleControls" role="button" data-slide="next">
-    <span class="carousel-control-next-icon" aria-hidden="true"></span>
-    <span class="sr-only">Next</span>
-  </a>
-</div> */}
+</div>
+        })}
+        
+      </div>
+  }              
+  })}
+</div>
               </dir>
               </dir>
-              <h1>Test</h1>
             </div>
           </Fragment>
         )}

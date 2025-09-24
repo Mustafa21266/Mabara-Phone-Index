@@ -71,11 +71,11 @@ class CreateExtension extends Component {
         ) : (
           <Redirect to="/"></Redirect>
         )}
-        {this.state.extensionCreated ? (
+        {/* {this.state.extensionCreated ? (
           <Redirect to={`/`}></Redirect>
         ) : (
           ""
-        )}
+        )} */}
         <br></br>
         <br></br>
         <br></br>
@@ -89,7 +89,7 @@ class CreateExtension extends Component {
           <Fragment>
                             <div className="container">
                               <div className="row animate__animated animate__fadeIn animate__slower">
-                                {this.state.extensionCreated ? <Redirect to="/" /> : ""}
+                                {/* {this.state.extensionCreated ? <Redirect to="/" /> : ""} */}
                                 <div className="col-12 col-lg-6 d-block mx-auto">
                                   <div className="login-container">
                                     <br></br>

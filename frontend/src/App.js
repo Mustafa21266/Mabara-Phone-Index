@@ -49,6 +49,7 @@ import EditExtension from './components/Admin/EditExtension'
 import { getAllSites } from "./actions/siteActions";
 import { getAllFloors } from "./actions/floorActions";
 import { getAllExtensions } from "./actions/extensionActions";
+import { getAllPins } from "./actions/pinActions";
 class App extends Component {
   constructor(props) {
     super(props);
@@ -65,11 +66,14 @@ class App extends Component {
               store.dispatch(getAllSites()).then((data) => {
                 store.dispatch(getAllFloors()).then((data) => {
               store.dispatch(getAllExtensions()).then((data) => {
-              if (data.success) {
-                this.setState({ refresh: true, loading: false });
-              } else {
-                this.setState({ loading: false });
-              }})
+                store.dispatch(getAllPins()).then((data) => {
+                        if (data.success) {
+        this.setState({ refresh: true, loading: false });
+      } else {
+        this.setState({ loading: false });
+      }
+            })
+            })
           });
       });
     });

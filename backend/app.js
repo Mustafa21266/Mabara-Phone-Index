@@ -25,6 +25,8 @@ const floor = require("./routes/floor");
 app.use("/api/v1", floor);
 const extension = require("./routes/extension");
 app.use("/api/v1", extension);
+const pin = require("./routes/pin");
+app.use("/api/v1", pin);
 
 
 app.listen(PORT, (error) =>{

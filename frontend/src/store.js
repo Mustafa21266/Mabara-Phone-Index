@@ -6,11 +6,13 @@ import articleReducer from './reducers/articleReducer';
 import floorReducer from './reducers/floorReducer';
 import sitesReducer from './reducers/siteReducer';
 import extensionReducer from './reducers/extensionReducer';
+import pinReducer from './reducers/pinReducer';
 const reducer = combineReducers({
     auth: userReducer,
     article: articleReducer,
     floor: floorReducer,
     extension: extensionReducer,
+    pin: pinReducer,
     site: sitesReducer
 })
 

@@ -48,7 +48,7 @@ class Navbar extends Component {
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav mb-2 mb-lg-0">
         <li className="nav-item">
-          <Link className="nav-link active ibm-plex-sans-arabic-bold" onClick={this.changeNav} aria-current="page" to="/" style={{color: 'black',textAlign: 'center',fontWeight: 900}}>الرئيسية</Link>
+          <Link className="nav-link active ibm-plex-sans-arabic-bold" onClick={this.changeNav} aria-current="page" to="/" style={{color: 'black',textAlign: 'center'}}>الرئيسية</Link>
         </li>
         {/* <li className="nav-item">
           <Link className="nav-link ibm-plex-sans-arabic-bold" to="/articles/all"  onClick={this.changeNav} style={{color: 'black',textAlign: 'center'}}>مقالات</Link>
@@ -82,19 +82,30 @@ class Navbar extends Component {
      <Fragment>
        {store.getState().auth.user.role === 'admin' && (
          <Fragment>
-          <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/extension/create">إضافة إمتداد جديد</Link>
+
+<div class="dropend">
+  <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold dropdown-toggle" to="#" data-bs-toggle="dropdown" aria-expanded="false" onMouseEnter={(e) => document.getElementById('addDrop').classList.add('show')}>إضافة</Link>
+  {/* <button type="button" class="btn btn-secondary dropdown-toggle">
+    Dropright
+  </button> */}
+  <ul id="addDrop" class="dropdown-menu" style={{position: 'absolute', right: '-160px',top: '-10px'}} onMouseLeave={(e) => document.getElementById('addDrop').classList.remove('show')}>
+          <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/extension/create">إمتداد جديد</Link>
           <div className="dropdown-divider"></div>
-            <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/floor/create">إضافة طابق جديد</Link>
+            <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/floor/create">طابق جديد</Link>
           <div className="dropdown-divider"></div>
-<Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/dashboard">لوحه التحكم</Link>
+          <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/site/create">مكان جديد</Link>
+  </ul>
+</div>
+  <div className="dropdown-divider"></div>
+<Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/dashboard" onMouseEnter={(e) => document.getElementById('addDrop').classList.remove('show')}>لوحه التحكم</Link>
 <div className="dropdown-divider"></div>
 {/* <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/article/create">إنشاء مقاله جديده</Link> */}
 {/* <div className="dropdown-divider"></div> */}
          </Fragment>
        )}
-<Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/me">حسابي الشخصي</Link>
+<Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/me" onMouseEnter={(e) => document.getElementById('addDrop').classList.remove('show')}>حسابي الشخصي</Link>
        <div className="dropdown-divider"></div>
-       <button className="dropdown-item text-danger text-center ibm-plex-sans-arabic-semibold" onClick={this.logOutHandler.bind(this)}>تسجيل الخروج</button>
+       <button className="dropdown-item text-danger text-center ibm-plex-sans-arabic-semibold"  onMouseEnter={(e) => document.getElementById('addDrop').classList.remove('show')} onClick={this.logOutHandler.bind(this)}>تسجيل الخروج</button>
 </Fragment>
    ) : (
      <Fragment>

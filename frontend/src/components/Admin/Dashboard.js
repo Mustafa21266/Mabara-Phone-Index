@@ -11,6 +11,7 @@ import MetaData from "../MetaData";
 import Loader from "../Loader";
 import { getAllSites } from "../../actions/siteActions";
 import { getAllFloors } from "../../actions/floorActions";
+import { getAllExtensions } from "../../actions/extensionActions";
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -18,19 +19,23 @@ class Dashboard extends Component {
       users: [],
       sites: [],
       floors: [],
+      extensions: [],
       loading: true,
     };
     store.dispatch(getAllUsers()).then(async (usersData) => {
       if (usersData.success === true) {
         store.dispatch(getAllSites()).then(async (sitesData) => {
           store.dispatch(getAllFloors()).then(async (floorsData) => {
-          console.log(sitesData)
-          this.setState({
-            users: usersData.users,
-            sites: sitesData,
-            floors: floorsData,
-            loading: false,
-          });
+            store.dispatch(getAllExtensions()).then(async (extensionsData) => {
+              console.log(sitesData)
+              this.setState({
+                users: usersData.users,
+                sites: sitesData,
+                floors: floorsData,
+                extensions: extensionsData,
+                loading: false,
+              });
+            })
         })
         })
         } else {
@@ -226,6 +231,73 @@ class Dashboard extends Component {
     });
     return data;
   }
+      setExtensions() {
+    const data = {
+      columns: [
+        {
+          label: "ID",
+          field: "id",
+          sort: "asc",
+        },
+        {
+          label: "الأسم",
+          field: "name",
+          sort: "asc",
+        },
+        {
+          label: "الإمتداد",
+          field: "extension",
+          sort: "asc",
+        },
+        {
+          label: "المكان",
+          field: "site",
+          sort: "asc",
+        },
+        {
+          label: "الطابق",
+          field: "floor",
+          sort: "asc",
+        },
+        {
+          label: "تاريخ التسجيل",
+          field: "createdAt",
+          sort: "asc",
+        },
+        {
+          label: "Actions",
+          field: "actions",
+        },
+      ],
+      rows: [],
+    };
+    this.state.extensions.forEach((extension) => {
+      data.rows = data.rows.concat({
+        id: extension._id,
+        name: extension.name,
+        extension: extension.extension,
+        site: extension.site,
+        floor: extension.floor,
+        createdAt: String(extension.createdAt).substring(0, 10),
+        actions: (
+          <Fragment>
+            <div className="row">
+              <div className="col-12 d-flex justify-content-center">
+                <Link
+                  to={`/admin/extension/update/${extension._id}`}
+                  className="btn btn-primary py-2 px-3"
+                >
+                  <i className="bi bi-pen"></i>
+                </Link>
+              </div>
+            </div>
+            <hr />
+          </Fragment>
+        ),
+      });
+    });
+    return data;
+  }
   render() {
     return (
       <Fragment>
@@ -322,6 +394,21 @@ class Dashboard extends Component {
                       الطوابق
                     </a>
                   </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      id="extension-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#extension"
+                      type="button"
+                      role="tab"
+                      aria-controls="extension"
+                      aria-selected="false"
+                      style={{color: 'white'}}
+                    >
+                      الإمتدادات
+                    </a>
+                  </li>
                 </ul>
 
                 {/* 
@@ -377,15 +464,7 @@ class Dashboard extends Component {
                           </div>
                         </div>
                       </div>
-                      <div
-                        className="col-12 col-lg-6"
-                        style={{ textAlign: "center" }}
-                      >
-                      </div>
-                    </div>
-                    <br></br>
-                                        <div className="row">
-                      <div
+<div
                         className="col-12 col-lg-6"
                         style={{ textAlign: "center" }}
                       >
@@ -413,12 +492,10 @@ class Dashboard extends Component {
                           </div>
                         </div>
                       </div>
-                      <div
-                        className="col-12 col-lg-6"
-                        style={{ textAlign: "center" }}
-                      >
-                      </div>
+
+
                     </div>
+                    <br></br>
                     <br></br>
                                         <div className="row">
                       <div
@@ -453,6 +530,29 @@ class Dashboard extends Component {
                         className="col-12 col-lg-6"
                         style={{ textAlign: "center" }}
                       >
+                        <div className="card">
+                          <br></br>
+                          <i
+                            className="bi bi-telephone"
+                            style={{ fontSize: "7rem" }}
+                          ></i>
+                          <div className="card-body">
+                            <h4 className="card-title text-center">
+                              {this.state.extensions ? this.state.extensions.length : 0}
+                            </h4>
+                            <p className="card-text text-center">الإمتدادات</p>
+                            <hr></hr>
+                            <a
+                              className="card-text text-center"
+                              type="button"
+                              onClick={(e) =>
+                                document.getElementById("extension-tab").click()
+                              }
+                            >
+                              عرض التفاصيل
+                            </a>
+                          </div>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -488,7 +588,7 @@ class Dashboard extends Component {
                       dir="rtl"
                     />
                   </div>
-                                    <div
+                <div
                     className="tab-pane fade"
                     id="floor"
                     role="tabpanel"
@@ -496,6 +596,22 @@ class Dashboard extends Component {
                   >
                     <MDBDataTable
                       data={this.setFloors()}
+                      className="px-3"
+                      bordered
+                      striped
+                      hover
+                      responsive
+                      dir="rtl"
+                    />
+                  </div>
+                                  <div
+                    className="tab-pane fade"
+                    id="extension"
+                    role="tabpanel"
+                    aria-labelledby="extension-tab"
+                  >
+                    <MDBDataTable
+                      data={this.setExtensions()}
                       className="px-3"
                       bordered
                       striped

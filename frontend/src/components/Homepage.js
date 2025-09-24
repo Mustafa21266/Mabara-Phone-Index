@@ -131,7 +131,12 @@ class Homepage extends Component {
             // document.getElementById("loader").style.display = "none";
             toast.success(data.message);
             this.setState((state, props) => {
-            return { pinCreated: true };
+            return { 
+              pinCreated: true,
+              userPins: store
+        .getState()
+        .pin.pins.filter(pin => store.getState().auth.user && pin.user === store.getState().auth.user._id)
+            };
             });
         } else {
             // document.getElementById("loader").style.display = "none";
@@ -148,7 +153,10 @@ class Homepage extends Component {
             // document.getElementById("loader").style.display = "none";
             toast.success(data.message);
             this.setState((state, props) => {
-            return { pinDeleted: true };
+            return { pinDeleted: true,
+              userPins: store
+        .getState()
+        .pin.pins.filter(pin => store.getState().auth.user && pin.user === store.getState().auth.user._id) };
             });
         } else {
             // document.getElementById("loader").style.display = "none";
@@ -238,7 +246,7 @@ class Homepage extends Component {
                 <dir className="col-12">
                   <ul class="nav nav-tabs" id="myTab" role="tablist"  dir="rtl">
                     <li class="nav-item" role="presentation">
-    <button class="nav-link" id="pin-tab" data-bs-toggle="tab" data-bs-target="#pin" type="button" role="tab" aria-controls="pin" aria-selected="true" onClick={(e) => {
+    <button class="nav-link text-white text-white" id="pin-tab" data-bs-toggle="tab" data-bs-target="#pin" type="button" role="tab" aria-controls="pin" aria-selected="true" onClick={(e) => {
       this.setState({
         extensions: this.state.userPins.map((pin) => {
           return store
@@ -251,7 +259,7 @@ class Homepage extends Component {
                     {this.state.selectedSiteFloor.map((floor,index) => {
                       if(index === 0){
                       return <li class="nav-item" role="presentation">
-    <button class="nav-link active" id={floor.nameEnglish + "-tab"} data-bs-toggle="tab" data-bs-target={`#${floor.nameEnglish}`} type="button" role="tab" aria-controls={`${floor.nameEnglish}`} aria-selected="true" onClick={(e) => {
+    <button class="nav-link text-white active" id={floor.nameEnglish + "-tab"} data-bs-toggle="tab" data-bs-target={`#${floor.nameEnglish}`} type="button" role="tab" aria-controls={`${floor.nameEnglish}`} aria-selected="true" onClick={(e) => {
       this.setState({
         extensions: store
         .getState()
@@ -261,7 +269,7 @@ class Homepage extends Component {
                         </li>
                       }else {
                       return <li class="nav-item" role="presentation">
-    <button class="nav-link" id={floor.nameEnglish + "-tab"} data-bs-toggle="tab" data-bs-target={`#${floor.nameEnglish}`} type="button" role="tab" aria-controls={`${floor.nameEnglish}`} aria-selected="true" onClick={(e) => {
+    <button class="nav-link text-white" id={floor.nameEnglish + "-tab"} data-bs-toggle="tab" data-bs-target={`#${floor.nameEnglish}`} type="button" role="tab" aria-controls={`${floor.nameEnglish}`} aria-selected="true" onClick={(e) => {
       this.setState({
         extensions: store
         .getState()

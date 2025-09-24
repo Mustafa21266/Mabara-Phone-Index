@@ -94,3 +94,17 @@
     display: block;
   }
 }
+
+.nav-link.active {
+  color: black !important;
+}
+
+
+.dropdown-toggle::after {
+  float: right;
+  font-size: 18px;
+  display: block;
+  margin: auto;
+  position: relative;
+  top: 5px;
+}

@@ -12,7 +12,7 @@ const auth = require("../middlewares/auth");
 router.route('/admin/site/create').post(auth, createSite)
 router.route('/admin/site/update/:id').put(auth, editSite)
 router.route('/admin/site/delete/:id').delete(auth, deleteSite)
-router.route('/sites/all').get(auth, getAllSites)
+router.route('/sites/all').get(getAllSites)
 
 
 module.exports = router;

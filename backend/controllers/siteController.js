@@ -183,14 +183,7 @@ exports.deleteSite = async (req, res, next) => {
 // }
 //Get all SITES for ADMIN ONLY
 exports.getAllSites = async (req, res, next) => {
-    const user = await User.findById(req.user._id)
-    if (!user || user.role !== 'admin') {
-        return res.status(401).json({
-            success: false,
-            message: 'Unauthorized Action!',
-        })
-    } else {
-        const sites = await Site.find()
+    const sites = await Site.find()
         if(sites){
             res.status(200).json({
                 success: true,
@@ -202,7 +195,6 @@ exports.getAllSites = async (req, res, next) => {
                 sites: []
             })
         }
-    }
 }
 
 

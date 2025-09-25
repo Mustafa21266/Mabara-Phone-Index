@@ -62,20 +62,23 @@ class App extends Component {
   componentDidMount() {
     setTimeout(()=>{
     console.log(localStorage.getItem('token'))
-    store.dispatch(getUserDetails(localStorage.getItem('token'))).then((data) => {
-              store.dispatch(getAllSites()).then((data) => {
+    
+    store.dispatch(getAllSites()).then((data) => {
                 store.dispatch(getAllFloors()).then((data) => {
               store.dispatch(getAllExtensions()).then((data) => {
-                store.dispatch(getAllPins()).then((data) => {
-                        if (data.success) {
-        this.setState({ refresh: true, loading: false });
-      } else {
-        this.setState({ loading: false });
-      }
-            })
+                
             })
           });
       });
+    store.dispatch(getUserDetails(localStorage.getItem('token'))).then((data) => {
+            store.dispatch(getAllPins()).then((data) => {
+                        if (data.success) {
+                  this.setState({ refresh: true, loading: false });
+              } else {
+              this.setState({ loading: false });
+            }
+            })
+     
     });
     },2000)
 

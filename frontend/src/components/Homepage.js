@@ -261,6 +261,7 @@ class Homepage extends Component {
               <dir className="row">
                 <dir className="col-12">
                   <ul class="nav nav-tabs" id="myTab" role="tablist"  dir="rtl">
+                    {Object.keys(store.getState().auth.user).length === 0 && 
                     <li class="nav-item" role="presentation">
     <button class="nav-link text-white text-white" id="pin-tab" data-bs-toggle="tab" data-bs-target="#pin" type="button" role="tab" aria-controls="pin" aria-selected="true" onClick={(e) => {
       this.setState({
@@ -272,6 +273,7 @@ class Homepage extends Component {
       })
     }}><i class="bi bi-pin-angle-fill"></i></button>
                         </li>
+                    }
                     {this.state.selectedSiteFloor.map((floor,index) => {
                       if(index === 0){
                       return <li class="nav-item" role="presentation">
@@ -303,23 +305,27 @@ class Homepage extends Component {
         {this.state.extensions.map((ext, index) => {
           return <div class="card col-12 col-md-3" style={{margin: '20px'}}>
   <div class="card-body">
-    <i id={`pin_${ext.extension}`} className={`bi ${store.getState().auth.user && this.state.userPins.find((pin) => this.checkPin(pin, ext)) ? 'bi-pin-angle-fill' : 'bi-pin-angle'}`} style={{fontSize: '28px'}} onClick={(e) => {
-      if(document.getElementById(`pin_${ext.extension}`).classList[1] === "bi-pin-angle"){
-        document.getElementById(`pin_${ext.extension}`).classList.remove("bi-pin-angle")
-        document.getElementById(`pin_${ext.extension}`).classList.add("bi-pin-angle-fill")
-
-        this.onAddPinHandler(e, ext._id);
-      }else {
-        document.getElementById(`pin_${ext.extension}`).classList.remove("bi-pin-angle-fill")
-        document.getElementById(`pin_${ext.extension}`).classList.add("bi-pin-angle")
-        let pin = this.state.userPins.find((pin) => this.checkPin(pin, ext))
-        if(pin){
-          console.log(this.state.userPins.find((pin) => this.checkPin(pin, ext)))
-          this.onRemovePinHandler(e, pin._id);
+    {Object.keys(store.getState().auth.user).length === 0 && 
+    <Fragment>
+      <i id={`pin_${ext.extension}`} className={`bi ${store.getState().auth.user && this.state.userPins.find((pin) => this.checkPin(pin, ext)) ? 'bi-pin-angle-fill' : 'bi-pin-angle'}`} style={{fontSize: '28px'}} onClick={(e) => {
+        if(document.getElementById(`pin_${ext.extension}`).classList[1] === "bi-pin-angle"){
+          document.getElementById(`pin_${ext.extension}`).classList.remove("bi-pin-angle")
+          document.getElementById(`pin_${ext.extension}`).classList.add("bi-pin-angle-fill")
+  
+          this.onAddPinHandler(e, ext._id);
+        }else {
+          document.getElementById(`pin_${ext.extension}`).classList.remove("bi-pin-angle-fill")
+          document.getElementById(`pin_${ext.extension}`).classList.add("bi-pin-angle")
+          let pin = this.state.userPins.find((pin) => this.checkPin(pin, ext))
+          if(pin){
+            console.log(this.state.userPins.find((pin) => this.checkPin(pin, ext)))
+            this.onRemovePinHandler(e, pin._id);
+          }
         }
-      }
-    }}></i>
-    <hr></hr>
+      }}></i>
+      <hr></hr>
+    </Fragment>
+    }
     <h5 class="card-title badge bg-primary text-center mx-auto d-block" style={{fontSize: '56px'}}>{ext.extension}</h5>
     <h6 class="card-subtitle mb-2 text-muted  text-center mx-auto d-block">{ext.name}</h6>
   </div>

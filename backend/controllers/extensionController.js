@@ -185,14 +185,7 @@ exports.deleteExtension = async (req, res, next) => {
 // }
 //Get all SITES for ADMIN ONLY
 exports.getAllExtensions = async (req, res, next) => {
-    const user = await User.findById(req.user._id)
-    if (!user || user.role !== 'admin') {
-        return res.status(401).json({
-            success: false,
-            message: 'Unauthorized Action!',
-        })
-    } else {
-        const extensions = await Extension.find()
+    const extensions = await Extension.find()
         if(extensions){
             res.status(200).json({
                 success: true,
@@ -204,7 +197,6 @@ exports.getAllExtensions = async (req, res, next) => {
                 extensions: []
             })
         }
-    }
 }
 
 

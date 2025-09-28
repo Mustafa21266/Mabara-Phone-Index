@@ -5,12 +5,13 @@ import {
     DELETE_PIN,
 } from '../constants/pinConstants';
 // axios.defaults.withCredentials = true;
-
+import Cookies from 'js-cookie';
 //Create an Pin FOR ADMIN ONLY
 export const createPin = (pinData) => async (dispatch) => {
     try {
         const config = {
             headers: {
+                'x-access-token': Cookies.get("token"),
                 'Content-Type': 'application/json'
             }
         }
@@ -29,7 +30,13 @@ export const createPin = (pinData) => async (dispatch) => {
 
 export const deletePin = (id) => async (dispatch) => {
     try {
-        const { data } = await axios.delete(`http://localhost:8000/api/v1/admin/pin/delete/${id}`)
+        const config = {
+            headers: {
+                'x-access-token': Cookies.get("token"),
+                'Content-Type': 'application/json'
+            }
+        }
+        const { data } = await axios.delete(`http://localhost:8000/api/v1/admin/pin/delete/${id}`, config)
         dispatch({
             type: DELETE_PIN,
             payload: data

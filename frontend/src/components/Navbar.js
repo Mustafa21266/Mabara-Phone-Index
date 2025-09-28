@@ -83,12 +83,12 @@ class Navbar extends Component {
        {store.getState().auth.user.role === 'admin' && (
          <Fragment>
 
-<div class="dropend">
+<div className="dropend">
   <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold dropdown-toggle" to="#" data-bs-toggle="dropdown" aria-expanded="false" onMouseEnter={(e) => document.getElementById('addDrop').classList.add('show')}>إضافة</Link>
-  {/* <button type="button" class="btn btn-secondary dropdown-toggle">
+  {/* <button type="button" className="btn btn-secondary dropdown-toggle">
     Dropright
   </button> */}
-  <ul id="addDrop" class="dropdown-menu" style={{position: 'absolute', right: '-160px',top: '-10px'}} onMouseLeave={(e) => document.getElementById('addDrop').classList.remove('show')}>
+  <ul id="addDrop" className="dropdown-menu" style={{position: 'absolute', right: '-160px',top: '-10px'}} onMouseLeave={(e) => document.getElementById('addDrop').classList.remove('show')}>
           <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/extension/create">إمتداد جديد</Link>
           <div className="dropdown-divider"></div>
             <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/floor/create">طابق جديد</Link>

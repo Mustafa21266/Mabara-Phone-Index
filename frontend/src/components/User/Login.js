@@ -7,6 +7,7 @@ import { toast } from "material-react-toastify";
 import MetaData from "../MetaData";
 import intlTelInput from "intl-tel-input";
 import Loader from "../Loader";
+import myVideo from '../../assets/videos/mabara.mp4'; // Adjust path as needed
 class Login extends Component {
   regex = new RegExp("^(?=.*[a-z])(?=.*[0-9])(?=.{6,})");
   constructor(props) {
@@ -76,10 +77,14 @@ class Login extends Component {
                 <br></br>
                 <br></br>
                 <br></br>
-                <br></br>
-                <div className="container" style={{ height: "100vh" }} dir="rtl">
+                <div className="home">
+      <video muted loop autoPlay>
+        <source src={myVideo} type="video/mp4"/>
+      </video>
+      <div className="home-content">
+        <div className="container" style={{ height: "100vh" }} dir="rtl">
                   <div className="row animate__animated animate__fadeIn animate__slower">
-                    <img
+                    {/* <img
                       id="loginImg"
                       className="img-fluid mx-auto login-img animate__animated animate__pulse animate__infinite animate__slower  d-flex align-self-center"
                       src={"../images/heart_login.png"}
@@ -92,7 +97,7 @@ class Login extends Component {
                         width: "700px",
                         zIndex: -1,
                       }}
-                    ></img>
+                    ></img> */}
                     {this.state.loggedIn ? <Redirect to="/" /> : ""}
                     <div className="col-12 col-lg-6 d-block mx-auto">
                       <br></br>
@@ -176,6 +181,9 @@ class Login extends Component {
                     </div>
                   </div>
                 </div>
+      </div>
+    </div>
+                
               </Fragment>
             )}
           </Fragment>

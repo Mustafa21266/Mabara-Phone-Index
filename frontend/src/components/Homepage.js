@@ -171,8 +171,8 @@ class Homepage extends Component {
     return (
       <Fragment>
         <MetaData
-          title={`Mabara Alasafra Support Portal`}
-          description="Mabara Alasafra Support Portal"
+          title={`Mabara Alasafra PhoneBook - دليل تليفونات مبرة العصافرة`}
+          description="Mabara Alasafra PhoneBook - دليل تليفونات مبرة العصافرة"
           image={
             "https://res.cloudinary.com/dvlnovdyu/image/upload/v1628954855/Screenshot_2021-08-13_165613_ucepzs.png"
           }
@@ -192,8 +192,19 @@ class Homepage extends Component {
                   <br></br>
             <div className="container-fluid" style={{backgroundColor: '#3357A0'}}>
               <div className="row">
+                <div className="col-12">
+              <h1 className="d-block mx-auto text-center text-white">دليل تليفونات مبرة العصافرة</h1>
+              <br></br>
+              <br></br>
+              <hr></hr>
+              <br></br>
+              <br></br>
+
+                </ div>
+                </ div>
+              <div className="row">
                 <div className="col-12 col-md-4 d-flex justify-content-center">
-                  <button id="gharbBtn" type="button" class="btn btn-outline-light">
+                  <button id="gharbBtn" type="button" className="btn btn-outline-light">
                     <div style={{width: '100%',height:'100%'}}  onClick={(e) => { 
                       this.onChangeHandler(e, "gharb");
                       // console.log(e.target.)
@@ -207,7 +218,7 @@ class Homepage extends Component {
                           </button>
                 </div>
                 <div className="col-12 col-md-4 d-flex justify-content-center">
-<button id="capitalBtn" type="button" class="btn btn-outline-light">                    
+<button id="capitalBtn" type="button" className="btn btn-outline-light">                    
   <div style={{width: '100%',height:'100%'}}  onClick={(e) => { 
                       this.onChangeHandler(e, "capital");
                       // console.log(e.target.)
@@ -221,7 +232,7 @@ class Homepage extends Component {
                           </button>
                 </div>
                 <div className="col-12 col-md-4 d-flex justify-content-center">
-<button id="sharkBtn" type="button" class="btn btn-outline-light">                    
+<button id="sharkBtn" type="button" className="btn btn-outline-light">                    
   <div style={{width: '100%',height:'100%'}}  onClick={(e) => { 
                       this.onChangeHandler(e, "shark");
                       // console.log(e.target.)
@@ -238,10 +249,10 @@ class Homepage extends Component {
               <br></br>
               <br></br>
               <hr></hr>
-<div class="mb-3 row" dir="rtl">
-    <label for="staticsearchTerm" class="col-sm-1 col-form-label text-center text-white">أبحث عن</label>
-    <div class="col-sm-11">
-      <input type="text" class="form-control" id="staticsearchTerm" onChange={(e) => 
+<div className="mb-3 row" dir="rtl">
+    <label for="staticsearchTerm" className="col-sm-1 col-form-label text-center text-white">أبحث عن</label>
+    <div className="col-sm-11">
+      <input type="text" className="form-control" id="staticsearchTerm" onChange={(e) => 
         this.setState({
         extensions: store
         .getState()
@@ -260,10 +271,10 @@ class Homepage extends Component {
                   <hr></hr>
               <dir className="row">
                 <dir className="col-12">
-                  <ul class="nav nav-tabs" id="myTab" role="tablist"  dir="rtl">
-                    {Object.keys(store.getState().auth.user).length === 0 && 
-                    <li class="nav-item" role="presentation">
-    <button class="nav-link text-white text-white" id="pin-tab" data-bs-toggle="tab" data-bs-target="#pin" type="button" role="tab" aria-controls="pin" aria-selected="true" onClick={(e) => {
+                  <ul className="nav nav-tabs" id="myTab" role="tablist"  dir="rtl">
+                    {Object.keys(store.getState().auth.user).length !== 0 && 
+                    <li className="nav-item" role="presentation">
+    <button className="nav-link text-white text-white" id="pin-tab" data-bs-toggle="tab" data-bs-target="#pin" type="button" role="tab" aria-controls="pin" aria-selected="true" onClick={(e) => {
       this.setState({
         extensions: this.state.userPins.map((pin) => {
           return store
@@ -271,13 +282,13 @@ class Homepage extends Component {
         .extension.extensions.filter(ext => ext._id === pin.extension)[0]
         })
       })
-    }}><i class="bi bi-pin-angle-fill"></i></button>
+    }}><i className="bi bi-pin-angle-fill"></i></button>
                         </li>
                     }
                     {this.state.selectedSiteFloor.map((floor,index) => {
                       if(index === 0){
-                      return <li class="nav-item" role="presentation">
-    <button class="nav-link text-white active" id={floor.nameEnglish + "-tab"} data-bs-toggle="tab" data-bs-target={`#${floor.nameEnglish}`} type="button" role="tab" aria-controls={`${floor.nameEnglish}`} aria-selected="true" onClick={(e) => {
+                      return <li className="nav-item" role="presentation">
+    <button className="nav-link text-white active" id={floor.nameEnglish + "-tab"} data-bs-toggle="tab" data-bs-target={`#${floor.nameEnglish}`} type="button" role="tab" aria-controls={`${floor.nameEnglish}`} aria-selected="true" onClick={(e) => {
       this.setState({
         extensions: store
         .getState()
@@ -286,8 +297,8 @@ class Homepage extends Component {
     }}>{`${floor.nameArabic}`}</button>
                         </li>
                       }else {
-                      return <li class="nav-item" role="presentation">
-    <button class="nav-link text-white" id={floor.nameEnglish + "-tab"} data-bs-toggle="tab" data-bs-target={`#${floor.nameEnglish}`} type="button" role="tab" aria-controls={`${floor.nameEnglish}`} aria-selected="true" onClick={(e) => {
+                      return <li className="nav-item" role="presentation">
+    <button className="nav-link text-white" id={floor.nameEnglish + "-tab"} data-bs-toggle="tab" data-bs-target={`#${floor.nameEnglish}`} type="button" role="tab" aria-controls={`${floor.nameEnglish}`} aria-selected="true" onClick={(e) => {
       this.setState({
         extensions: store
         .getState()
@@ -298,14 +309,14 @@ class Homepage extends Component {
                       }
                     })}
 </ul>
-<div class="tab-content" id="myTabContent" dir="rtl">
+<div className="tab-content" id="myTabContent" dir="rtl">
   {this.state.selectedSiteFloor.map((floor,index) => {
     if(index === 0){
-      return <div class="tab-pane fade show active row d-flex justify-content-start" id={`${floor.nameEnglish}`} role="tabpanel" aria-labelledby={floor.nameEnglish + "-tab"}>
+      return <div className="tab-pane fade show active row d-flex justify-content-start" id={`${floor.nameEnglish}`} role="tabpanel" aria-labelledby={floor.nameEnglish + "-tab"}>
         {this.state.extensions.map((ext, index) => {
-          return <div class="card col-12 col-md-3" style={{margin: '20px'}}>
-  <div class="card-body">
-    {Object.keys(store.getState().auth.user).length === 0 && 
+          return <div className="card col-12 col-md-3" style={{margin: '20px'}}>
+  <div className="card-body">
+    {Object.keys(store.getState().auth.user).length !== 0 && 
     <Fragment>
       <i id={`pin_${ext.extension}`} className={`bi ${store.getState().auth.user && this.state.userPins.find((pin) => this.checkPin(pin, ext)) ? 'bi-pin-angle-fill' : 'bi-pin-angle'}`} style={{fontSize: '28px'}} onClick={(e) => {
         if(document.getElementById(`pin_${ext.extension}`).classList[1] === "bi-pin-angle"){
@@ -326,8 +337,8 @@ class Homepage extends Component {
       <hr></hr>
     </Fragment>
     }
-    <h5 class="card-title badge bg-primary text-center mx-auto d-block" style={{fontSize: '56px'}}>{ext.extension}</h5>
-    <h6 class="card-subtitle mb-2 text-muted  text-center mx-auto d-block">{ext.name}</h6>
+    <h5 className="card-title badge bg-primary text-center mx-auto d-block" style={{fontSize: '56px'}}>{ext.extension}</h5>
+    <h6 className="card-subtitle mb-2 text-muted  text-center mx-auto d-block">{ext.name}</h6>
   </div>
 </div>
         })}

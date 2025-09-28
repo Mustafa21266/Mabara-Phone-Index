@@ -229,8 +229,8 @@ class AllArticles extends Component {
                       prevPageText={"Previous"}
                       firstPageText={"First"}
                       lastPageText={"Last"}
-                      itemClass="page-item"
-                      linkClass="page-link"
+                      itemclassName="page-item"
+                      linkclassName="page-link"
                     />
                   </div>
                 )}

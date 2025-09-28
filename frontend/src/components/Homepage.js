@@ -54,10 +54,13 @@ class Homepage extends Component {
       document.getElementById('capitalBtn').classList.remove("active")
       document.getElementById('sharkBtn').classList.remove("active")
       document.getElementById('gharbBtn').classList.add("active")
+            let firstfloor = store
+        .getState()
+        .floor.floors.filter(floor => floor.site === "68cbbdffc5b33217c0218711")[0]
       this.setState({
         extensions: store
         .getState()
-        .extension.extensions.filter(ext => ext.site === "68cbbdffc5b33217c0218711"),
+        .extension.extensions.filter(ext => ext.site === "68cbbdffc5b33217c0218711" && ext.floor === firstfloor._id),
         selectedSite: "68cbbdffc5b33217c0218711",
         selectedSiteFloor: store
         .getState()
@@ -67,10 +70,13 @@ class Homepage extends Component {
       document.getElementById('gharbBtn').classList.remove("active")
       document.getElementById('sharkBtn').classList.remove("active")
       document.getElementById('capitalBtn').classList.add("active")
+      let firstfloor = store
+        .getState()
+        .floor.floors.filter(floor => floor.site === "68cbbdf4c5b33217c021870e")[0]
       this.setState({
         extensions: store
         .getState()
-        .extension.extensions.filter(ext => ext.site === "68cbbdf4c5b33217c021870e"),
+        .extension.extensions.filter(ext => ext.site === "68cbbdf4c5b33217c021870e" && ext.floor === firstfloor._id),
         selectedSite: "68cbbdf4c5b33217c021870e",
         selectedSiteFloor: store
         .getState()
@@ -81,10 +87,13 @@ class Homepage extends Component {
       document.getElementById('gharbBtn').classList.remove("active")
       document.getElementById('capitalBtn').classList.remove("active")
       document.getElementById('sharkBtn').classList.add("active")
+      let firstfloor = store
+        .getState()
+        .floor.floors.filter(floor => floor.site === "68cbbe05c5b33217c0218714")[0]
       this.setState({
         extensions: store
         .getState()
-        .extension.extensions.filter(ext => ext.site === "68cbbe05c5b33217c0218714"),
+        .extension.extensions.filter(ext => ext.site === "68cbbe05c5b33217c0218714" && ext.floor === firstfloor._id),
         selectedSite: "68cbbe05c5b33217c0218714",
         selectedSiteFloor: store
         .getState()

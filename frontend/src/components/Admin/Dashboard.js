@@ -323,11 +323,11 @@ class Dashboard extends Component {
             <br></br>
             <br></br>
             <div
-              className="row animate__animated animate__fadeIn animate__slower"
+              className="row animate__animated animate__fadeIn animate__slower animate__delay-1s"
               style={{ padding: "30px" }}
               dir="rtl"
             >
-              <div className="col-12 col-lg-2" dir="ltr">
+              <div className="col-12 col-lg-2 animate__animated animate__fadeIn animate__slower animate__delay-2s" dir="ltr">
                 <h1 style={{ textAlign: "center", color: 'white' }}>
                   <i className="bi bi-speedometer"></i>
                 </h1>
@@ -437,7 +437,7 @@ class Dashboard extends Component {
                   >
                     <div className="row">
                       <div
-                        className="col-12 col-lg-6"
+                        className="col-12 col-lg-6 animate__animated animate__fadeIn animate__slower animate__delay-3s"
                         style={{ textAlign: "center", padding: "20px" }}
                       >
                         <div className="card">
@@ -465,7 +465,7 @@ class Dashboard extends Component {
                         </div>
                       </div>
 <div
-                        className="col-12 col-lg-6"
+                        className="col-12 col-lg-6 animate__animated animate__fadeIn animate__slower animate__delay-4s"
                         style={{ textAlign: "center", padding: "20px" }}
                       >
                         <div className="card">
@@ -499,7 +499,7 @@ class Dashboard extends Component {
                     <br></br>
                                         <div className="row">
                       <div
-                        className="col-12 col-lg-6"
+                        className="col-12 col-lg-6 animate__animated animate__fadeIn animate__slower animate__delay-5s"
                         style={{ textAlign: "center", padding: "20px" }}
                       >
                         <div className="card">
@@ -527,7 +527,7 @@ class Dashboard extends Component {
                         </div>
                       </div>
                       <div
-                        className="col-12 col-lg-6"
+                        className="col-12 col-lg-6 animate__animated animate__fadeIn animate__slower animate__delay-5s"
                         style={{ textAlign: "center", padding: "20px" }}
                       >
                         <div className="card">

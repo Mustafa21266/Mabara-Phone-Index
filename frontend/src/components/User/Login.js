@@ -77,12 +77,12 @@ class Login extends Component {
                 <br></br>
                 <br></br>
                 <br></br>
-                <div className="home">
-      <video muted loop autoPlay>
+                <div className="home animate__animated animate__fadeIn animate__slower animate__delay-1s">
+      <video muted loop autoPlay className="animate__animated animate__fadeIn animate__slower animate__delay-2s">
         <source src={myVideo} type="video/mp4"/>
       </video>
       <div className="home-content">
-        <div className="container" style={{ height: "100vh" }} dir="rtl">
+        <div className="container" dir="rtl">
                   <div className="row animate__animated animate__fadeIn animate__slower">
                     {/* <img
                       id="loginImg"
@@ -104,7 +104,10 @@ class Login extends Component {
                       <br></br>
                       <br></br>
                       <div className="login-container">
+                      <br></br>
                         <h1 className="text-center text-white">تسجيل الدخول</h1>
+                        <br></br>
+                        <hr></hr>
                         <br></br>
                         <form onSubmit={(e) => this.onSubmitHandler(e)}>
                           <div className="form-group">

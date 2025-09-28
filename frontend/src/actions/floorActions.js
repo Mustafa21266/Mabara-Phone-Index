@@ -6,7 +6,7 @@ import {
     DELETE_FLOOR,
     SEARCH_FLOORS
 } from '../constants/floorConstants';
-
+// axios.defaults.withCredentials = true;
 
 //Create an Floor FOR ADMIN ONLY
 export const createFloor = (floorData) => async (dispatch) => {

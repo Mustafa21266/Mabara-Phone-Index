@@ -5,6 +5,8 @@ import store from '../store';
 import { logoutAdmin } from '../actions/adminActions';
 import {getUserDetails } from '../actions/adminActions';
 import mabaraLogo from '../assets/images/mabara-logo.png';
+import Cookies from 'js-cookie';
+import { toast } from "material-react-toastify";
 class Navbar extends Component {
   constructor(props){
     super(props);
@@ -24,10 +26,21 @@ class Navbar extends Component {
       let user = store.getState().auth.user
   }
   async logOutHandler(){
+    await store.dispatch(logoutAdmin(Cookies.get("token"))).then((data) => {
+                            if (data.success) {
+                              setTimeout(()=>{
+                          toast.success(data.message);
+                        this.setState({redirect : true})
+                       window.location.reload();
+                       },1000)
+                  } else {
+                  this.setState({ loading: false });
+                  toast.error(data.message);
+                }
+                })
     // await logoutAdmin(store.dispatch)
-    localStorage.removeItem('token')
-    this.setState({redirect : true})
-    window.location.reload();
+    
+    // window.location.reload();
   }
   changeNav(e){
     Array.from(document.getElementsByClassName("nav-link")).forEach(link => link.style.fontWeight = 400)
@@ -42,14 +55,14 @@ class Navbar extends Component {
               {this.state.redirect ? <Redirect to="/"></Redirect>: ""}
 <nav dir="rtl" className="navbar navbar-expand-lg w-100 nav-style animate__animated animate__slideInDown animate__slower" style={{position: 'fixed',top: 0,zIndex: 5,backgroundColor: '#ECEFF5'}}>
   <div className="container-fluid">
-    <Link className="navbar-brand" onClick={this.resetNav} to="/"><img src={mabaraLogo} style={{width: "120px", height: "90px"}}></img></Link>
+    <Link className="navbar-brand animate__animated animate__fadeIn animate__slower animate__delay-1s" onClick={this.resetNav} to="/"><img src={mabaraLogo} style={{width: "120px", height: "90px"}}></img></Link>
     <button style={{color:"white"}} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
       <i className="fas fa-bars"></i>
     </button>
     <div className="collapse navbar-collapse" id="navbarSupportedContent">
       <ul className="navbar-nav mb-2 mb-lg-0">
         <li className="nav-item">
-          <Link className="nav-link active ibm-plex-sans-arabic-bold" onClick={this.changeNav} aria-current="page" to="/" style={{color: 'black',textAlign: 'center'}}>الرئيسية</Link>
+          <Link className="nav-link active ibm-plex-sans-arabic-bold animate__animated animate__fadeIn animate__slower animate__delay-2s" onClick={this.changeNav} aria-current="page" to="/" style={{color: 'black',textAlign: 'center'}}>الرئيسية</Link>
         </li>
         {/* <li className="nav-item">
           <Link className="nav-link ibm-plex-sans-arabic-bold" to="/articles/all"  onClick={this.changeNav} style={{color: 'black',textAlign: 'center'}}>مقالات</Link>
@@ -65,7 +78,7 @@ class Navbar extends Component {
         </Fragment>
       ): (
         <Fragment>
-        <i className="fas fa-user-circle" style={{fontSize: '28px',color: '#e60006'}}></i>
+        <i className="fas fa-user-circle animate__animated animate__fadeIn animate__slower animate__delay-3s" style={{fontSize: '28px',color: '#e60006'}}></i>
     </Fragment>
       )}
       
@@ -73,7 +86,7 @@ class Navbar extends Component {
     
   ):(
     <Fragment>
-        <i className="fas fa-user-circle" style={{fontSize: '26px',color: '#e60006'}}></i>
+        <i className="fas fa-user-circle animate__animated animate__fadeIn animate__slower animate__delay-3s" style={{fontSize: '26px',color: '#e60006'}}></i>
     </Fragment>
     
   )}

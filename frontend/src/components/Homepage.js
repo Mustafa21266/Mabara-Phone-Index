@@ -11,6 +11,7 @@ import { createPin } from "../actions/pinActions";
 import { deletePin } from "../actions/pinActions";
 import { toast } from "material-react-toastify";
 
+
 class Homepage extends Component {
   constructor(props) {
     super(props);
@@ -200,7 +201,7 @@ class Homepage extends Component {
                   <br></br>
                   <br></br>
             <div className="container-fluid" style={{backgroundColor: '#3357A0'}}>
-              <div className="row">
+              <div className="row animate__animated animate__fadeIn animate__slower animate__delay-1s">
                 <div className="col-12">
               <h1 className="d-block mx-auto text-center text-white">دليل تليفونات مبرة العصافرة</h1>
               <br></br>
@@ -211,7 +212,7 @@ class Homepage extends Component {
 
                 </ div>
                 </ div>
-              <div className="row">
+              <div className="row animate__animated animate__fadeIn animate__slower animate__delay-2s">
                 <div className="col-12 col-md-4 d-flex justify-content-center" style={{padding: "20px"}}>
                   <button id="gharbBtn" type="button" className="btn btn-outline-light">
                     <div style={{width: '100%',height:'100%'}}  onClick={(e) => { 
@@ -258,7 +259,9 @@ class Homepage extends Component {
               <br></br>
               <br></br>
               <hr></hr>
-<div className="mb-3 row" dir="rtl">
+              <div className="row animate__animated animate__fadeIn animate__slower animate__delay-3s">
+                <div className="col-12" style={{padding: "20px"}}>
+                  <div className="mb-3 row" dir="rtl">
     <label htmlFor="staticsearchTerm" className="col-sm-1 col-form-label text-center text-white">أبحث عن</label>
     <div className="col-sm-11">
       <input type="text" className="form-control" id="staticsearchTerm" onChange={(e) => 
@@ -277,8 +280,11 @@ class Homepage extends Component {
       }/>
     </div>
   </div>
+                </div>
+                </div>
+
                   <hr></hr>
-              <dir className="row">
+              <dir className="row animate__animated animate__fadeIn animate__slower animate__delay-4s">
                 <dir className="col-12">
                   <ul className="nav nav-tabs" id="myTab" role="tablist"  dir="rtl">
                     {Object.keys(store.getState().auth.user).length !== 0 && 
@@ -323,7 +329,7 @@ class Homepage extends Component {
     if(index === 0){
       return <div key={floor._id} className="tab-pane fade show active row d-flex justify-content-start" id={`${floor.nameEnglish}`} role="tabpanel" aria-labelledby={floor.nameEnglish + "-tab"}>
         {this.state.extensions.map((ext, index) => {
-          return <div key={ext._id} className="card col-12 col-md-3" style={{margin: '20px'}}>
+          return <div id="extensionDiv" key={ext._id} className="card col-12 col-md-3" style={{margin: '20px'}}>
   <div className="card-body">
     {Object.keys(store.getState().auth.user).length !== 0 && 
     <Fragment>

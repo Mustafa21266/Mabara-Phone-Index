@@ -6,7 +6,7 @@ import {
     DELETE_SITE,
     SEARCH_SITES
 } from '../constants/siteConstants';
-
+// axios.defaults.withCredentials = true;
 
 //Create an Site FOR ADMIN ONLY
 export const createSite = (siteData) => async (dispatch) => {

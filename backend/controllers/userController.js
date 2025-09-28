@@ -9,8 +9,7 @@ exports.registerUser = async (req, res, next) => {
         const user = await User.create(req.body);
         const token = jwt.sign({_id: user._id},"fghfghw132414as@!")
             const options = {
-                expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-                httpOnly: true
+                expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
             }
             res.status(200).cookie('token',token, options).json({
                 success: true,
@@ -37,7 +36,6 @@ exports.loginUser = async (req, res, next) => {
             const token = jwt.sign({_id: user._id},"fghfghw132414as@!")
             const options = {
                 expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-                httpOnly: true,
             secure: true, // Ensure this is true in production
             sameSite: "None", // This allows cross-site requests
             maxAge: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 1 day
@@ -73,8 +71,7 @@ exports.getUserDetails = async (req, res, next) => {
     if(user){
         const token = jwt.sign({_id: user._id},"fghfghw132414as@!")
         const options = {
-            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-            httpOnly: true
+            expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
         }
         console.log(user)
         res.status(200).cookie('token',token, options).json({
@@ -108,14 +105,12 @@ exports.logoutUser = async (req, res, next) => {
             message: 'Unauthorized Action!',
         })
     }else {
-        res.cookie('token', null, {
-            expires: new Date(Date.now()),
-            httpOnly: true
-        })
-        res.status(200).json({
-            success: true,
-            message: "Logged out Successfully!"
-        })
+        res.status(200).cookie('token', null, {
+            expires: new Date(Date.now())
+        }).json({
+                success: true,
+                message: "Logged out Successfully!"
+            })
     }
 
 }
@@ -200,8 +195,7 @@ exports.resetPassword = async (req, res, next) => {
     await user.save();
     const token = jwt.sign({_id: user._id},"fghfghw132414as@!")
             const options = {
-                expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000),
-                httpOnly: true
+                expires: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000)
             }
             user = await User.findById(user._id)
             res.status(200).cookie('token',token, options).json({

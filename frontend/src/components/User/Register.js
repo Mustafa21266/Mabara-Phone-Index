@@ -7,6 +7,7 @@ import { toast } from "material-react-toastify";
 import MetaData from "../MetaData";
 import intlTelInput from "intl-tel-input";
 import Loader from "../Loader";
+import myVideo from '../../assets/videos/mabara.mp4'; // Adjust path as needed
 class Register extends Component {
   regex = new RegExp("^(?=.*[a-z])(?=.*[0-9])(?=.{6,})");
   phoneInput;
@@ -83,13 +84,14 @@ class Register extends Component {
               <Redirect to="/"></Redirect>
             ) : (
               <Fragment>
-                <br></br>
-                <br></br>
-                <br></br>
-                <br></br>
-                <div className="container" style={{ height: "100vh" }} dir="rtl">
+                  <div className="home animate__animated animate__fadeIn animate__slower animate__delay-1s">
+                      <video muted loop autoPlay className="animate__animated animate__fadeIn animate__slower animate__delay-2s">
+                        <source src={myVideo} type="video/mp4"/>
+                      </video>
+                      <div className="home-content">
+                <div className="container" dir="rtl">
                   <div className="row animate__animated animate__fadeIn animate__slower">
-                    <img
+                    {/* <img
                       id="loginImg"
                       className="img-fluid mx-auto login-img animate__animated animate__pulse animate__infinite animate__slower  d-flex align-self-center"
                       src={"../images/heart_login.png"}
@@ -102,14 +104,19 @@ class Register extends Component {
                         width: "700px",
                         zIndex: -1,
                       }}
-                    ></img>
+                    ></img> */}
                     {this.state.registered ? <Redirect to="/" /> : ""}
                     <div className="col-12 col-lg-6 d-block mx-auto">
                       <br></br>
                       <br></br>
                       <br></br>
+                      <br></br>
+                      <br></br>
                       <div className="login-container">
-                        <h1 className="text-center">تسجيل كمستخدم جديد</h1>
+                      <br></br>
+                        <h1 className="text-center text-white">تسجيل كمستخدم جديد</h1>
+                      <br></br>
+                        <hr></hr>
                         <br></br>
                         <form onSubmit={(e) => this.onSubmitHandler(e)}>
                           <div className="form-group">
@@ -200,7 +207,7 @@ class Register extends Component {
                           <br></br>
                           <button
                             type="submit"
-                            className="btn btn-outline-primary d-block mx-auto"
+                            className="btn btn-outline-light d-block mx-auto"
                             style={{
                               borderRadius: "50px",
                               padding: "10px 30px",
@@ -220,14 +227,19 @@ class Register extends Component {
                           </div>
                         </form>
                         <br></br>
-                        <p className="text-center">
-                          سجلت مسبقا؟ <Link to="/login">تسجيل الدخول</Link>
+                        <p className="text-center text-white">
+                          سجلت مسبقاً
+                          <Link to="/login" style={{marginRight: '10px',color: '#e60006'}}>تسجيل الدخول</Link>
                         </p>
+                        {/* <p className="text-center">
+                          سجلت مسبقا؟ <Link to="/login">تسجيل الدخول</Link>
+                        </p> */}
                       </div>
                     </div>
                   </div>
                 </div>
-                <br></br>
+                </div>
+                </div>
               </Fragment>
             )}
           </Fragment>

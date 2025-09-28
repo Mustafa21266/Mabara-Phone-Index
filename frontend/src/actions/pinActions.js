@@ -4,7 +4,7 @@ import {
     GET_ALL_PINS,
     DELETE_PIN,
 } from '../constants/pinConstants';
-
+// axios.defaults.withCredentials = true;
 
 //Create an Pin FOR ADMIN ONLY
 export const createPin = (pinData) => async (dispatch) => {
@@ -43,9 +43,15 @@ export const deletePin = (id) => async (dispatch) => {
 };
 
 
-export const getAllPins = () => async (dispatch) => {
+export const getAllPins = (token) => async (dispatch) => {
     try {
-        const { data } = await axios.get(`http://localhost:8000/api/v1/pins/all`)
+        const config = {
+            headers: {
+                'x-access-token': token,
+                'Access-Control-Allow-Headers': '*'
+            }
+        }
+        const { data } = await axios.get(`http://localhost:8000/api/v1/pins/${token}`,config)
         dispatch({
             type: GET_ALL_PINS,
             payload: data

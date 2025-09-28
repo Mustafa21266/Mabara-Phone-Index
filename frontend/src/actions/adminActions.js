@@ -12,7 +12,7 @@ import {
     RESET_PASSWORD
 } from '../constants/adminConstants';
 let baseURL = '';
-
+// axios.defaults.withCredentials = true;
 //REGISTER
 export const register = (registerData) => async (dispatch) => {
     try {
@@ -79,12 +79,24 @@ export const loginAdmin = (loginData) => async (dispatch) => {
 
 };
 //LOGOUT 
-export const logoutAdmin = async (dispatch) => {
-    await axios.get(`http://localhost:8000/api/v1/logout`)
+export const logoutAdmin = (token) => async (dispatch) => {
+    try {
+    const config = {
+            headers: {
+                'x-access-token': token,
+                'Access-Control-Allow-Headers': '*'
+            }
+        }
+    const { data } = await axios.get(`http://localhost:8000/api/v1/logout/${token}`,config)
     dispatch({
         type: LOGOUT_ADMIN,
-        payload: []
+        payload: data
     })
+    return data
+    } catch (err) {
+        
+        return { message: 'An error has occured' }
+    }
 };
 
 

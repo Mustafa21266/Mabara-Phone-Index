@@ -50,6 +50,7 @@ import { getAllSites } from "./actions/siteActions";
 import { getAllFloors } from "./actions/floorActions";
 import { getAllExtensions } from "./actions/extensionActions";
 import { getAllPins } from "./actions/pinActions";
+
 class App extends Component {
   constructor(props) {
     super(props);
@@ -57,11 +58,11 @@ class App extends Component {
       loading: false,
       refresh: false,
     };
-    // console.log(localStorage.getItem('token'))
+    // console.log(Cookies.get("token"))
   }
   componentDidMount() {
     setTimeout(()=>{
-    // console.log(localStorage.getItem('token'))
+    // console.log(Cookies.get("token"))
     
     store.dispatch(getAllSites()).then((data) => {
                 store.dispatch(getAllFloors()).then((data) => {
@@ -70,9 +71,10 @@ class App extends Component {
             })
           });
       });
-      if(localStorage.getItem('token')){
-        store.dispatch(getUserDetails(localStorage.getItem('token'))).then((data) => {
-                store.dispatch(getAllPins()).then((data) => {
+      console.log(Cookies.get("token"))
+      if(Cookies.get("token")){
+        store.dispatch(getUserDetails(Cookies.get("token"))).then((data) => {
+                store.dispatch(getAllPins(Cookies.get("token"))).then((data) => {
                             if (data.success) {
                       this.setState({ refresh: true, loading: false });
                   } else {

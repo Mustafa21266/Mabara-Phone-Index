@@ -6,7 +6,7 @@ import {
     DELETE_EXTENSION,
     SEARCH_EXTENSIONS
 } from '../constants/extensionConstants';
-
+// axios.defaults.withCredentials = true;
 
 //Create an Extension FOR ADMIN ONLY
 export const createExtension = (extensionData) => async (dispatch) => {

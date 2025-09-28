@@ -158,3 +158,30 @@ video {
     padding: 12px 20px;
     cursor: pointer;
 }
+#extensionDiv {
+  -webkit-transition: -webkit-transform 1s ease-in-out;
+  transition: transform 1s ease-in-out;
+}
+
+#extensionDiv:hover {
+   -webkit-transform: scale(1.1);
+  transform: scale(1.1);
+}
+
+#gharbBtn, #sharkBtn, #capitalBtn {
+  -webkit-transition: -webkit-transform 1s ease-in-out;
+  transition: transform 1s ease-in-out;
+}
+
+#gharbBtn:hover {
+   -webkit-transform: scale(1.25);
+  transform: scale(1.25);
+}
+#sharkBtn:hover {
+   -webkit-transform: scale(1.25);
+  transform: scale(1.25);
+}
+#capitalBtn:hover {
+   -webkit-transform: scale(1.25);
+  transform: scale(1.25);
+}

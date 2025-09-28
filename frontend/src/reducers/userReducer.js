@@ -10,6 +10,7 @@ import {
   FORGOT_PASSWORD,
   RESET_PASSWORD
 } from "../constants/adminConstants";
+import Cookies from 'js-cookie';
 
 const initialState = {
   user: {},
@@ -32,7 +33,7 @@ function userReducer(state = initialState, action) {
         user: action.payload.user
       })
     case LOGIN_ADMIN:
-      localStorage.setItem('token', action.payload.token);
+      Cookies.set("token",action.payload.token)
       return Object.assign({}, state, {
         user: action.payload.user,
         token: action.payload.token
@@ -43,7 +44,7 @@ function userReducer(state = initialState, action) {
         user: action.payload.user
       })
     case LOGOUT_ADMIN:
-      
+      Cookies.remove("token")
       return Object.assign({}, state, {
         user: []
       })

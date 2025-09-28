@@ -329,7 +329,7 @@ class Homepage extends Component {
     if(index === 0){
       return <div key={floor._id} className="tab-pane fade show active row d-flex justify-content-start" id={`${floor.nameEnglish}`} role="tabpanel" aria-labelledby={floor.nameEnglish + "-tab"}>
         {this.state.extensions.map((ext, index) => {
-          return <div id="extensionDiv" key={ext._id} className="card col-12 col-md-3" style={{margin: '20px'}}>
+          return <div id="extensionDiv" key={ext._id} className="card col-12 col-md-3" style={{margin: '20px', padding: "30px"}}>
   <div className="card-body">
     {Object.keys(store.getState().auth.user).length !== 0 && 
     <Fragment>

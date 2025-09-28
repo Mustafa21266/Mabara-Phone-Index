@@ -113,7 +113,7 @@ class Register extends Component {
                         <br></br>
                         <form onSubmit={(e) => this.onSubmitHandler(e)}>
                           <div className="form-group">
-                            {/* <label for="exampleInputEmail1">Email address</label> */}
+                            {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                             <input
                               type="text"
                               className="form-control"
@@ -134,7 +134,7 @@ class Register extends Component {
                           </div>
                           <br></br>
                           <div className="form-group">
-                            {/* <label for="exampleInputEmail1">Email address</label> */}
+                            {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                             <input
                               type="text"
                               className="form-control"
@@ -155,7 +155,7 @@ class Register extends Component {
                           </div>
                           <br></br>
                           <div className="form-group">
-                            {/* <label for="exampleInputEmail1">Email address</label> */}
+                            {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                             <input
                               type="email"
                               id="email"
@@ -176,7 +176,7 @@ class Register extends Component {
                           </div>
                           <br></br>
                           <div className="form-group">
-                            {/* <label for="exampleInputPassword1">Password</label> */}
+                            {/* <label htmlFor="exampleInputPassword1">Password</label> */}
                             <input
                               type="password"
                               className="form-control"

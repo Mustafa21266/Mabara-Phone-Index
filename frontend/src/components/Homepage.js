@@ -203,7 +203,7 @@ class Homepage extends Component {
                 </ div>
                 </ div>
               <div className="row">
-                <div className="col-12 col-md-4 d-flex justify-content-center">
+                <div className="col-12 col-md-4 d-flex justify-content-center" style={{padding: "20px"}}>
                   <button id="gharbBtn" type="button" className="btn btn-outline-light">
                     <div style={{width: '100%',height:'100%'}}  onClick={(e) => { 
                       this.onChangeHandler(e, "gharb");
@@ -217,7 +217,7 @@ class Homepage extends Component {
                     </div>
                           </button>
                 </div>
-                <div className="col-12 col-md-4 d-flex justify-content-center">
+                <div className="col-12 col-md-4 d-flex justify-content-center" style={{padding: "20px"}}>
 <button id="capitalBtn" type="button" className="btn btn-outline-light">                    
   <div style={{width: '100%',height:'100%'}}  onClick={(e) => { 
                       this.onChangeHandler(e, "capital");
@@ -231,7 +231,7 @@ class Homepage extends Component {
                     </div>
                           </button>
                 </div>
-                <div className="col-12 col-md-4 d-flex justify-content-center">
+                <div className="col-12 col-md-4 d-flex justify-content-center" style={{padding: "20px"}}>
 <button id="sharkBtn" type="button" className="btn btn-outline-light">                    
   <div style={{width: '100%',height:'100%'}}  onClick={(e) => { 
                       this.onChangeHandler(e, "shark");
@@ -250,7 +250,7 @@ class Homepage extends Component {
               <br></br>
               <hr></hr>
 <div className="mb-3 row" dir="rtl">
-    <label for="staticsearchTerm" className="col-sm-1 col-form-label text-center text-white">أبحث عن</label>
+    <label htmlFor="staticsearchTerm" className="col-sm-1 col-form-label text-center text-white">أبحث عن</label>
     <div className="col-sm-11">
       <input type="text" className="form-control" id="staticsearchTerm" onChange={(e) => 
         this.setState({
@@ -273,7 +273,7 @@ class Homepage extends Component {
                 <dir className="col-12">
                   <ul className="nav nav-tabs" id="myTab" role="tablist"  dir="rtl">
                     {Object.keys(store.getState().auth.user).length !== 0 && 
-                    <li className="nav-item" role="presentation">
+                    <li key={store.getState().auth.user._id} className="nav-item" role="presentation">
     <button className="nav-link text-white text-white" id="pin-tab" data-bs-toggle="tab" data-bs-target="#pin" type="button" role="tab" aria-controls="pin" aria-selected="true" onClick={(e) => {
       this.setState({
         extensions: this.state.userPins.map((pin) => {
@@ -287,7 +287,7 @@ class Homepage extends Component {
                     }
                     {this.state.selectedSiteFloor.map((floor,index) => {
                       if(index === 0){
-                      return <li className="nav-item" role="presentation">
+                      return <li key={floor._id} className="nav-item" role="presentation">
     <button className="nav-link text-white active" id={floor.nameEnglish + "-tab"} data-bs-toggle="tab" data-bs-target={`#${floor.nameEnglish}`} type="button" role="tab" aria-controls={`${floor.nameEnglish}`} aria-selected="true" onClick={(e) => {
       this.setState({
         extensions: store
@@ -297,7 +297,7 @@ class Homepage extends Component {
     }}>{`${floor.nameArabic}`}</button>
                         </li>
                       }else {
-                      return <li className="nav-item" role="presentation">
+                      return <li key={floor._id} className="nav-item" role="presentation">
     <button className="nav-link text-white" id={floor.nameEnglish + "-tab"} data-bs-toggle="tab" data-bs-target={`#${floor.nameEnglish}`} type="button" role="tab" aria-controls={`${floor.nameEnglish}`} aria-selected="true" onClick={(e) => {
       this.setState({
         extensions: store
@@ -312,9 +312,9 @@ class Homepage extends Component {
 <div className="tab-content" id="myTabContent" dir="rtl">
   {this.state.selectedSiteFloor.map((floor,index) => {
     if(index === 0){
-      return <div className="tab-pane fade show active row d-flex justify-content-start" id={`${floor.nameEnglish}`} role="tabpanel" aria-labelledby={floor.nameEnglish + "-tab"}>
+      return <div key={floor._id} className="tab-pane fade show active row d-flex justify-content-start" id={`${floor.nameEnglish}`} role="tabpanel" aria-labelledby={floor.nameEnglish + "-tab"}>
         {this.state.extensions.map((ext, index) => {
-          return <div className="card col-12 col-md-3" style={{margin: '20px'}}>
+          return <div key={ext._id} className="card col-12 col-md-3" style={{margin: '20px'}}>
   <div className="card-body">
     {Object.keys(store.getState().auth.user).length !== 0 && 
     <Fragment>

@@ -148,7 +148,7 @@ class EditUser extends Component {
                         <br></br>
                         <form onSubmit={(e) => this.onSubmitHandler(e)}>
                           <div className="form-group">
-                            {/* <label for="exampleInputEmail1">Email address</label> */}
+                            {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                             <input
                               type="text"
                               className="form-control"
@@ -168,7 +168,7 @@ class EditUser extends Component {
                           </div>
                           <br></br>
                           <div className="form-group">
-                            {/* <label for="exampleInputEmail1">Email address</label> */}
+                            {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                             <select
                               defaultValue={this.state.role}
                               onChange={(e) =>
@@ -190,7 +190,7 @@ class EditUser extends Component {
                           </div>
                           <br></br>
                           <div className="form-group">
-                            {/* <label for="exampleInputEmail1">Email address</label> */}
+                            {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                             <input
                               id="phone"
                               className="form-control"

@@ -97,7 +97,7 @@ class NewPassword extends Component {
                 <form onSubmit={(e) => this.onSubmitHandler(e)}>
                   <br></br>
                   <div className="form-group">
-                    {/* <label for="exampleInputEmail1">Email address</label> */}
+                    {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                     <input
                       type="password"
                       className="form-control"

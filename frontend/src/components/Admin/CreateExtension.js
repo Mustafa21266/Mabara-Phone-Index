@@ -101,7 +101,7 @@ class CreateExtension extends Component {
                                     <form onSubmit={(e) => this.onSubmitHandler(e)} dir="rtl">
                                       <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputExtensionName1" className="col-sm-2 col-form-label text-center text-white">إسم الإمتداد</label>
+                                        <label htmlFor="exampleInputExtensionName1" className="col-sm-2 col-form-label text-center text-white">إسم الإمتداد</label>
                                         <div className="col-sm-10">
                                         <input
                                           type="text"
@@ -142,7 +142,7 @@ class CreateExtension extends Component {
                                       <br></br>
                                <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputExtensionExtension1" className="col-sm-2 col-form-label text-center text-white">رقم الإمتداد</label>
+                                        <label htmlFor="exampleInputExtensionExtension1" className="col-sm-2 col-form-label text-center text-white">رقم الإمتداد</label>
                                         <div className="col-sm-10">
                             <input
                                           type="number"
@@ -166,7 +166,7 @@ class CreateExtension extends Component {
                                       <br></br>
                                <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputExtensionSite1" className="col-sm-2 col-form-label text-center text-white">مكان الإمتداد</label>
+                                        <label htmlFor="exampleInputExtensionSite1" className="col-sm-2 col-form-label text-center text-white">مكان الإمتداد</label>
                                         <div className="col-sm-10">
                             <select
                               defaultValue={this.state.site}
@@ -192,7 +192,7 @@ class CreateExtension extends Component {
                                        <br></br>
                                <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputExtensionFloor1" className="col-sm-2 col-form-label text-center text-white">طابق الإمتداد</label>
+                                        <label htmlFor="exampleInputExtensionFloor1" className="col-sm-2 col-form-label text-center text-white">طابق الإمتداد</label>
                                         <div className="col-sm-10">
                             <select
                               defaultValue={this.state.floor}

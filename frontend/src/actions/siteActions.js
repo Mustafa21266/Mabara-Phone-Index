@@ -16,7 +16,7 @@ export const createSite = (siteData) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        const { data } = await axios.post(`http://127.0.0.1:8000/api/v1/admin/site/create`, siteData, config)
+        const { data } = await axios.post(`http://localhost:8000/api/v1/admin/site/create`, siteData, config)
         dispatch({
             type: CREATE_SITE,
             payload: data
@@ -37,7 +37,7 @@ export const editSite = (id,siteData) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        const { data } = await axios.put(`http://127.0.0.1:8000/api/v1/admin/site/update/${id}`, siteData, config)
+        const { data } = await axios.put(`http://localhost:8000/api/v1/admin/site/update/${id}`, siteData, config)
         dispatch({
             type: UPDATE_SITE,
             payload: data
@@ -52,7 +52,7 @@ export const editSite = (id,siteData) => async (dispatch) => {
 
 export const deleteSite = (id) => async (dispatch) => {
     try {
-        const { data } = await axios.delete(`http://127.0.0.1:8000/api/v1/admin/site/delete/${id}`)
+        const { data } = await axios.delete(`http://localhost:8000/api/v1/admin/site/delete/${id}`)
         dispatch({
             type: DELETE_SITE,
             payload: data
@@ -67,7 +67,7 @@ export const deleteSite = (id) => async (dispatch) => {
 
 // export const searchSites = (searchTerm,orderBy) => async (dispatch) => {
 //     try {
-//         const { data } = await axios.get(`http://127.0.0.1:8000/api/v1/pcs/search?searchTerm=${searchTerm}&orderBy=${orderBy}`)
+//         const { data } = await axios.get(`http://localhost:8000/api/v1/pcs/search?searchTerm=${searchTerm}&orderBy=${orderBy}`)
 //         dispatch({
 //             type: SEARCH_SiteS,
 //             payload: data
@@ -82,7 +82,7 @@ export const deleteSite = (id) => async (dispatch) => {
 
 export const getAllSites = () => async (dispatch) => {
     try {
-        const { data } = await axios.get(`http://127.0.0.1:8000/api/v1/sites/all`)
+        const { data } = await axios.get(`http://localhost:8000/api/v1/sites/all`)
         dispatch({
             type: GET_ALL_SITES,
             payload: data

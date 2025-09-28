@@ -118,7 +118,7 @@ class EditProfile extends Component {
                         <form onSubmit={(e) => this.onSubmitHandler(e)} dir="rtl">
                           <div className="form-group">
                             <div className="mb-3 row">
-                            <label for="exampleInputName1" className="col-sm-2 col-form-label text-center text-white">الإسم </label>
+                            <label htmlFor="exampleInputName1" className="col-sm-2 col-form-label text-center text-white">الإسم </label>
                             <div className="col-sm-10">
                             <input
                               type="text"
@@ -142,7 +142,7 @@ class EditProfile extends Component {
                           <br></br>
                             <div className="form-group">
                               <div className="mb-3 row">     
-                            <label for="exampleInputUserName1" className="col-sm-2 col-form-label text-center text-white">إسم المستخدم</label>
+                            <label htmlFor="exampleInputUserName1" className="col-sm-2 col-form-label text-center text-white">إسم المستخدم</label>
                             <div className="col-sm-10">
                             <input
                               type="text"
@@ -166,7 +166,7 @@ class EditProfile extends Component {
                           <br></br>
                             <div className="form-group">
                             <div className="mb-3 row">     
-                            <label for="exampleInputEmail1" className="col-sm-2 col-form-label text-center text-white">البريد الإلكتروني</label>
+                            <label htmlFor="exampleInputEmail1" className="col-sm-2 col-form-label text-center text-white">البريد الإلكتروني</label>
                             <div className="col-sm-10">
                             <input
                               type="email"
@@ -190,7 +190,7 @@ class EditProfile extends Component {
                           <br></br>
                           <div className="form-group">
                            <div className="mb-3 row">     
-                            <label for="exampleInputPassword1" className="col-sm-2 col-form-label text-center text-white">كلمة السر</label>
+                            <label htmlFor="exampleInputPassword1" className="col-sm-2 col-form-label text-center text-white">كلمة السر</label>
                             <div className="col-sm-10">
                             <input
                               type="password"
@@ -218,7 +218,7 @@ class EditProfile extends Component {
                           <br></br>
                           <div className="form-group">
                           <div className="mb-3 row">     
-                            <label for="exampleInputPassword2" className="col-sm-2 col-form-label text-center text-white">تأكيد كلمة السر</label>
+                            <label htmlFor="exampleInputPassword2" className="col-sm-2 col-form-label text-center text-white">تأكيد كلمة السر</label>
                             <div className="col-sm-10">
                               <input
                               type="password"

@@ -103,25 +103,25 @@ class Profile extends Component {
                         >
                           <br></br>
                           <div className="mb-3 row">
-                        <label htmlFor="staticEmail" className="col-sm-2 col-form-label text-center">الأسم</label>
+                        <label htmlhtmlFor="staticEmail" className="col-sm-2 col-form-label text-center">الأسم</label>
                         <div className="col-sm-10">
                           <input type="text" readOnly className="form-control" id="staticEmail" value={store.getState().auth.user.name} style={{color:'black'}} />
                         </div>
                       </div>
                           <div className="mb-3 row">
-                        <label htmlFor="staticEmail" className="col-sm-2 col-form-label text-center">إسم المستخدم</label>
+                        <label htmlhtmlFor="staticEmail" className="col-sm-2 col-form-label text-center">إسم المستخدم</label>
                         <div className="col-sm-10">
                           <input type="text" readOnly className="form-control" id="staticEmail" value={store.getState().auth.user.username} style={{color:'black'}} />
                         </div>
                       </div>
                                                 <div className="mb-3 row">
-                        <label htmlFor="staticEmail" className="col-sm-2 col-form-label text-center">البريد الإلكتروني</label>
+                        <label htmlhtmlFor="staticEmail" className="col-sm-2 col-form-label text-center">البريد الإلكتروني</label>
                         <div className="col-sm-10">
                           <input type="text" readOnly className="form-control" id="staticEmail" value={store.getState().auth.user.email} style={{color:'black'}} />
                         </div>
                       </div>
                       <div className="mb-3 row">
-                        <label htmlFor="staticEmail" className="col-sm-2 col-form-label text-center">تاريخ التسجيل</label>
+                        <label htmlhtmlFor="staticEmail" className="col-sm-2 col-form-label text-center">تاريخ التسجيل</label>
                         <div className="col-sm-10">
                           <input type="text" readOnly className="form-control" id="staticEmail" value={String(
                                 store.getState().auth.user.createdAt
@@ -129,7 +129,7 @@ class Profile extends Component {
                         </div>
                       </div>
                       <div className="mb-3 row">
-                        <label htmlFor="staticEmail" className="col-sm-2 col-form-label text-center">نوع الحساب</label>
+                        <label htmlhtmlFor="staticEmail" className="col-sm-2 col-form-label text-center">نوع الحساب</label>
                         <div className="col-sm-10">
                           <input type="text" readOnly className="form-control" id="staticEmail" value={store
                                 .getState()

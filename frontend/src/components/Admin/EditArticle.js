@@ -107,10 +107,10 @@ class EditArticle extends Component {
     imageUploadParam: "articleImage",
 
     // Set the image upload URL.
-    imageUploadURL: `http://127.0.0.1:8000/api/v1/admin/article/images/upload/${
+    imageUploadURL: `http://localhost:8000/api/v1/admin/article/images/upload/${
       store.getState().auth.user._id
     }`,
-    // imageRemoveURL: `http://127.0.0.1:8000/api/v1/admin/article/images/delete/${store.getState().auth.user._id}`,
+    // imageRemoveURL: `http://localhost:8000/api/v1/admin/article/images/delete/${store.getState().auth.user._id}`,
 
     // Additional upload params.
     imageUploadParams: {},
@@ -144,7 +144,7 @@ class EditArticle extends Component {
         };
         xhttp.open(
           "POST",
-          `http://127.0.0.1:8000/api/v1/admin/article/images/delete/${
+          `http://localhost:8000/api/v1/admin/article/images/delete/${
             store.getState().auth.user._id
           }`,
           true

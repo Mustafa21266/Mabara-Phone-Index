@@ -14,7 +14,7 @@ export const createPin = (pinData) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        const { data } = await axios.post(`http://127.0.0.1:8000/api/v1/admin/pin/create`, pinData, config)
+        const { data } = await axios.post(`http://localhost:8000/api/v1/admin/pin/create`, pinData, config)
         dispatch({
             type: CREATE_PIN,
             payload: data
@@ -29,7 +29,7 @@ export const createPin = (pinData) => async (dispatch) => {
 
 export const deletePin = (id) => async (dispatch) => {
     try {
-        const { data } = await axios.delete(`http://127.0.0.1:8000/api/v1/admin/pin/delete/${id}`)
+        const { data } = await axios.delete(`http://localhost:8000/api/v1/admin/pin/delete/${id}`)
         dispatch({
             type: DELETE_PIN,
             payload: data
@@ -45,7 +45,7 @@ export const deletePin = (id) => async (dispatch) => {
 
 export const getAllPins = () => async (dispatch) => {
     try {
-        const { data } = await axios.get(`http://127.0.0.1:8000/api/v1/pins/all`)
+        const { data } = await axios.get(`http://localhost:8000/api/v1/pins/all`)
         dispatch({
             type: GET_ALL_PINS,
             payload: data

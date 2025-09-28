@@ -99,7 +99,7 @@ class CreateFloor extends Component {
                                     <form onSubmit={(e) => this.onSubmitHandler(e)} dir="rtl">
                                       <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputFloorNameArabic1" className="col-sm-2 col-form-label text-center text-white">إسم الطابق بالعربية</label>
+                                        <label htmlFor="exampleInputFloorNameArabic1" className="col-sm-2 col-form-label text-center text-white">إسم الطابق بالعربية</label>
                                         <div className="col-sm-10">
                                         <input
                                           type="text"
@@ -140,7 +140,7 @@ class CreateFloor extends Component {
                                       <br></br>
                                       <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputFloorNameEnglish1" className="col-sm-2 col-form-label text-center text-white">إسم الطابق بالأنجليزية</label>
+                                        <label htmlFor="exampleInputFloorNameEnglish1" className="col-sm-2 col-form-label text-center text-white">إسم الطابق بالأنجليزية</label>
                                         <div className="col-sm-10">
                                         <input
                                           type="text"
@@ -181,7 +181,7 @@ class CreateFloor extends Component {
                                       <br></br>
                                <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputFloorNumber1" className="col-sm-2 col-form-label text-center text-white">رقم الطابق</label>
+                                        <label htmlFor="exampleInputFloorNumber1" className="col-sm-2 col-form-label text-center text-white">رقم الطابق</label>
                                         <div className="col-sm-10">
                             <select
                               defaultValue={this.state.number}
@@ -220,7 +220,7 @@ class CreateFloor extends Component {
                                       <br></br>
                                <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputFloorSite1" className="col-sm-2 col-form-label text-center text-white">مكان الطابق</label>
+                                        <label htmlFor="exampleInputFloorSite1" className="col-sm-2 col-form-label text-center text-white">مكان الطابق</label>
                                         <div className="col-sm-10">
                             <select
                               defaultValue={this.state.site}

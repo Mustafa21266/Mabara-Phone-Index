@@ -121,7 +121,7 @@ class EditExtension extends Component {
                                     <form onSubmit={(e) => this.onSubmitHandler(e)} dir="rtl">
                                       <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputExtensionName1" className="col-sm-2 col-form-label text-center text-white">إسم الطابق</label>
+                                        <label htmlFor="exampleInputExtensionName1" className="col-sm-2 col-form-label text-center text-white">إسم الطابق</label>
                                         <div className="col-sm-10">
                                         <input
                                           type="text"
@@ -162,7 +162,7 @@ class EditExtension extends Component {
                                       <br></br>
                                <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputExtensionNumber1" className="col-sm-2 col-form-label text-center text-white">رقم الطابق</label>
+                                        <label htmlFor="exampleInputExtensionNumber1" className="col-sm-2 col-form-label text-center text-white">رقم الطابق</label>
                                         <div className="col-sm-10">
                             <select
                               defaultValue={this.state.number}
@@ -202,7 +202,7 @@ class EditExtension extends Component {
                                                                             <br></br>
                                <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputExtensionSite1" className="col-sm-2 col-form-label text-center text-white">مكان الطابق</label>
+                                        <label htmlFor="exampleInputExtensionSite1" className="col-sm-2 col-form-label text-center text-white">مكان الطابق</label>
                                         <div className="col-sm-10">
                             <select
                               defaultValue={this.state.site}

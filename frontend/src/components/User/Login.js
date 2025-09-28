@@ -126,7 +126,7 @@ class Login extends Component {
                           <div className="form-group">
                                                         <h5 className="text-center text-white">كلمة السر</h5>
                             <br></br>
-                            {/* <label for="exampleInputPassword1">Password</label> */}
+                            {/* <label htmlFor="exampleInputPassword1">Password</label> */}
                             <input
                               type="password"
                               className="form-control"

@@ -438,7 +438,7 @@ class Dashboard extends Component {
                     <div className="row">
                       <div
                         className="col-12 col-lg-6"
-                        style={{ textAlign: "center" }}
+                        style={{ textAlign: "center", padding: "20px" }}
                       >
                         <div className="card">
                           <br></br>
@@ -466,7 +466,7 @@ class Dashboard extends Component {
                       </div>
 <div
                         className="col-12 col-lg-6"
-                        style={{ textAlign: "center" }}
+                        style={{ textAlign: "center", padding: "20px" }}
                       >
                         <div className="card">
                           <br></br>
@@ -500,7 +500,7 @@ class Dashboard extends Component {
                                         <div className="row">
                       <div
                         className="col-12 col-lg-6"
-                        style={{ textAlign: "center" }}
+                        style={{ textAlign: "center", padding: "20px" }}
                       >
                         <div className="card">
                           <br></br>
@@ -528,7 +528,7 @@ class Dashboard extends Component {
                       </div>
                       <div
                         className="col-12 col-lg-6"
-                        style={{ textAlign: "center" }}
+                        style={{ textAlign: "center", padding: "20px" }}
                       >
                         <div className="card">
                           <br></br>

@@ -57,11 +57,11 @@ class App extends Component {
       loading: false,
       refresh: false,
     };
-    console.log(localStorage.getItem('token'))
+    // console.log(localStorage.getItem('token'))
   }
   componentDidMount() {
     setTimeout(()=>{
-    console.log(localStorage.getItem('token'))
+    // console.log(localStorage.getItem('token'))
     
     store.dispatch(getAllSites()).then((data) => {
                 store.dispatch(getAllFloors()).then((data) => {
@@ -70,16 +70,20 @@ class App extends Component {
             })
           });
       });
-    store.dispatch(getUserDetails(localStorage.getItem('token'))).then((data) => {
-            store.dispatch(getAllPins()).then((data) => {
-                        if (data.success) {
-                  this.setState({ refresh: true, loading: false });
-              } else {
-              this.setState({ loading: false });
-            }
-            })
-     
-    });
+      if(localStorage.getItem('token')){
+        store.dispatch(getUserDetails(localStorage.getItem('token'))).then((data) => {
+                store.dispatch(getAllPins()).then((data) => {
+                            if (data.success) {
+                      this.setState({ refresh: true, loading: false });
+                  } else {
+                  this.setState({ loading: false });
+                }
+                })
+         
+        });
+      }else {
+        this.setState({ refresh: true, loading: false });
+      }
     },2000)
 
   }
@@ -148,7 +152,7 @@ class App extends Component {
             <Route path="/article/:id" exact>
               <Article />
             </Route>
-            <ToastContainer />
+            <ToastContainer autoClose={3000} />
             <Footer />
           </Router>
         )}

@@ -16,7 +16,7 @@ export const createArticle = (articleData) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        const { data } = await axios.post(`http://127.0.0.1:8000/api/v1/admin/article/create`, articleData, config)
+        const { data } = await axios.post(`http://localhost:8000/api/v1/admin/article/create`, articleData, config)
         dispatch({
             type: CREATE_ARTICLE,
             payload: data
@@ -37,7 +37,7 @@ export const editArticle = (id,articleData) => async (dispatch) => {
                 'Content-Type': 'application/json'
             }
         }
-        const { data } = await axios.put(`http://127.0.0.1:8000/api/v1/admin/article/update/${id}`, articleData, config)
+        const { data } = await axios.put(`http://localhost:8000/api/v1/admin/article/update/${id}`, articleData, config)
         dispatch({
             type: UPDATE_ARTICLE,
             payload: data
@@ -52,7 +52,7 @@ export const editArticle = (id,articleData) => async (dispatch) => {
 
 export const deleteArticle = (id) => async (dispatch) => {
     try {
-        const { data } = await axios.delete(`http://127.0.0.1:8000/api/v1/admin/article/delete/${id}`)
+        const { data } = await axios.delete(`http://localhost:8000/api/v1/admin/article/delete/${id}`)
         dispatch({
             type: DELETE_ARTICLE,
             payload: data
@@ -67,7 +67,7 @@ export const deleteArticle = (id) => async (dispatch) => {
 
 export const searchArticles = (searchTerm,orderBy) => async (dispatch) => {
     try {
-        const { data } = await axios.get(`http://127.0.0.1:8000/api/v1/articles/search?searchTerm=${searchTerm}&orderBy=${orderBy}`)
+        const { data } = await axios.get(`http://localhost:8000/api/v1/articles/search?searchTerm=${searchTerm}&orderBy=${orderBy}`)
         dispatch({
             type: SEARCH_ARTICLES,
             payload: data
@@ -82,7 +82,7 @@ export const searchArticles = (searchTerm,orderBy) => async (dispatch) => {
 
 export const getAllArticles = () => async (dispatch) => {
     try {
-        const { data } = await axios.get(`http://127.0.0.1:8000/api/v1/articles/all`)
+        const { data } = await axios.get(`http://localhost:8000/api/v1/articles/all`)
         dispatch({
             type: GET_ALL_ARTICLES,
             payload: data

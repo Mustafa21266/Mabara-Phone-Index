@@ -98,7 +98,7 @@ class ForgotPassword extends Component {
                 <br></br>
                 <form onSubmit={(e) => this.onSubmitHandler(e)}>
                   <div className="form-group">
-                    {/* <label for="exampleInputEmail1">Email address</label> */}
+                    {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                     <input
                       id="phone"
                       className="form-control"

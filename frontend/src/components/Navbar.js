@@ -24,7 +24,8 @@ class Navbar extends Component {
       let user = store.getState().auth.user
   }
   async logOutHandler(){
-    await logoutAdmin(store.dispatch)
+    // await logoutAdmin(store.dispatch)
+    localStorage.removeItem('token')
     this.setState({redirect : true})
     window.location.reload();
   }
@@ -39,7 +40,7 @@ class Navbar extends Component {
         return(
             <Fragment>
               {this.state.redirect ? <Redirect to="/"></Redirect>: ""}
-<nav dir="rtl" className="navbar navbar-expand-lg w-100 nav-style animate__animated animate__slideInDown animate__slower" style={{position: 'fixed',top: 0,zIndex: 5,backgroundColor: '#ECEFF5',height: '90px'}}>
+<nav dir="rtl" className="navbar navbar-expand-lg w-100 nav-style animate__animated animate__slideInDown animate__slower" style={{position: 'fixed',top: 0,zIndex: 5,backgroundColor: '#ECEFF5'}}>
   <div className="container-fluid">
     <Link className="navbar-brand" onClick={this.resetNav} to="/"><img src={mabaraLogo} style={{width: "120px", height: "90px"}}></img></Link>
     <button style={{color:"white"}} className="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">

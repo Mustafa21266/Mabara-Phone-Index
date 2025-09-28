@@ -95,7 +95,7 @@ class CreateSite extends Component {
                                     <form onSubmit={(e) => this.onSubmitHandler(e)} dir="rtl">
                                       <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label for="exampleInputSiteName1" className="col-sm-2 col-form-label text-center text-white">إسم المكان</label>
+                                        <label htmlFor="exampleInputSiteName1" className="col-sm-2 col-form-label text-center text-white">إسم المكان</label>
                                         <div className="col-sm-10">
                                         <input
                                           type="text"
@@ -119,7 +119,7 @@ class CreateSite extends Component {
                                       <br></br>
                                         <div className="form-group">
                                           <div className="mb-3 row">     
-                                        <label for="exampleInputSiteLocation1" className="col-sm-2 col-form-label text-center text-white">عنوان المكان</label>
+                                        <label htmlFor="exampleInputSiteLocation1" className="col-sm-2 col-form-label text-center text-white">عنوان المكان</label>
                                         <div className="col-sm-10">
                                         <input
                                           type="text"

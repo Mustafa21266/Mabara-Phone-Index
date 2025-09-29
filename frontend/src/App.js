@@ -50,6 +50,14 @@ import { getAllSites } from "./actions/siteActions";
 import { getAllFloors } from "./actions/floorActions";
 import { getAllExtensions } from "./actions/extensionActions";
 import { getAllPins } from "./actions/pinActions";
+// import { SIPProvider } from "react-sipjs";
+import { ReactSipPhone } from 'react-sip-phone'
+import 'react-sip-phone/dist/index.css'
+
+const name = "4444";
+const sipuri = "sip:4444@10.30.90.13";
+const password = "T3$t1234";
+const websocket = "wss://10.30.90.13:8089/ws"; // Your WebSocket server
 
 class App extends Component {
   constructor(props) {
@@ -89,6 +97,7 @@ class App extends Component {
     },2000)
 
   }
+  
   render() {
     return (
       <Fragment>
@@ -97,6 +106,12 @@ class App extends Component {
         ) : (
           <Router history={history}>
             <Navbar history={history} />
+            <ReactSipPhone
+                        name={name}
+                        sipCredentials={{ sipuri: sipuri, password: password }}
+                        sipConfig={{ websocket: websocket, defaultCountryCode: '1' }}
+                        width={400}
+                    />
             <Route path="/" exact>
               <Homepage />
             </Route>

@@ -7,12 +7,13 @@ import {
     SEARCH_EXTENSIONS
 } from '../constants/extensionConstants';
 // axios.defaults.withCredentials = true;
-
+import Cookies from 'js-cookie';
 //Create an Extension FOR ADMIN ONLY
 export const createExtension = (extensionData) => async (dispatch) => {
     try {
         const config = {
             headers: {
+                'x-access-token': Cookies.get("token"),
                 'Content-Type': 'application/json'
             }
         }
@@ -34,6 +35,7 @@ export const editExtension = (id,extensionData) => async (dispatch) => {
     try {
         const config = {
             headers: {
+                'x-access-token': Cookies.get("token"),
                 'Content-Type': 'application/json'
             }
         }

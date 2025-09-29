@@ -10,7 +10,8 @@ import 'jquery'
 // import 'mdbreact/dist/css/mdb.css';
 import store from "./store";
 import { Provider } from 'react-redux';
-import "react-datepicker/dist/react-datepicker.css";
+// import { composeWithDevTools } from "@redux-devtools/extension";
+// import "react-datepicker/dist/react-datepicker.css";
 window.store = store;
 ReactDOM.render(
   <Provider store={store}>

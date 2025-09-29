@@ -213,9 +213,15 @@ export const deleteUserAdmin = (id) => async (dispatch) => {
 
 
 //Get all users
-export const getAllUsers = () => async (dispatch) => {
+export const getAllUsers = (token) => async (dispatch) => {
     try {
-        const { data } = await axios.get(`http://localhost:8000/api/v1/admin/users/all`)
+        const config = {
+            headers: {
+                'x-access-token': token,
+                'Access-Control-Allow-Headers': '*'
+            }
+        }
+        const { data } = await axios.get(`http://localhost:8000/api/v1/admin/users/all`,config)
         dispatch({
             type: GET_ALL_USERS,
             payload: data

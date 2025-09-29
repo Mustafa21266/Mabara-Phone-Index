@@ -12,6 +12,7 @@ import Loader from "../Loader";
 import { getAllSites } from "../../actions/siteActions";
 import { getAllFloors } from "../../actions/floorActions";
 import { getAllExtensions } from "../../actions/extensionActions";
+import Cookies from 'js-cookie';
 class Dashboard extends Component {
   constructor(props) {
     super(props);
@@ -22,7 +23,7 @@ class Dashboard extends Component {
       extensions: [],
       loading: true,
     };
-    store.dispatch(getAllUsers()).then(async (usersData) => {
+    store.dispatch(getAllUsers(Cookies.get("token"))).then(async (usersData) => {
       if (usersData.success === true) {
         store.dispatch(getAllSites()).then(async (sitesData) => {
           store.dispatch(getAllFloors()).then(async (floorsData) => {

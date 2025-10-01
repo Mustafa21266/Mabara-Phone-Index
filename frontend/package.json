@@ -36,6 +36,7 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
     "react-share": "^4.4.0",
+    "react-sip": "^0.8.1",
     "react-sip-phone": "^1.0.0",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",

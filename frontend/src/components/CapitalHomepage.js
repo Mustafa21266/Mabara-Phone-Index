@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Fragment } from "react";
-import "./Homepage.css";
+import "./CapitalHomepage.css";
 import store from "../store";
 import { Link } from "react-router-dom";
 import MetaData from "./MetaData";
@@ -12,7 +12,7 @@ import { deletePin } from "../actions/pinActions";
 import { toast } from "material-react-toastify";
 
 
-class Homepage extends Component {
+class CapitalHomepage extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -46,7 +46,9 @@ class Homepage extends Component {
         };
       });
       console.log(this.state.userPins)
-      document.getElementById('capitalBtn').classList.toggle("active")
+      document.getElementById('capitalBtn').classList.add("active")
+      document.getElementById('gharbBtn').classList.remove("active")
+      document.getElementById('sharkBtn').classList.remove("active")
     }, 3000);
   }
   async onChangeHandler(e, site) {
@@ -372,4 +374,4 @@ class Homepage extends Component {
   }
 }
 
-export default Homepage;
+export default CapitalHomepage;

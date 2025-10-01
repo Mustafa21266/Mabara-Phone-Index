@@ -35,7 +35,8 @@ const extension = require("./routes/extension");
 app.use("/api/v1", extension);
 const pin = require("./routes/pin");
 app.use("/api/v1", pin);
-
+const department = require("./routes/department");
+app.use("/api/v1", department);
 
 app.listen(PORT, (error) =>{
     if(!error)

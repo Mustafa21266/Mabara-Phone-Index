@@ -2,7 +2,6 @@ import React, { Component } from "react";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
 import { getAllUsers } from "../../actions/adminActions";
-import { get } from "../../actions/adminActions";
 import store from "../../store";
 import { toast } from "material-react-toastify";
 import { withRouter } from "react-router-dom";
@@ -12,9 +11,8 @@ import Loader from "../Loader";
 import { getAllSites } from "../../actions/siteActions";
 import { getAllFloors } from "../../actions/floorActions";
 import { getAllExtensions } from "../../actions/extensionActions";
-import { getAllDepartments } from "../../actions/departmentActions";
 import Cookies from 'js-cookie';
-class Dashboard extends Component {
+class OPSharkDashboard extends Component {
   constructor(props) {
     super(props);
     this.state = {
@@ -29,18 +27,15 @@ class Dashboard extends Component {
         store.dispatch(getAllSites()).then(async (sitesData) => {
           store.dispatch(getAllFloors()).then(async (floorsData) => {
             store.dispatch(getAllExtensions()).then(async (extensionsData) => {
-              store.dispatch(getAllDepartments()).then(async (departmentsData) => {
-              // console.log(sitesData)
+              console.log(sitesData)
               this.setState({
                 users: usersData.users,
-                sites: sitesData,
-                floors: floorsData,
-                extensions: extensionsData,
-                departments: departmentsData,
+                sites: sitesData.filter((site) => site._id === "68cbbe05c5b33217c0218714"),
+                floors: floorsData.filter((floor) => floor.site === "68cbbe05c5b33217c0218714"),
+                extensions: extensionsData.filter((ext) => ext.site === "68cbbe05c5b33217c0218714"),
                 loading: false,
               });
             })
-          })
         })
         })
         } else {
@@ -175,7 +170,7 @@ class Dashboard extends Component {
     });
     return data;
   }
-    setFloors() {
+  setFloors() {
     const data = {
       columns: [
         {
@@ -236,7 +231,7 @@ class Dashboard extends Component {
     });
     return data;
   }
-      setExtensions() {
+  setExtensions() {
     const data = {
       columns: [
         {
@@ -290,67 +285,6 @@ class Dashboard extends Component {
               <div className="col-12 d-flex justify-content-center">
                 <Link
                   to={`/admin/extension/update/${extension._id}`}
-                  className="btn btn-primary py-2 px-3"
-                >
-                  <i className="bi bi-pen"></i>
-                </Link>
-              </div>
-            </div>
-            <hr />
-          </Fragment>
-        ),
-      });
-    });
-    return data;
-  }
-    setDepartments() {
-    const data = {
-      columns: [
-        {
-          label: "ID",
-          field: "id",
-          sort: "asc",
-        },
-        {
-          label: "الإسم بالعربية",
-          field: "nameArabic",
-          sort: "asc",
-        },
-        {
-          label: "الإسم بالأنجليزية",
-          field: "nameEnglish",
-          sort: "asc",
-        },
-        {
-          label: "المكان",
-          field: "site",
-          sort: "asc",
-        },
-        {
-          label: "تاريخ التسجيل",
-          field: "createdAt",
-          sort: "asc",
-        },
-        {
-          label: "Actions",
-          field: "actions",
-        },
-      ],
-      rows: [],
-    };
-    this.state.departments.forEach((department) => {
-      data.rows = data.rows.concat({
-        id: department._id,
-        nameArabic: department.nameArabic,
-        nameEnglish: department.nameEnglish,
-        site: department.site,
-        createdAt: String(department.createdAt).substring(0, 10),
-        actions: (
-          <Fragment>
-            <div className="row">
-              <div className="col-12 d-flex justify-content-center">
-                <Link
-                  to={`/admin/department/update/${department._id}`}
                   className="btn btn-primary py-2 px-3"
                 >
                   <i className="bi bi-pen"></i>
@@ -475,21 +409,6 @@ class Dashboard extends Component {
                       الإمتدادات
                     </a>
                   </li>
-                <li className="nav-item">
-                    <a
-                      className="nav-link"
-                      id="department-tab"
-                      data-bs-toggle="tab"
-                      data-bs-target="#department"
-                      type="button"
-                      role="tab"
-                      aria-controls="department"
-                      aria-selected="false"
-                      style={{color: 'white'}}
-                    >
-                      الأقسام
-                    </a>
-                  </li>
                 </ul>
 
                 {/* 
@@ -518,7 +437,7 @@ class Dashboard extends Component {
                   >
                     <div className="row">
                       <div
-                        className="col-12 col-lg-4 animate__animated animate__fadeIn animate__slower animate__delay-3s"
+                        className="col-12 col-lg-6 animate__animated animate__fadeIn animate__slower animate__delay-3s"
                         style={{ textAlign: "center", padding: "20px" }}
                       >
                         <div className="card">
@@ -546,7 +465,7 @@ class Dashboard extends Component {
                         </div>
                       </div>
 <div
-                        className="col-12 col-lg-4 animate__animated animate__fadeIn animate__slower animate__delay-4s"
+                        className="col-12 col-lg-6 animate__animated animate__fadeIn animate__slower animate__delay-4s"
                         style={{ textAlign: "center", padding: "20px" }}
                       >
                         <div className="card">
@@ -573,8 +492,14 @@ class Dashboard extends Component {
                           </div>
                         </div>
                       </div>
+
+
+                    </div>
+                    <br></br>
+                    <br></br>
+                                        <div className="row">
                       <div
-                        className="col-12 col-lg-4 animate__animated animate__fadeIn animate__slower animate__delay-5s"
+                        className="col-12 col-lg-6 animate__animated animate__fadeIn animate__slower animate__delay-5s"
                         style={{ textAlign: "center", padding: "20px" }}
                       >
                         <div className="card">
@@ -601,13 +526,10 @@ class Dashboard extends Component {
                           </div>
                         </div>
                       </div>
-
-                    
-                    </div>
-                    <br></br>
-                    <br></br>
-                                        <div className="row">
-                      <div className="col-12 col-lg-4 animate__animated animate__fadeIn animate__slower animate__delay-5s" style={{ textAlign: "center", padding: "20px" }}>
+                      <div
+                        className="col-12 col-lg-6 animate__animated animate__fadeIn animate__slower animate__delay-5s"
+                        style={{ textAlign: "center", padding: "20px" }}
+                      >
                         <div className="card">
                           <br></br>
                           <i
@@ -625,31 +547,6 @@ class Dashboard extends Component {
                               type="button"
                               onClick={(e) =>
                                 document.getElementById("extension-tab").click()
-                              }
-                            >
-                              عرض التفاصيل
-                            </a>
-                          </div>
-                        </div>
-                      </div>
-                            <div className="col-12 col-lg-4 animate__animated animate__fadeIn animate__slower animate__delay-5s" style={{ textAlign: "center", padding: "20px" }}>
-                        <div className="card">
-                          <br></br>
-                          <i
-                            className="bi bi-bar-chart-steps"
-                            style={{ fontSize: "7rem" }}
-                          ></i>
-                          <div className="card-body">
-                            <h4 className="card-title text-center">
-                              {this.state.departments ? this.state.departments.length : 0}
-                            </h4>
-                            <p className="card-text text-center">الأقسام</p>
-                            <hr></hr>
-                            <a
-                              className="card-text text-center"
-                              type="button"
-                              onClick={(e) =>
-                                document.getElementById("department-tab").click()
                               }
                             >
                               عرض التفاصيل
@@ -707,7 +604,7 @@ class Dashboard extends Component {
                       dir="rtl"
                     />
                   </div>
-                  <div
+                                  <div
                     className="tab-pane fade"
                     id="extension"
                     role="tabpanel"
@@ -715,22 +612,6 @@ class Dashboard extends Component {
                   >
                     <MDBDataTable
                       data={this.setExtensions()}
-                      className="px-3"
-                      bordered
-                      striped
-                      hover
-                      responsive
-                      dir="rtl"
-                    />
-                  </div>
-                    <div
-                    className="tab-pane fade"
-                    id="department"
-                    role="tabpanel"
-                    aria-labelledby="department-tab"
-                  >
-                    <MDBDataTable
-                      data={this.setDepartments()}
                       className="px-3"
                       bordered
                       striped
@@ -760,4 +641,4 @@ class Dashboard extends Component {
     );
   }
 }
-export default withRouter(Dashboard);
+export default withRouter(OPSharkDashboard);

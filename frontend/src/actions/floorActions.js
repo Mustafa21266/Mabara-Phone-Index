@@ -7,15 +7,16 @@ import {
     SEARCH_FLOORS
 } from '../constants/floorConstants';
 // axios.defaults.withCredentials = true;
-
+import Cookies from 'js-cookie';
 //Create an Floor FOR ADMIN ONLY
 export const createFloor = (floorData) => async (dispatch) => {
     try {
         const config = {
-            headers: {
-                'Content-Type': 'application/json'
-            }
-        }
+                    headers: {
+                        'x-access-token': Cookies.get("token"),
+                        'Content-Type': 'application/json'
+                    }
+                }
         const { data } = await axios.post(`http://localhost:8000/api/v1/admin/floor/create`, floorData, config)
         dispatch({
             type: CREATE_FLOOR,

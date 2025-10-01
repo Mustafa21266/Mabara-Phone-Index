@@ -8,7 +8,9 @@ import {
 } from "react-router-dom";
 import { ToastContainer } from "material-react-toastify";
 import "material-react-toastify/dist/ReactToastify.css";
-import Homepage from "./components/Homepage";
+import CapitalHomepage from "./components/CapitalHomepage";
+import SharkHomepage from "./components/SharkHomepage";
+import GharbHomepage from "./components/GharbHomepage";
 import Navbar from "./components/Navbar";
 import "./App.css";
 import Footer from "./components/Footer";
@@ -34,6 +36,9 @@ import { getUserDetails } from "./actions/adminActions";
 import store from "./store";
 import { Fragment } from "react";
 import Dashboard from "./components/Admin/Dashboard";
+import OPGharbDashboard from "./components/Operator/OPGharbDashboard";
+import OPSharkDashboard from "./components/Operator/OPSharkDashboard";
+import OPCapitalDashboard from "./components/Operator/OPCapitalDashboard";
 import { getAllArticles } from "./actions/articleActions";
 import EditUser from "./components/Admin/EditUser";
 import Loader from "./components/Loader";
@@ -42,6 +47,8 @@ import NewPassword from "./components/User/NewPassword";
 import Cookies from 'js-cookie';
 import CreateSite from './components/Admin/CreateSite'
 import EditSite from './components/Admin/EditSite'
+import CreateDepartment from './components/Admin/CreateDepartment'
+import EditDepartment from './components/Admin/EditDepartment'
 import CreateFloor from './components/Admin/CreateFloor'
 import EditFloor from './components/Admin/EditFloor'
 import CreateExtension from './components/Admin/CreateExtension'
@@ -51,13 +58,13 @@ import { getAllFloors } from "./actions/floorActions";
 import { getAllExtensions } from "./actions/extensionActions";
 import { getAllPins } from "./actions/pinActions";
 // import { SIPProvider } from "react-sipjs";
-import { ReactSipPhone } from 'react-sip-phone'
-import 'react-sip-phone/dist/index.css'
+// import { ReactSipPhone } from 'react-sip-phone'
+// import 'react-sip-phone/dist/index.css'
 
 const name = "4444";
 const sipuri = "sip:4444@10.30.90.13";
 const password = "T3$t1234";
-const websocket = "wss://10.30.90.13:8089/ws"; // Your WebSocket server
+const websocket = "https://10.30.90.13:8090"; // Your WebSocket server
 
 class App extends Component {
   constructor(props) {
@@ -106,14 +113,20 @@ class App extends Component {
         ) : (
           <Router history={history}>
             <Navbar history={history} />
-            <ReactSipPhone
+            {/* <ReactSipPhone
                         name={name}
                         sipCredentials={{ sipuri: sipuri, password: password }}
-                        sipConfig={{ websocket: websocket, defaultCountryCode: '1' }}
+                        sipConfig={{ websocket: websocket, defaultCountryCode: '20' }}
                         width={400}
-                    />
-            <Route path="/" exact>
-              <Homepage />
+                    /> */}
+            <Route path="/capital/homepage" exact>
+              <CapitalHomepage />
+            </Route>
+              <Route path="/shark/homepage" exact>
+              <SharkHomepage />
+            </Route>
+              <Route path="/gharb/homepage" exact>
+              <GharbHomepage />
             </Route>
             <Route path="/login" exact>
               <Login />
@@ -139,6 +152,12 @@ class App extends Component {
             <Route path="/admin/site/update/:id" exact>
               <EditSite />
             </Route>
+              <Route path="/admin/department/create" exact>
+              <CreateDepartment />
+            </Route>
+            <Route path="/admin/department/update/:id" exact>
+              <EditDepartment />
+            </Route>
             <Route path="/admin/floor/create" exact>
               <CreateFloor />
             </Route>
@@ -159,6 +178,15 @@ class App extends Component {
             </Route>
             <Route path="/admin/dashboard" exact>
               <Dashboard />
+            </Route>
+            <Route path="/operator/gharb/dashboard" exact>
+              <OPGharbDashboard />
+            </Route>
+            <Route path="/operator/shark/dashboard" exact>
+              <OPSharkDashboard />
+            </Route>
+            <Route path="/operator/capital/dashboard" exact>
+              <OPCapitalDashboard />
             </Route>
             <Route path="/admin/user/update/:id" exact>
               <EditUser />

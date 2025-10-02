@@ -5,7 +5,6 @@ import { register, loginAdmin } from "../../actions/adminActions";
 import store from "../../store";
 import { toast } from "material-react-toastify";
 import MetaData from "../MetaData";
-import intlTelInput from "intl-tel-input";
 import Loader from "../Loader";
 import myVideo from '../../assets/videos/mabara.mp4'; // Adjust path as needed
 class Register extends Component {

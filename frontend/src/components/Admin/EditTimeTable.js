@@ -1,34 +1,34 @@
 import React, { Component } from "react";
 import { Fragment } from "react";
 import { Redirect } from "react-router-dom";
-import { editExtension, deleteExtension } from "../../actions/extensionActions";
+import { editTimeTable, deleteTimeTable } from "../../actions/timetableActions";
 import store from "../../store";
 import { toast } from "material-react-toastify";
 import MetaData from "../MetaData";
 import Loader from "../Loader";
 import { withRouter } from "react-router-dom";
 
-class EditExtension extends Component {
+class EditTimeTable extends Component {
   formData = new FormData();
   constructor(props) {
     super(props);
     this.state = {
-      extensionEditied: false,
-      name: store
+      timetableEditied: false,
+      nameArabic: store
         .getState()
-        .extension.extensions.filter((extension) => extension._id === this.props.match.params.id)[0]
-        .name,
-      number: store
+        .timetable.timetables.filter((timetable) => timetable._id === this.props.match.params.id)[0]
+        .nameArabic,
+        nameEnglish: store
         .getState()
-        .extension.extensions.filter((extension) => extension._id === this.props.match.params.id)[0]
-        .number,
+        .timetable.timetables.filter((timetable) => timetable._id === this.props.match.params.id)[0]
+        .nameEnglish,
       site: store
         .getState()
-        .extension.extensions.filter((extension) => extension._id === this.props.match.params.id)[0]
+        .timetable.timetables.filter((timetable) => timetable._id === this.props.match.params.id)[0]
         .site,
       loading: true,
     };
-    this.handleDeleteExtension = this.handleDeleteExtension.bind(this);
+    this.handleDeleteTimeTable = this.handleDeleteTimeTable.bind(this);
     // this.submitHandler = this.submitHandler.bind(this);
   }
   componentDidMount() {
@@ -40,17 +40,17 @@ class EditExtension extends Component {
     e.preventDefault();
     const formData = new FormData();
     document.getElementById("loader").style.display = "block";
-    formData.set("name", e.target.name.value);
-    formData.set("number", e.target.number.value);
+    formData.set("nameArabic", e.target.nameArabic.value);
+    formData.set("nameEnglish", e.target.nameEnglish.value);
     formData.set("site", e.target.site.value);
     store
-        .dispatch(editExtension(this.props.match.params.id, formData))
+        .dispatch(editTimeTable(this.props.match.params.id, formData))
         .then((data) => {
         if (data.success === true) {
             document.getElementById("loader").style.display = "none";
             toast.success(data.message);
             this.setState((state, props) => {
-            return { extensionEditied: true };
+            return { timetableEditied: true };
             });
         } else {
             document.getElementById("loader").style.display = "none";
@@ -58,12 +58,12 @@ class EditExtension extends Component {
         }
         });
   }
-    async handleDeleteExtension(e) {
-    store.dispatch(deleteExtension(this.props.match.params.id)).then((data) => {
+    async handleDeleteTimeTable(e) {
+    store.dispatch(deleteTimeTable(this.props.match.params.id)).then((data) => {
       if (data.success === true) {
         toast.success(data.message);
         this.setState((state, props) => {
-          return { extensionEditied: true };
+          return { timetableEditied: true };
         });
       } else {
         toast.error(data.message);
@@ -74,7 +74,7 @@ class EditExtension extends Component {
     return (
       <Fragment>
         <MetaData
-          title={"تعديل الطابق"}
+          title={"تعديل قسم"}
           description="دليل تليفونات مبرة العصافرة"
           image={
             ""
@@ -90,7 +90,7 @@ class EditExtension extends Component {
         ) : (
           <Redirect to="/"></Redirect>
         )}
-        {this.state.extensionEditied ? (
+        {this.state.timetableEditied ? (
           <Redirect to={`/`}></Redirect>
         ) : (
           ""
@@ -108,31 +108,31 @@ class EditExtension extends Component {
           <Fragment>
                             <div className="container">
                               <div className="row animate__animated animate__fadeIn animate__slower">
-                                {this.state.extensionEditied ? <Redirect to="/" /> : ""}
+                                {this.state.timetableEditied ? <Redirect to="/" /> : ""}
                                 <div className="col-12 col-lg-6 d-block mx-auto">
                                   <div className="login-container">
                                     <br></br>
                             <br></br>
                             <br></br>
                             <br></br>
-                                    <h1 className="text-center text-white">تعديل الطابق</h1>
+                                    <h1 className="text-center text-white">إضافة قسم جديد</h1>
                                     <br></br>
                                     <form onSubmit={(e) => this.onSubmitHandler(e)} dir="rtl">
-                                      <div className="form-group">
+<div className="form-group">
                                         <div className="mb-3 row">
-                                        <label htmlFor="exampleInputExtensionName1" className="col-sm-2 col-form-label text-center text-white">إسم الطابق</label>
+                                        <label htmlFor="exampleInputTimeTableNameArabic1" className="col-sm-2 col-form-label text-center text-white">إسم القسم بالعربية</label>
                                         <div className="col-sm-10">
                                         <input
                                           type="text"
                                           className="form-control"
-                                          id="exampleInputExtensionName1"
-                                          placeholder="إسم الطابق"
+                                          id="exampleInputTimeTableNameArabic1"
+                                          placeholder="إسم القسم بالعربية"
                                           style={{ borderRadius: "25px" }}
-                                          name="name"
-                                          value={this.state.name}
+                                          name="nameArabic"
+                                          value={this.state.nameArabic}
                                           onChange={(e) =>
                                             this.setState((state, props) => {
-                                              return { name: e.target.value };
+                                              return { nameArabic: e.target.value };
                                             })
                                           }
                                           required
@@ -159,49 +159,50 @@ class EditExtension extends Component {
                                         {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
                                       </div>
                                       <br></br>
-                               <div className="form-group">
+                                      <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label htmlFor="exampleInputExtensionNumber1" className="col-sm-2 col-form-label text-center text-white">رقم الطابق</label>
+                                        <label htmlFor="exampleInputTimeTableNameEnglish1" className="col-sm-2 col-form-label text-center text-white">إسم القسم بالأنجليزية</label>
                                         <div className="col-sm-10">
-                            <select
-                              defaultValue={this.state.number}
+                                        <input
+                                          type="text"
+                                          className="form-control"
+                                          id="exampleInputTimeTableNameEnglish1"
+                                          placeholder="إسم القسم بالأنجليزية"
+                                          style={{ borderRadius: "25px" }}
+                                          name="nameEnglish"
+                                          value={this.state.nameEnglish}
+                                          onChange={(e) =>
+                                            this.setState((state, props) => {
+                                              return { nameEnglish: e.target.value };
+                                            })
+                                          }
+                                          required
+                                        />
+                                                                    {/* <select
+                              defaultValue={this.state.role}
                               onChange={(e) =>
                                 this.setState((state, props) => {
-                                  return { number: e.target.value };
+                                  return { role: e.target.value };
                                 })
                               }
-                              id="exampleInputExtensionNumber1"
+                              id="placeSelect"
                               className="form-select"
                               aria-label="Default select example"
-                              name="number"
+                              name="role"
                               required
                             >
-                              <option value="0">0</option>
-                              <option value="1">1</option>
-                              <option value="2">2</option>
-                              <option value="3">3</option>
-                              <option value="4">4</option>
-                              <option value="5">5</option>
-                              <option value="6">6</option>
-                              <option value="7">7</option>
-                              <option value="8">8</option>
-                              <option value="9">9</option>
-                              <option value="10">10</option>
-                              <option value="11">11</option>
-                              <option value="12">12</option>
-                              <option value="13">13</option>
-                              <option value="14">14</option>
-                              <option value="15">15</option>
-                            </select>
+                              <option value="user">user</option>
+                              <option value="admin">admin</option>
+                              <option value="moderator">moderator</option>
+                            </select> */}
                                         </div>
                                         </div>
                                         {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
                                       </div>
                                       <br></br>
-                                                                            <br></br>
-                               <div className="form-group">
+                                      <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label htmlFor="exampleInputExtensionSite1" className="col-sm-2 col-form-label text-center text-white">مكان الطابق</label>
+                                        <label htmlFor="exampleInputExtensionSite1" className="col-sm-2 col-form-label text-center text-white">مكان الإمتداد</label>
                                         <div className="col-sm-10">
                             <select
                               defaultValue={this.state.site}
@@ -243,7 +244,7 @@ class EditExtension extends Component {
                               borderRadius: "50px",
                               padding: "10px 30px",
                             }}
-                            onClick={this.handleDeleteExtension}
+                            onClick={this.handleDeleteTimeTable}
                           >
                             مسح
                           </button>
@@ -270,4 +271,4 @@ class EditExtension extends Component {
     );
   }
 }
-export default withRouter(EditExtension);
+export default withRouter(EditTimeTable);

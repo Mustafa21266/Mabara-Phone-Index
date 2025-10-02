@@ -7,7 +7,6 @@ import { toast } from "material-react-toastify";
 import MetaData from "../MetaData";
 import Loader from "../Loader";
 import { withRouter } from "react-router-dom";
-import intlTelInput from "intl-tel-input";
 
 class EditDepartment extends Component {
   formData = new FormData();
@@ -203,7 +202,7 @@ class EditDepartment extends Component {
                                       <br></br>
                                       <div className="form-group">
                                         <div className="mb-3 row">
-                                        <label htmlFor="exampleInputExtensionSite1" className="col-sm-2 col-form-label text-center text-white">مكان الإمتداد</label>
+                                        <label htmlFor="exampleInputExtensionSite1" className="col-sm-2 col-form-label text-center text-white">مكان القسم</label>
                                         <div className="col-sm-10">
                             <select
                               defaultValue={this.state.site}

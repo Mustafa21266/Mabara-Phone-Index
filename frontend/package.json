@@ -3,29 +3,31 @@
   "version": "0.1.0",
   "private": true,
   "dependencies": {
+    "@asphalt-react/time-picker": "^2.9.0",
     "@emotion/react": "^11.14.0",
     "@emotion/styled": "^11.14.1",
-    "@mui/material": "^7.3.2",
+    "@fortawesome/fontawesome-free": "^7.1.0",
     "@testing-library/jest-dom": "^5.11.4",
     "@testing-library/react": "^11.1.0",
     "@testing-library/user-event": "^12.1.10",
     "animate.css": "^4.1.1",
+    "antd": "^5.27.4",
     "axios": "^0.21.1",
     "bootstrap": "^5.0.2",
     "bootstrap-icons": "^1.5.0",
     "date-fns": "^2.23.0",
+    "dayjs": "^1.11.18",
     "express": "^4.17.1",
     "history": "^4.10.1",
-    "intl-tel-input": "^17.0.13",
     "jquery": "^3.6.0",
     "js-cookie": "^3.0.5",
     "json-server": "^0.16.3",
     "material-react-toastify": "^1.0.1",
-    "mdbreact": "^5.1.0",
+    "mdbreact": "^5.2.0",
     "path": "^0.12.7",
     "react": "^17.0.1",
     "react-bootstrap": "^2.0.0-beta.4",
-    "react-datepicker": "^4.2.0",
+    "react-datepicker": "^4.25.0",
     "react-dom": "^17.0.1",
     "react-froala-wysiwyg": "^4.0.4",
     "react-helmet": "^6.1.0",
@@ -36,12 +38,10 @@
     "react-router-dom": "^5.2.0",
     "react-scripts": "^4.0.1",
     "react-share": "^4.4.0",
-    "react-sip": "^0.8.1",
-    "react-sip-phone": "^1.0.0",
+    "react-time-picker": "^8.0.2",
     "redux": "^4.1.0",
     "redux-devtools-extension": "^2.13.9",
     "redux-thunk": "^2.3.0",
-    "universal-cookie": "^8.0.1",
     "web-vitals": "^0.2.4"
   },
   "scripts": {
@@ -63,9 +63,9 @@
       "not op_mini all"
     ],
     "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
     ]
   },
   "engines": {

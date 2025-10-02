@@ -49,6 +49,8 @@ import CreateSite from './components/Admin/CreateSite'
 import EditSite from './components/Admin/EditSite'
 import CreateDepartment from './components/Admin/CreateDepartment'
 import EditDepartment from './components/Admin/EditDepartment'
+import CreateTimeTable from './components/Admin/CreateTimeTable'
+import EditTimeTable from './components/Admin/EditTimeTable'
 import CreateFloor from './components/Admin/CreateFloor'
 import EditFloor from './components/Admin/EditFloor'
 import CreateExtension from './components/Admin/CreateExtension'
@@ -57,6 +59,7 @@ import { getAllSites } from "./actions/siteActions";
 import { getAllFloors } from "./actions/floorActions";
 import { getAllExtensions } from "./actions/extensionActions";
 import { getAllPins } from "./actions/pinActions";
+import { getAllDepartments } from "./actions/departmentActions";
 // import { SIPProvider } from "react-sipjs";
 // import { ReactSipPhone } from 'react-sip-phone'
 // import 'react-sip-phone/dist/index.css'
@@ -82,7 +85,9 @@ class App extends Component {
     store.dispatch(getAllSites()).then((data) => {
                 store.dispatch(getAllFloors()).then((data) => {
               store.dispatch(getAllExtensions()).then((data) => {
+                store.dispatch(getAllDepartments()).then((data) => {
                 
+            })
             })
           });
       });
@@ -157,6 +162,12 @@ class App extends Component {
             </Route>
             <Route path="/admin/department/update/:id" exact>
               <EditDepartment />
+            </Route>
+              <Route path="/admin/timetable/create" exact>
+              <CreateTimeTable />
+            </Route>
+            <Route path="/admin/timetable/update/:id" exact>
+              <EditTimeTable />
             </Route>
             <Route path="/admin/floor/create" exact>
               <CreateFloor />

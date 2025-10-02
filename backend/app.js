@@ -37,6 +37,8 @@ const pin = require("./routes/pin");
 app.use("/api/v1", pin);
 const department = require("./routes/department");
 app.use("/api/v1", department);
+const timetable = require("./routes/timetable");
+app.use("/api/v1", timetable);
 
 app.listen(PORT, (error) =>{
     if(!error)

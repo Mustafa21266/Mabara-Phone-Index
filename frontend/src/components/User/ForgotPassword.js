@@ -4,7 +4,6 @@ import { forgotPassword } from "../../actions/adminActions";
 import { toast } from "material-react-toastify";
 import Loader from "../Loader";
 import MetaData from "../MetaData";
-import intlTelInput from "intl-tel-input";
 import store from "../../store";
 import { Link, Redirect } from "react-router-dom";
 class ForgotPassword extends Component {
@@ -21,11 +20,7 @@ class ForgotPassword extends Component {
   componentDidMount() {
     setTimeout(() => {
       let input = document.querySelector("#phone");
-      this.phoneInput = intlTelInput(input, {
-        initialCountry: "EG",
-        utilsScript:
-          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-      });
+      this.phoneInput = ""
     }, 1000);
   }
   async onSubmitHandler(e) {

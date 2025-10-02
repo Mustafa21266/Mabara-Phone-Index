@@ -185,3 +185,7 @@ video {
    -webkit-transform: scale(1.25);
   transform: scale(1.25);
 }
+
+.react-datepicker__input-container input {
+  width: 150px !important;
+}

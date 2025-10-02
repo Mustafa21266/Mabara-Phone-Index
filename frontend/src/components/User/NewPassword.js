@@ -4,7 +4,6 @@ import { resetPassword } from "../../actions/adminActions";
 import { toast } from "material-react-toastify";
 import Loader from "../Loader";
 import MetaData from "../MetaData";
-import intlTelInput from "intl-tel-input";
 import store from "../../store";
 import { Link, Redirect } from "react-router-dom";
 import { withRouter } from "react-router-dom";

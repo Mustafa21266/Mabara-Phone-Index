@@ -7,7 +7,6 @@ import { toast } from "material-react-toastify";
 import MetaData from "../MetaData";
 import Loader from "../Loader";
 import { withRouter } from "react-router-dom";
-import intlTelInput from "intl-tel-input";
 
 class EditSite extends Component {
   formData = new FormData();

@@ -10,7 +10,6 @@ import { toast } from "material-react-toastify";
 import { withRouter } from "react-router-dom";
 import MetaData from "../MetaData";
 import Loader from "../Loader";
-import intlTelInput from "intl-tel-input";
 class EditUser extends Component {
   constructor(props) {
     super(props);
@@ -38,11 +37,7 @@ class EditUser extends Component {
     this.setState({ loading: false });
     setTimeout(() => {
       let input = document.querySelector("#phone");
-      this.phoneInput = intlTelInput(input, {
-        initialCountry: "EG",
-        utilsScript:
-          "https://cdnjs.cloudflare.com/ajax/libs/intl-tel-input/17.0.8/js/utils.js",
-      });
+      this.phoneInput = "";
     }, 1000);
   }
   async onSubmitHandler(e) {

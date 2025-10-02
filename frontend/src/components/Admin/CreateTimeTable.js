@@ -21,15 +21,15 @@ const CreateTimeTable = () => {
   const [department, setDepartment] = useState("");
   const [site, setSite] = useState("");
   const [departments, setDepartments] = useState([]);
+  const [extensions, setExtensions] = useState(store
+        .getState()
+        .extension.extensions.filter(ext => ext.site === "68cbbdf4c5b33217c021870e"));
   const [tableRows, setTableRows] = useState([]);
   const [loading, setLoading] = useState(true);
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState([new Date(2025, 7, 8, 15, 12, 12)]);
   const [endTime, setEndTime] = useState([new Date(2025, 7, 8, 15, 12, 12)]);
-  const [time, setTime] = React.useState([new Date(2023, 7, 8, 15, 12, 12)])
-  const onChange = (time, timeString) => {
-  console.log(time, timeString);
-};
+  const [extension, setExtension] = useState("");
   async function onSubmitHandler(e) {
     e.preventDefault();
     const formData = new FormData();
@@ -49,6 +49,25 @@ const CreateTimeTable = () => {
             toast.error(data.message);
         }
         });
+  }
+  function handleAddTableRow(e) {
+    e.preventDefault();
+    let newObj = [startDate.toLocaleDateString(), startTime.$d.toTimeString().split(' ')[0], endTime.$d.toTimeString().split(' ')[0], store
+        .getState()
+        .extension.extensions.filter(ext => ext._id === extension)[0].extension]
+    setTableRows([...tableRows, newObj])
+    console.log(tableRows)
+  }
+  function onChangeStartTime(time, timeString){
+    console.log(time, timeString)
+    setStartTime(time)
+  }
+    function onChangeEndTime(time, timeString){
+    console.log(time, timeString)
+    setEndTime(time)
+  }
+  function handleRemoveTableRow(e, index){
+    setTableRows(tableRows.filter((row, idx)=> idx !== index))
   }
   return (
       <Fragment>
@@ -99,7 +118,7 @@ const CreateTimeTable = () => {
                             <br></br>
                                     <h1 className="text-center text-white">إضافة جدول جديد</h1>
                                     <br></br>
-                                    <form onSubmit={(e) => this.onSubmitHandler(e)} dir="rtl">
+                                    <form onSubmit={(e) => onSubmitHandler(e)} dir="rtl">
                                        <div className="form-group">
                                         <div className="mb-3 row">
                                         <label htmlFor="exampleInputTimeTableNameArabic1" className="col-sm-2 col-form-label text-center text-white">إسم الجدول</label>
@@ -172,6 +191,7 @@ const CreateTimeTable = () => {
                               onChange={(e) => {
                                 setSite(e.target.value)
                                 setDepartments(store.getState().department.departments.filter((department) => department.site === e.target.value))
+                                setExtensions(store.getState().extension.extensions.filter((extension) => extension.site === e.target.value))
                                 }
                               }
                               id="exampleInputExtensionSite1"
@@ -191,16 +211,46 @@ const CreateTimeTable = () => {
                                       <hr></hr>
                                       <div class="row">
   <div class="col">
+    <h5 className="text-white text-center">اليوم</h5>
+    <hr></hr>
     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
   </div>
   <div class="col">
-<TimePicker onChange={onChange} defaultOpenValue={dayjs('00:00:00', 'HH:mm:ss')} />
+        <h5 className="text-white text-center">من</h5>
+    <hr></hr>
+<TimePicker onChange={onChangeStartTime} defaultOpenValue={dayjs('00:00:00', 'HH:mm:ss')} />
   </div>
   <div class="col">
-
+            <h5 className="text-white text-center">إلى</h5>
+    <hr></hr>
+    <TimePicker onChange={onChangeEndTime} defaultOpenValue={dayjs('00:00:00', 'HH:mm:ss')} />
   </div>
   <div class="col">
-    <input type="text" class="form-control" placeholder="Last name" aria-label="Last name" />
+            <h5 className="text-white text-center">الإمتداد</h5>
+    <hr></hr>
+                             <select
+                              defaultValue=""
+                              onChange={(e) => {
+                                setExtension(e.target.value)
+                                // setDepartments(store.getState().department.departments.filter((department) => department.site === e.target.value))
+                                }
+                              }
+                              id="exampleInputExtensionExtension1"
+                              className="form-select"
+                              aria-label="Default select example"
+                              name="extension"
+                              required
+                            >
+                                {extensions.map((extension) => {
+                                    return <option value={extension._id}>{extension.extension}</option>
+                                })}
+                            </select>
+  </div>
+</div>
+<br></br>
+<div className="row">
+  <div className="col d-flex justify-content-center">
+<button type="button" class="btn btn-warning" onClick={handleAddTableRow}>إضافة</button>
   </div>
 </div>
                                       <hr></hr>
@@ -213,16 +263,19 @@ const CreateTimeTable = () => {
       <th scope="col">من</th>
       <th scope="col">إلى</th>
       <th scope="col">الإمتداد</th>
+      <th scope="col">خيارات</th>
     </tr>
   </thead>
   <tbody>
     {tableRows.map((row, index) => {
+      console.log(row)
       return <tr>
       <th scope="row">{index + 1}</th>
-      <td>{row.day}</td>
-      <td>{row.fromTime}</td>
-      <td>{row.toTime}</td>
-      <td>[{row.extension}] - {row.extensionName}</td>
+      <td>{row[0]}</td>
+      <td>{row[1]}</td>
+      <td>{row[2]}</td>
+      <td>{row[3]}</td>
+      <td><button type="button" class="btn btn-danger" onClick={(e) => handleRemoveTableRow(e, index)}>إلغاء</button></td>
     </tr>
     })}
   </tbody>

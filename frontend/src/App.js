@@ -32,7 +32,7 @@ import CreateArticle from "./components/Admin/CreateArticle";
 import EditArticle from "./components/Admin/EditArticle";
 import AllArticles from "./components/Article/AllArticles";
 import Article from "./components/Article/Article";
-import { getUserDetails } from "./actions/adminActions";
+import { getAllUsers, getUserDetails } from "./actions/adminActions";
 import store from "./store";
 import { Fragment } from "react";
 import Dashboard from "./components/Admin/Dashboard";
@@ -60,6 +60,8 @@ import { getAllFloors } from "./actions/floorActions";
 import { getAllExtensions } from "./actions/extensionActions";
 import { getAllPins } from "./actions/pinActions";
 import { getAllDepartments } from "./actions/departmentActions";
+import { getAllTimeTables } from "./actions/timetableActions";
+import { getAllTableDays } from "./actions/tabledayActions";
 // import { SIPProvider } from "react-sipjs";
 // import { ReactSipPhone } from 'react-sip-phone'
 // import 'react-sip-phone/dist/index.css'
@@ -86,7 +88,13 @@ class App extends Component {
                 store.dispatch(getAllFloors()).then((data) => {
               store.dispatch(getAllExtensions()).then((data) => {
                 store.dispatch(getAllDepartments()).then((data) => {
+                store.dispatch(getAllUsers()).then((data) => {
+                store.dispatch(getAllTimeTables()).then((data) => {
+                store.dispatch(getAllTableDays()).then((data) => {
                 
+            })
+            })
+            })
             })
             })
           });
@@ -178,8 +186,8 @@ class App extends Component {
               <Route path="/admin/extension/create" exact>
               <CreateExtension />
             </Route>
-            <Route path="/admin/extension/update/:id" exact>
-              <EditExtension />
+            <Route path="/admin/extension/update/:id" element={<EditExtension />} exact>
+             
             </Route>
             <Route path="/admin/article/create" exact>
               <CreateArticle />

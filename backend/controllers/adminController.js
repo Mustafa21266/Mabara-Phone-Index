@@ -246,14 +246,7 @@ exports.getAllArticles = async (req, res, next) => {
 }
 //Get all users for ADMIN ONLY
 exports.getAllUsers = async (req, res, next) => {
-    const user = await User.findById(req.user._id)
-    if (!user || user.role !== 'admin') {
-        return res.status(401).json({
-            success: false,
-            message: 'Unauthorized Action!',
-        })
-    } else {
-        const users = await User.find()
+    const users = await User.find()
         if(users){
             res.status(200).json({
                 success: true,
@@ -265,7 +258,6 @@ exports.getAllUsers = async (req, res, next) => {
                 users: []
             })
         }
-    }
 }
 
 

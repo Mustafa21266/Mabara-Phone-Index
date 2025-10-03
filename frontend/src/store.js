@@ -7,6 +7,7 @@ import floorReducer from './reducers/floorReducer';
 import sitesReducer from './reducers/siteReducer';
 import departmentsReducer from './reducers/departmentReducer';
 import timetablesReducer from './reducers/timetableReducer';
+import tabledaysReducer from './reducers/tabledayReducer';
 import extensionReducer from './reducers/extensionReducer';
 import pinReducer from './reducers/pinReducer';
 const reducer = combineReducers({
@@ -17,7 +18,8 @@ const reducer = combineReducers({
     pin: pinReducer,
     site: sitesReducer,
     department: departmentsReducer,
-    timetable: timetablesReducer
+    timetable: timetablesReducer,
+    tableday: tabledaysReducer
 })
 
 let initialState = {

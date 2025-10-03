@@ -15,7 +15,7 @@ class Register extends Component {
     this.state = {
       name: "",
       username: "",
-      email: "",
+      phoneNo: "",
       password: "",
       registered: false,
       loading: true,
@@ -33,7 +33,7 @@ class Register extends Component {
       const formData = new FormData();
       formData.set("name", e.target.name.value);
       formData.set("username", e.target.username.value);
-      formData.set("email", e.target.email.value);
+      formData.set("phoneNo", e.target.phoneNo.value);
       formData.set("password", e.target.password.value);
       store.dispatch(register(formData)).then((data) => {
         if (data.success === true) {
@@ -135,12 +135,9 @@ class Register extends Component {
                               }
                               required
                             />
-
-                            {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
                           </div>
                           <br></br>
                           <div className="form-group">
-                            {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                             <input
                               type="text"
                               className="form-control"
@@ -157,19 +154,18 @@ class Register extends Component {
                               required
                             />
 
-                            {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
                           </div>
                           <br></br>
                           <div className="form-group">
                             {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                             <input
-                              type="email"
-                              id="email"
+                              type="phoneNo"
+                              id="phoneNo"
                               className="form-control"
-                              placeholder="البريد الإلكتروني"
-                              name="email"
+                              placeholder="رقم التليفون"
+                              name="phoneNo"
                               style={{ borderRadius: "25px" }}
-                              defaultValue={this.state.email}
+                              defaultValue={this.state.phoneNo}
                               required
                             />
                             <p
@@ -178,11 +174,9 @@ class Register extends Component {
                             >
                               رقم التليفون لابد ان يكون مكون من 11 رقم
                             </p>
-                            {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
                           </div>
                           <br></br>
                           <div className="form-group">
-                            {/* <label htmlFor="exampleInputPassword1">Password</label> */}
                             <input
                               type="password"
                               className="form-control"

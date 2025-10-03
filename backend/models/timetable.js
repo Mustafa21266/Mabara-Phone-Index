@@ -8,10 +8,9 @@ const timetableSchema = new mongoose.Schema({
         maxlength: [150, 'TimeTable Name cannot exceed 150 characters']
     },
     department: {
-        type: String,
-        trim: true,
-        required: [true, 'Please Enter TimeTable Department!'],
-        maxlength: [150, 'TimeTable Department cannot exceed 150 characters']
+        type: mongoose.Schema.ObjectId,
+        ref: 'Department',
+        required: true
     },
     site: {
         type: mongoose.Schema.ObjectId,

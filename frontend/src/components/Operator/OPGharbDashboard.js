@@ -12,6 +12,8 @@ import { getAllSites } from "../../actions/siteActions";
 import { getAllFloors } from "../../actions/floorActions";
 import { getAllExtensions } from "../../actions/extensionActions";
 import Cookies from 'js-cookie';
+import { getAllTimeTables } from "../../actions/timetableActions";
+import { getAllTableDays } from "../../actions/tabledayActions";
 class OPGharbDashboard extends Component {
   constructor(props) {
     super(props);
@@ -20,6 +22,7 @@ class OPGharbDashboard extends Component {
       sites: [],
       floors: [],
       extensions: [],
+      timetables: [],
       loading: true,
     };
     store.dispatch(getAllUsers(Cookies.get("token"))).then(async (usersData) => {
@@ -27,14 +30,20 @@ class OPGharbDashboard extends Component {
         store.dispatch(getAllSites()).then(async (sitesData) => {
           store.dispatch(getAllFloors()).then(async (floorsData) => {
             store.dispatch(getAllExtensions()).then(async (extensionsData) => {
-              console.log(sitesData)
+              store.dispatch(getAllTimeTables()).then(async (timetablesData) => {
+                store.dispatch(getAllTableDays()).then(async (tabledaysData) => {
+              // console.log(sitesData)
               this.setState({
                 users: usersData.users,
                 sites: sitesData.filter((site) => site._id === "68cbbdffc5b33217c0218711"),
                 floors: floorsData.filter((floor) => floor.site === "68cbbdffc5b33217c0218711"),
                 extensions: extensionsData.filter((ext) => ext.site === "68cbbdffc5b33217c0218711"),
+                timetables: timetablesData.filter((ext) => ext.site._id === "68cbbdffc5b33217c0218711"),
+                tabledays: tabledaysData.filter((ext) => ext.timetable.site === "68cbbdffc5b33217c0218711"),
                 loading: false,
               });
+              })
+              })
             })
         })
         })
@@ -298,6 +307,67 @@ class OPGharbDashboard extends Component {
     });
     return data;
   }
+    setTimeTables() {
+    const data = {
+      columns: [
+        {
+          label: "ID",
+          field: "id",
+          sort: "asc",
+        },
+        {
+          label: "الأسم",
+          field: "name",
+          sort: "asc",
+        },
+        {
+          label: "القسم",
+          field: "department",
+          sort: "asc",
+        },
+        {
+          label: "المكان",
+          field: "site",
+          sort: "asc",
+        },
+        {
+          label: "تاريخ التسجيل",
+          field: "createdAt",
+          sort: "asc",
+        },
+        {
+          label: "Actions",
+          field: "actions",
+        },
+      ],
+      rows: [],
+    };
+    this.state.timetables.forEach((timetable) => {
+      data.rows = data.rows.concat({
+        id: timetable._id,
+        name: timetable.name,
+        department: timetable.department.name,
+        site: timetable.site.name,
+        createdAt: String(timetable.createdAt).substring(0, 10),
+        actions: (
+          <Fragment>
+            <div className="row">
+              <div className="col-12 d-flex justify-content-center">
+                <Link
+                  to={`/admin/timetable/update/${timetable._id}`}
+                  className="btn btn-primary py-2 px-3"
+                >
+                  <i className="bi bi-pen"></i>
+                </Link>
+              </div>
+            </div>
+            <hr />
+          </Fragment>
+        ),
+      });
+    });
+    return data;
+  }
   render() {
     return (
       <Fragment>
@@ -407,6 +477,21 @@ class OPGharbDashboard extends Component {
                       style={{color: 'white'}}
                     >
                       الإمتدادات
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      id="timetable-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#timetable"
+                      type="button"
+                      role="tab"
+                      aria-controls="timetable"
+                      aria-selected="false"
+                      style={{color: 'white'}}
+                    >
+                      الجداول
                     </a>
                   </li>
                 </ul>
@@ -555,6 +640,64 @@ class OPGharbDashboard extends Component {
                         </div>
                       </div>
                     </div>
+                                                            <div className="row">
+                      <div
+                        className="col-12 col-lg-6 animate__animated animate__fadeIn animate__slower animate__delay-5s"
+                        style={{ textAlign: "center", padding: "20px" }}
+                      >
+                        <div className="card">
+                          <br></br>
+                          <i
+                            className="bi bi-table"
+                            style={{ fontSize: "7rem" }}
+                          ></i>
+                          <div className="card-body">
+                            <h4 className="card-title text-center">
+                              {this.state.timetables ? this.state.timetables.length : 0}
+                            </h4>
+                            <p className="card-text text-center">الجداول</p>
+                            <hr></hr>
+                            <a
+                              className="card-text text-center"
+                              type="button"
+                              onClick={(e) =>
+                                document.getElementById("timetable-tab").click()
+                              }
+                            >
+                              عرض التفاصيل
+                            </a>
+                          </div>
+                        </div>
+                      </div>
+                      {/* <div
+                        className="col-12 col-lg-6 animate__animated animate__fadeIn animate__slower animate__delay-5s"
+                        style={{ textAlign: "center", padding: "20px" }}
+                      >
+                        <div className="card">
+                          <br></br>
+                          <i
+                            className="bi bi-telephone"
+                            style={{ fontSize: "7rem" }}
+                          ></i>
+                          <div className="card-body">
+                            <h4 className="card-title text-center">
+                              {this.state.extensions ? this.state.extensions.length : 0}
+                            </h4>
+                            <p className="card-text text-center">الإمتدادات</p>
+                            <hr></hr>
+                            <a
+                              className="card-text text-center"
+                              type="button"
+                              onClick={(e) =>
+                                document.getElementById("extension-tab").click()
+                              }
+                            >
+                              عرض التفاصيل
+                            </a>
+                          </div>
+                        </div>
+                      </div> */}
+                    </div>
                   </div>
                   <div
                     className="tab-pane fade"
@@ -604,7 +747,7 @@ class OPGharbDashboard extends Component {
                       dir="rtl"
                     />
                   </div>
-                                  <div
+                  <div
                     className="tab-pane fade"
                     id="extension"
                     role="tabpanel"
@@ -612,6 +755,22 @@ class OPGharbDashboard extends Component {
                   >
                     <MDBDataTable
                       data={this.setExtensions()}
+                      className="px-3"
+                      bordered
+                      striped
+                      hover
+                      responsive
+                      dir="rtl"
+                    />
+                  </div>
+                  <div
+                    className="tab-pane fade"
+                    id="timetable"
+                    role="tabpanel"
+                    aria-labelledby="timetable-tab"
+                  >
+                    <MDBDataTable
+                      data={this.setTimeTables()}
                       className="px-3"
                       bordered
                       striped

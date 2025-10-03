@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { Fragment } from "react";
 import { Redirect } from "react-router-dom";
 import { createTimeTable } from "../../actions/timetableActions";
+import { createTableDay } from "../../actions/tabledayActions";
 import store from "../../store";
 import { toast } from "material-react-toastify";
 import MetaData from "../MetaData";
@@ -21,15 +22,18 @@ const CreateTimeTable = () => {
   const [department, setDepartment] = useState("");
   const [site, setSite] = useState("");
   const [departments, setDepartments] = useState([]);
-  const [extensions, setExtensions] = useState(store
+  const [users, setUsers] = useState(store
         .getState()
-        .extension.extensions.filter(ext => ext.site === "68cbbdf4c5b33217c021870e"));
+        .auth.users);
   const [tableRows, setTableRows] = useState([]);
+  const [tableRowsRaw, setTableRowsRaw] = useState([]);
   const [loading, setLoading] = useState(true);
   const [startDate, setStartDate] = useState(new Date());
   const [startTime, setStartTime] = useState([new Date(2025, 7, 8, 15, 12, 12)]);
   const [endTime, setEndTime] = useState([new Date(2025, 7, 8, 15, 12, 12)]);
-  const [extension, setExtension] = useState("");
+  const [user, setUser] = useState(store
+        .getState()
+        .auth.users[0]._id);
   async function onSubmitHandler(e) {
     e.preventDefault();
     const formData = new FormData();
@@ -37,10 +41,23 @@ const CreateTimeTable = () => {
     formData.set("name", e.target.name.value);
     formData.set("department", e.target.department.value);
     formData.set("site", e.target.site.value);
+    // formData.set("user", e.target.user.value);
     store
         .dispatch(createTimeTable(formData))
         .then((data) => {
         if (data.success === true) {
+          tableRowsRaw.map((row, index) => {
+            const fd = new FormData();
+            // document.getElementById("loader").style.display = "block";
+            fd.set("startDate", row[0]);
+            fd.set("startTime", row[1]);
+            fd.set("endTime", row[2]);
+            fd.set("user", row[3]);
+            fd.set("timetable", data.timetable._id);
+            store.dispatch(createTableDay(fd)).then((data) => {
+                
+            })
+          })
             document.getElementById("loader").style.display = "none";
             toast.success(data.message);
             setTimetableCreated(true)
@@ -52,10 +69,13 @@ const CreateTimeTable = () => {
   }
   function handleAddTableRow(e) {
     e.preventDefault();
+    console.log(user)
     let newObj = [startDate.toLocaleDateString(), startTime.$d.toTimeString().split(' ')[0], endTime.$d.toTimeString().split(' ')[0], store
         .getState()
-        .extension.extensions.filter(ext => ext._id === extension)[0].extension]
+        .auth.users.filter(us => us._id === user)[0].name]
     setTableRows([...tableRows, newObj])
+    let newObjRaw = [startDate, startTime.$d, endTime.$d, user]
+    setTableRowsRaw([...tableRowsRaw, newObjRaw])
     console.log(tableRows)
   }
   function onChangeStartTime(time, timeString){
@@ -191,7 +211,6 @@ const CreateTimeTable = () => {
                               onChange={(e) => {
                                 setSite(e.target.value)
                                 setDepartments(store.getState().department.departments.filter((department) => department.site === e.target.value))
-                                setExtensions(store.getState().extension.extensions.filter((extension) => extension.site === e.target.value))
                                 }
                               }
                               id="exampleInputExtensionSite1"
@@ -216,6 +235,30 @@ const CreateTimeTable = () => {
     <DatePicker selected={startDate} onChange={(date) => setStartDate(date)} />
   </div>
   <div class="col">
+            <h5 className="text-white text-center">الشخص</h5>
+    <hr></hr>
+                             <select
+                              defaultValue=""
+                              onChange={(e) => {
+                                setUser(e.target.value)
+                                // setDepartments(store.getState().department.departments.filter((department) => department.site === e.target.value))
+                                }
+                              }
+                              id="exampleInputExtensionExtension1"
+                              className="form-select"
+                              aria-label="Default select example"
+                              name="user"
+                              required
+                            >
+                                {users.map((user) => {
+                                    return <option value={user._id}>{user.name}</option>
+                                })}
+                            </select>
+  </div>
+</div>
+<br></br>
+<div className="row">
+<div class="col">
         <h5 className="text-white text-center">من</h5>
     <hr></hr>
 <TimePicker onChange={onChangeStartTime} defaultOpenValue={dayjs('00:00:00', 'HH:mm:ss')} />
@@ -224,27 +267,6 @@ const CreateTimeTable = () => {
             <h5 className="text-white text-center">إلى</h5>
     <hr></hr>
     <TimePicker onChange={onChangeEndTime} defaultOpenValue={dayjs('00:00:00', 'HH:mm:ss')} />
-  </div>
-  <div class="col">
-            <h5 className="text-white text-center">الإمتداد</h5>
-    <hr></hr>
-                             <select
-                              defaultValue=""
-                              onChange={(e) => {
-                                setExtension(e.target.value)
-                                // setDepartments(store.getState().department.departments.filter((department) => department.site === e.target.value))
-                                }
-                              }
-                              id="exampleInputExtensionExtension1"
-                              className="form-select"
-                              aria-label="Default select example"
-                              name="extension"
-                              required
-                            >
-                                {extensions.map((extension) => {
-                                    return <option value={extension._id}>{extension.extension}</option>
-                                })}
-                            </select>
   </div>
 </div>
 <br></br>
@@ -262,7 +284,7 @@ const CreateTimeTable = () => {
       <th scope="col">اليوم</th>
       <th scope="col">من</th>
       <th scope="col">إلى</th>
-      <th scope="col">الإمتداد</th>
+      <th scope="col">الشخص</th>
       <th scope="col">خيارات</th>
     </tr>
   </thead>

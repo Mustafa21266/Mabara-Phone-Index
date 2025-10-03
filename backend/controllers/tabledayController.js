@@ -1,4 +1,4 @@
-const TimeTable = require('../models/timetable');
+const TableDay = require('../models/tableday');
 const User = require('../models/user');
 const crypto = require('crypto');
 const cloudinary = require('cloudinary');
@@ -8,7 +8,7 @@ const jwt = require('jsonwebtoken');
 const streamifier = require('streamifier');
 
 
-exports.createTimeTable = async (req, res, next) => {
+exports.createTableDay = async (req, res, next) => {
     const user = await User.findById(req.user._id)
     if (!user || user.role !== 'admin') {
         res.status(401).json({
@@ -16,18 +16,18 @@ exports.createTimeTable = async (req, res, next) => {
             message: 'Unauthorized Action!',
         })
     } else {
-        let timetable = await TimeTable.create(req.body)
+        let tableday = await TableDay.create(req.body)
         // article = await Article.findById(article._id).populate('user')
         res.status(200).json({
             success: true,
-            message: 'TimeTable Created Successfully!',
-            timetable
+            message: 'TableDay Created Successfully!',
+            tableday
         })
     }
 }
 
 
-exports.editTimeTable = async (req, res, next) => {
+exports.editTableDay = async (req, res, next) => {
     const user = await User.findById(req.user._id)
     if (!user || user.role !== 'admin') {
         res.status(401).json({
@@ -36,26 +36,26 @@ exports.editTimeTable = async (req, res, next) => {
         })
     } else {
         let newData = {
-            name: req.body.name,
-            department: req.body.department,
+            nameArabic: req.body.nameArabic,
+            nameEnglish: req.body.nameEnglish,
             site: req.body.site
         }
-        let timetable = await TimeTable.findByIdAndUpdate(req.params.id, newData, {
+        let tableday = await TableDay.findByIdAndUpdate(req.params.id, newData, {
             new: true,
             runValidators: true,
             useFindAndModify: false
         })
-        timetable = await TimeTable.findById(req.params.id)
+        tableday = await TableDay.findById(req.params.id)
         res.status(200).json({
                     success: true,
-                    message: 'TimeTable Editied Successfully!',
-                    timetable
+                    message: 'TableDay Editied Successfully!',
+                    tableday
                 })
         }
 
     }
 
-exports.deleteTimeTable = async (req, res, next) => {
+exports.deleteTableDay = async (req, res, next) => {
     const user = await User.findById(req.user._id)
     if (!user || user.role !== 'admin') {
         res.status(401).json({
@@ -63,12 +63,12 @@ exports.deleteTimeTable = async (req, res, next) => {
             message: 'Unauthorized Action!',
         })
     } else {
-        let timetable = await TimeTable.findById(req.params.id)
-        await TimeTable.findByIdAndDelete(req.params.id)
+        let tableday = await TableDay.findById(req.params.id)
+        await TableDay.findByIdAndDelete(req.params.id)
         res.status(200).json({
             success: true,
-            message: 'TimeTable Deleted Successfully!',
-            timetable
+            message: 'TableDay Deleted Successfully!',
+            tableday
         })
     }
 }
@@ -119,7 +119,7 @@ exports.deleteTimeTable = async (req, res, next) => {
 //         let response;
 //         let cld_upload_stream = await cloudinary.v2.uploader.upload_stream(
 //             {
-//                 folder: `dadswebtimetable/articles/images`
+//                 folder: `dadswebtableday/articles/images`
 //             },
 //             function (error, resultObj) {
 //                 // console.log(error, result);
@@ -183,17 +183,17 @@ exports.deleteTimeTable = async (req, res, next) => {
 //     }
 // }
 //Get all SITES for ADMIN ONLY
-exports.getAllTimeTables = async (req, res, next) => {
-    const timetables = await TimeTable.find().populate('department').populate('site')
-        if(timetables){
+exports.getAllTableDays = async (req, res, next) => {
+    const tabledays = await TableDay.find().populate('user').populate('timetable')
+        if(tabledays){
             res.status(200).json({
                 success: true,
-                timetables
+                tabledays
             })
         }else {
             res.status(200).json({
                 success: true,
-                timetables: []
+                tabledays: []
             })
         }
 }

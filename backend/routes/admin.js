@@ -23,7 +23,7 @@ router.route('/admin/article/images/delete/:id').post(auth, deleteArticleImage)
 router.route('/articles/all').get(getAllArticles)
 router.route('/articles/search').get(searchArticles)
 
-router.route('/admin/users/all').get(auth, getAllUsers)
+router.route('/admin/users/all').get(getAllUsers)
 
 router.route('/admin/user/update/:id').put(auth, editUserDetailsAdmin)
 router.route('/admin/user/delete/:id').delete(auth, deleteUserAdmin)

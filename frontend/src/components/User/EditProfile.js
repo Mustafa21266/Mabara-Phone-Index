@@ -12,8 +12,7 @@ class EditProfile extends Component {
     super(props);
     this.state = {
       name: store.getState().auth.user.name,
-      username: store.getState().auth.user.username,
-      email: store.getState().auth.user.email,
+      phoneNo: store.getState().auth.user.phoneNo,
       password: "",
       confirmPassowrd: "",
       edited: false,
@@ -38,8 +37,7 @@ class EditProfile extends Component {
         const formData = new FormData();
         document.getElementById("loader").style.display = "block";
         formData.set("name", e.target.name.value);
-        formData.set("username", e.target.username.value);
-        formData.set("email", e.target.email.value);
+        formData.set("phoneNo", e.target.phoneNo.value);
         formData.set("password", e.target.password.value);
         formData.set("confirmPassword", e.target.confirmPassowrd.value);
         store
@@ -94,18 +92,6 @@ class EditProfile extends Component {
                 <br></br>
                 <div className="container">
                   <div className="row animate__animated animate__fadeIn animate__slower">
-                    <img
-                      id="loginImg"
-                      className="img-fluid mx-auto login-img animate__animated animate__pulse animate__infinite animate__slower"
-                      src={"../images/heart_login.png"}
-                      style={{
-                        position: "absolute",
-                        top: 0,
-                        left: 0,
-                        right: 0,
-                        zIndex: -1,
-                      }}
-                    ></img>
                     {this.state.edited ? <Redirect to="/me" /> : ""}
                     <div className="col-12 col-lg-6 d-block mx-auto">
                       <div className="login-container">
@@ -142,19 +128,19 @@ class EditProfile extends Component {
                           <br></br>
                             <div className="form-group">
                               <div className="mb-3 row">     
-                            <label htmlFor="exampleInputUserName1" className="col-sm-2 col-form-label text-center text-white">إسم المستخدم</label>
+                            <label htmlFor="exampleInputPhoneNo1" className="col-sm-2 col-form-label text-center text-white">رقم التليفون</label>
                             <div className="col-sm-10">
                             <input
                               type="text"
                               className="form-control"
-                              id="exampleInputUserName1"
-                              placeholder="إسم المستخدم"
+                              id="exampleInputPhoneNo1"
+                              placeholder="رقم التليفون"
                               style={{ borderRadius: "25px" }}
-                              name="username"
-                              value={this.state.username}
+                              name="phoneNo"
+                              value={this.state.phoneNo}
                               onChange={(e) =>
                                 this.setState((state, props) => {
-                                  return { username: e.target.value };
+                                  return { phoneNo: e.target.value };
                                 })
                               }
                               required
@@ -162,30 +148,6 @@ class EditProfile extends Component {
                               </div>
                             </div>
                             {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
-                          </div>
-                          <br></br>
-                            <div className="form-group">
-                            <div className="mb-3 row">     
-                            <label htmlFor="exampleInputEmail1" className="col-sm-2 col-form-label text-center text-white">البريد الإلكتروني</label>
-                            <div className="col-sm-10">
-                            <input
-                              type="email"
-                              className="form-control"
-                              id="exampleInputEmail1"
-                              placeholder="البريد الإلكتروني"
-                              style={{ borderRadius: "25px" }}
-                              name="email"
-                              value={this.state.email}
-                              onChange={(e) =>
-                                this.setState((state, props) => {
-                                  return { email: e.target.value };
-                                })
-                              }
-                              required
-                            />
-                            {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
-                          </div>
-                          </div>
                           </div>
                           <br></br>
                           <div className="form-group">

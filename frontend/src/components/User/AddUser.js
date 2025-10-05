@@ -1,29 +1,38 @@
 import React, { Component } from "react";
 import { Fragment } from "react";
 import { Link, Redirect } from "react-router-dom";
-import { register, loginAdmin } from "../../actions/adminActions";
+import { adduser, loginAdmin } from "../../actions/adminActions";
 import store from "../../store";
 import { toast } from "material-react-toastify";
 import MetaData from "../MetaData";
 import Loader from "../Loader";
 import myVideo from '../../assets/videos/mabara.mp4'; // Adjust path as needed
-class Register extends Component {
+class AddUser extends Component {
   regex = new RegExp("^(?=.*[a-z])(?=.*[0-9])(?=.{6,})");
   phoneInput;
   constructor(props) {
     super(props);
     this.state = {
       name: "",
-      username: "",
       phoneNo: "",
-      password: "",
-      registered: false,
+      site: "",
+      department: "",
+      password: "xyz123",
+      departments: [],
+      sites: [],
+      addusered: false,
       loading: true,
     };
     this.checkPassword = this.checkPassword.bind(this);
   }
   componentDidMount() {
-    this.setState({ loading: false });
+    setTimeout(() => {
+      this.setState({ 
+        loading: false,
+        sites: store.getState().site.sites
+       });
+      console.log(store.getState().site.sites)
+    },4000)
   }
   async onSubmitHandler(e) {
     e.preventDefault();
@@ -32,15 +41,16 @@ class Register extends Component {
       document.getElementById("loader").style.display = "block";
       const formData = new FormData();
       formData.set("name", e.target.name.value);
-      formData.set("username", e.target.username.value);
       formData.set("phoneNo", e.target.phoneNo.value);
       formData.set("password", e.target.password.value);
-      store.dispatch(register(formData)).then((data) => {
+      formData.set("department", e.target.department.value);
+      formData.set("site", e.target.site.value);
+      store.dispatch(adduser(formData)).then((data) => {
         if (data.success === true) {
           toast.success(data.message);
           document.getElementById("loader").style.display = "none";
           this.setState((state, props) => {
-            return { registered: true };
+            return { addusered: true };
           });
           window.location.reload();
         } else {
@@ -104,7 +114,7 @@ class Register extends Component {
                         zIndex: -1,
                       }}
                     ></img> */}
-                    {this.state.registered ? <Redirect to="/" /> : ""}
+                    {this.state.addusered ? <Redirect to="/" /> : ""}
                     <div className="col-12 col-lg-6 d-block mx-auto">
                       <br></br>
                       <br></br>
@@ -113,12 +123,16 @@ class Register extends Component {
                       <br></br>
                       <div className="login-container">
                       <br></br>
-                        <h1 className="text-center text-white">تسجيل كمستخدم جديد</h1>
+                        <h1 className="text-center text-white">إضافة مستخدم جديد</h1>
                       <br></br>
                         <hr></hr>
                         <br></br>
                         <form onSubmit={(e) => this.onSubmitHandler(e)}>
                           <div className="form-group">
+                            <div className="mb-3 row">
+                              <label htmlFor="exampleInputExtensionPhoneNo1" className="col-sm-2 col-form-label text-center text-white">الإسم</label>
+                            {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
+                            <div className="col-sm-10">
                             {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                             <input
                               type="text"
@@ -136,28 +150,14 @@ class Register extends Component {
                               required
                             />
                           </div>
-                          <br></br>
-                          <div className="form-group">
-                            <input
-                              type="text"
-                              className="form-control"
-                              id="exampleInputUsername1"
-                              placeholder="إسم المستخدم"
-                              style={{ borderRadius: "25px" }}
-                              name="username"
-                              value={this.state.username}
-                              onChange={(e) =>
-                                this.setState((state, props) => {
-                                  return { username: e.target.value };
-                                })
-                              }
-                              required
-                            />
-
+                          </div>
                           </div>
                           <br></br>
                           <div className="form-group">
+                            <div className="mb-3 row">
+                              <label htmlFor="exampleInputExtensionPhoneNo1" className="col-sm-2 col-form-label text-center text-white">رقم التليفون</label>
                             {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
+                            <div className="col-sm-10">
                             <input
                               type="phoneNo"
                               id="phoneNo"
@@ -175,8 +175,68 @@ class Register extends Component {
                               رقم التليفون لابد ان يكون مكون من 11 رقم
                             </p>
                           </div>
-                          <br></br>
+                          </div>
+                          </div>
+                                                                <br></br>
+                                      <div className="form-group">
+                                        <div className="mb-3 row">
+                                        <label htmlFor="exampleInputExtensionDepartment1" className="col-sm-2 col-form-label text-center text-white">القسم</label>
+                                        <div className="col-sm-10">
+                            <select
+                              defaultValue={this.state.department}
+                              onChange={(e) =>
+                                this.setState({
+                                  department: e.target.value
+                                })
+                              }
+                              id="exampleInputExtensionDepartment1"
+                              className="form-select"
+                              aria-label="Default select example"
+                              name="department"
+                              required
+                            >
+                                {this.state.departments.map((department) => {
+                                    return <option value={department._id}>{department.nameArabic} - {department.nameEnglish}</option>
+                                })}
+                            </select>
+                                        </div>
+                                        </div>
+                                        {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
+                                      </div>
+                                      <br></br>
+                                      <div className="form-group">
+                                        <div className="mb-3 row">
+                                        <label htmlFor="exampleInputExtensionSite1" className="col-sm-2 col-form-label text-center text-white">المكان</label>
+                                        <div className="col-sm-10">
+                            <select
+                              defaultValue={this.state.site}
+                              onChange={(e) => {
+                                this.setState({
+                                  site: e.target.value,
+                                  departments: store.getState().department.departments.filter((department) => department.site === e.target.value)
+                                })
+                                }
+                              }
+                              id="exampleInputExtensionSite1"
+                              className="form-select"
+                              aria-label="Default select example"
+                              name="site"
+                              required
+                            >
+                                {this.state.sites.map((site) => {
+                                    return <option value={site._id}>{site.name}</option>
+                                })}
+                            </select>
+                                        </div>
+                                        </div>
+                                        {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
+                                      </div>
+                                      <br></br>
                           <div className="form-group">
+                            <div className="mb-3 row">
+                              <label htmlFor="exampleInputExtensionPhoneNo1" className="col-sm-2 col-form-label text-center text-white">كلمة السر</label>
+                            {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
+                            <div className="col-sm-10">
                             <input
                               type="password"
                               className="form-control"
@@ -196,6 +256,8 @@ class Register extends Component {
                               كلمه السر يجب الا تقل عن 6 أحرف/أرقام , و يجب ان
                               تحتوي علي حرف واحد و رقم واحد علي ألاقل
                             </p>
+                          </div>
+                          </div>
                           </div>
                           <br></br>
                           <button
@@ -220,10 +282,10 @@ class Register extends Component {
                           </div>
                         </form>
                         <br></br>
-                        <p className="text-center text-white">
+                        {/* <p className="text-center text-white">
                           سجلت مسبقاً
                           <Link to="/login" style={{marginRight: '10px',color: '#e60006'}}>تسجيل الدخول</Link>
-                        </p>
+                        </p> */}
                         {/* <p className="text-center">
                           سجلت مسبقا؟ <Link to="/login">تسجيل الدخول</Link>
                         </p> */}
@@ -241,4 +303,4 @@ class Register extends Component {
     );
   }
 }
-export default Register;
+export default AddUser;

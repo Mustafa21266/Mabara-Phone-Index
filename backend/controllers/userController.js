@@ -4,7 +4,7 @@ const fetch = require('node-fetch')
 const bcrypt = require('bcryptjs');
 const jwt = require('jsonwebtoken');
 
-exports.registerUser = async (req, res, next) => {
+exports.adduserUser = async (req, res, next) => {
     try {
         const user = await User.create(req.body);
         const token = jwt.sign({_id: user._id},"fghfghw132414as@!")
@@ -26,9 +26,9 @@ exports.registerUser = async (req, res, next) => {
 }
 exports.loginUser = async (req, res, next) => {
     try{
-        const { username, password } = req.body;
-        console.log(username)
-    let user = await User.findOne({ username: username}).select("+password")
+        const { phoneNo, password } = req.body;
+        console.log(phoneNo)
+    let user = await User.findOne({ phoneNo: phoneNo}).select("+password")
     if(user){
         let isCorrectPassword = await bcrypt.compare(password, user.password)
         if(isCorrectPassword){
@@ -41,7 +41,7 @@ exports.loginUser = async (req, res, next) => {
             maxAge: new Date(Date.now() + 7 * 24 * 60 * 60 * 1000), // 1 day
             path: "/",
             }
-            user = await User.findOne({ username: username})
+            user = await User.findOne({ phoneNo: phoneNo})
             res.status(200).cookie('token',token, options).json({
                 success: true,
                 token,
@@ -52,7 +52,7 @@ exports.loginUser = async (req, res, next) => {
     }else {
         res.status(401).json({
             success: false,
-            message: "Username & Passwords don't match"
+            message: "Phone Number & Passwords don't match"
         })
     }
     }catch(err){
@@ -67,7 +67,7 @@ exports.loginUser = async (req, res, next) => {
 exports.getUserDetails = async (req, res, next) => {
     try{
         console.log(req._id)
-    let user = await User.findOne({ _id: req.user._id})
+    let user = await User.findOne({ _id: req.user._id}).populate("site").populate("department")
     if(user){
         const token = jwt.sign({_id: user._id},"fghfghw132414as@!")
         const options = {
@@ -219,8 +219,7 @@ exports.editUserDetails = async (req, res, next) => {
         if(req.body.password === req.body.confirmPassword){
             // const user = await User.findById(req.params.id);
             user.name = req.body.name
-            user.username = req.body.username
-            user.email = req.body.email
+            user.phoneNo = req.body.phoneNo
             user.password = req.body.password
             await user.save();
             res.status(200).json({

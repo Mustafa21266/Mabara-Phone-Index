@@ -1,5 +1,5 @@
 import {
-  REGISTER,
+  ADDUSER,
   LOGIN_ADMIN,
   LOGOUT_ADMIN,
   EDIT_PROFILE,
@@ -19,7 +19,7 @@ const initialState = {
 
 function userReducer(state = initialState, action) {
   switch (action.type) {
-    case REGISTER:
+    case ADDUSER:
       
       return Object.assign({}, state, {
         user: action.payload.user,

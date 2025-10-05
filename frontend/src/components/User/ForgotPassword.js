@@ -132,9 +132,9 @@ class ForgotPassword extends Component {
                   </div>
                 </form>
                 <br></br>
-                <p className="text-center">
+                {/* <p className="text-center">
                   مستخدم جديد؟ <Link to="/register">تسجيل كمستخدم جديد</Link>
-                </p>
+                </p> */}
                 <p className="text-center">
                   <Link to="/password/forgot">نسيت كلمه السر؟</Link>
                 </p>

@@ -128,8 +128,6 @@ class Navbar extends Component {
    ) : (
      <Fragment>
        <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/login">تسجيل الدخول</Link>
-              <div className="dropdown-divider"></div>
-             <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/register">إنشاء حساب</Link>
      </Fragment>
 
    )}

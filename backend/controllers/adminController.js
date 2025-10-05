@@ -272,8 +272,10 @@ exports.editUserDetailsAdmin = async (req, res, next) => {
         } else {
             const user = await User.findById(req.params.id);
             user.name = req.body.name
-            user.role = req.body.role
             user.phoneNo = req.body.phoneNo
+            user.department = req.body.department
+            user.site = req.body.site
+            user.role = req.body.role
             await user.save();
             res.status(200).json({
                 success: true,

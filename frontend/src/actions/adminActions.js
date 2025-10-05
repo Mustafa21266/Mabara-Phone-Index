@@ -1,6 +1,6 @@
 import axios from 'axios';
 import {
-    REGISTER,
+    ADDUSER,
     LOGIN_ADMIN,
     LOGOUT_ADMIN,
     EDIT_PROFILE,
@@ -13,17 +13,17 @@ import {
 } from '../constants/adminConstants';
 let baseURL = '';
 // axios.defaults.withCredentials = true;
-//REGISTER
-export const register = (registerData) => async (dispatch) => {
+//ADDUSER
+export const adduser = (adduserData) => async (dispatch) => {
     try {
         const config = {
             headers: {
                 'Content-Type': 'application/json'
             }
         }
-        const { data } = await axios.post(`http://localhost:8000/api/v1/register`, registerData, config)
+        const { data } = await axios.post(`http://localhost:8000/api/v1/adduser`, adduserData, config)
         dispatch({
-            type: REGISTER,
+            type: ADDUSER,
             payload: data
         })
         return data

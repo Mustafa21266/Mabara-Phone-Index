@@ -1,4 +1,4 @@
-export const REGISTER = 'REGISTER';
+export const ADDUSER = 'ADDUSER';
 export const LOGIN_ADMIN = 'LOGIN_ADMIN';
 export const LOGOUT_ADMIN = 'LOGOUT_ADMIN';
 export const EDIT_PROFILE = 'EDIT_PROFILE';

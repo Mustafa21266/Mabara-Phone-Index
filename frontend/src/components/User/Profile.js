@@ -109,15 +109,21 @@ class Profile extends Component {
                         </div>
                       </div>
                           <div className="mb-3 row">
-                        <label htmlhtmlFor="staticEmail" className="col-sm-2 col-form-label text-center">إسم المستخدم</label>
+                        <label htmlhtmlFor="staticPhoneNo" className="col-sm-2 col-form-label text-center">رقم التليفون</label>
                         <div className="col-sm-10">
-                          <input type="text" readOnly className="form-control" id="staticEmail" value={store.getState().auth.user.username} style={{color:'black'}} />
+                          <input type="text" readOnly className="form-control" id="staticPhoneNo" value={store.getState().auth.user.phoneNo} style={{color:'black'}} />
                         </div>
                       </div>
                                                 <div className="mb-3 row">
-                        <label htmlhtmlFor="staticEmail" className="col-sm-2 col-form-label text-center">البريد الإلكتروني</label>
+                        <label htmlhtmlFor="staticDepartment" className="col-sm-2 col-form-label text-center">القسم</label>
                         <div className="col-sm-10">
-                          <input type="text" readOnly className="form-control" id="staticEmail" value={store.getState().auth.user.email} style={{color:'black'}} />
+                          <input type="text" readOnly className="form-control" id="staticDepartment" value={store.getState().auth.user.department.nameArabic + ' - ' + store.getState().auth.user.department.nameEnglish} style={{color:'black'}} />
+                        </div>
+                      </div>
+                      <div className="mb-3 row">
+                        <label htmlhtmlFor="staticSite" className="col-sm-2 col-form-label text-center">المكان</label>
+                        <div className="col-sm-10">
+                          <input type="text" readOnly className="form-control" id="staticSite" value={store.getState().auth.user.site.name} style={{color:'black'}} />
                         </div>
                       </div>
                       <div className="mb-3 row">

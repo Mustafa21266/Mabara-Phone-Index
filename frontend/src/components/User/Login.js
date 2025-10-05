@@ -12,7 +12,7 @@ class Login extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      username: "",
+      phoneNo: "",
       password: "",
       loggedIn: false,
       loading: true,
@@ -27,7 +27,7 @@ class Login extends Component {
     e.preventDefault();
     document.getElementById("loader").style.display = "block";
     const formData = new FormData();
-    formData.set("username", e.target.username.value);
+    formData.set("phoneNo", e.target.phoneNo.value);
     formData.set("password", e.target.password.value);
     await store.dispatch(loginAdmin(formData)).then(async (data) => {
       if (data.success === true) {
@@ -110,16 +110,16 @@ class Login extends Component {
                         <br></br>
                         <form onSubmit={(e) => this.onSubmitHandler(e)}>
                           <div className="form-group">
-                            <h5 className="text-center text-white">إسم المستخدم</h5>
+                            <h5 className="text-center text-white">رقم التليفون</h5>
                             <br></br>
                             <input
-                              type="test"
-                              id="username"
+                              type="number"
+                              id="phoneNo"
                               className="form-control"
                               placeholder="إسم المستخدم"
-                              name="username"
+                              name="phoneNo"
                               style={{ borderRadius: "25px" }}
-                              defaultValue={this.state.username}
+                              defaultValue={this.state.phoneNo}
                               required
                             />
                             <br></br>
@@ -172,10 +172,10 @@ class Login extends Component {
                           </div>
                         </form>
                         <br></br>
-                        <p className="text-center text-white">
+                        {/* <p className="text-center text-white">
                           مستخدم جديد؟
                           <Link to="/register" style={{marginRight: '10px',color: '#e60006'}}>تسجيل كمستخدم جديد</Link>
-                        </p>
+                        </p> */}
                         <p className="text-center">
                           <Link to="/password/forgot" style={{color: '#e60006'}}>نسيت كلمه السر؟</Link>
                         </p>

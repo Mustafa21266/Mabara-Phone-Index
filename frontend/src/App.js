@@ -16,7 +16,7 @@ import "./App.css";
 import Footer from "./components/Footer";
 import Login from "./components/User/Login";
 import Profile from "./components/User/Profile";
-import Register from "./components/User/Register";
+import AddUser from "./components/User/AddUser";
 import history from "./history";
 import EditProfile from "./components/User/EditProfile";
 // Require Editor JS files.
@@ -144,8 +144,8 @@ class App extends Component {
             <Route path="/login" exact>
               <Login />
             </Route>
-            <Route path="/register" exact>
-              <Register />
+            <Route path="/add-user" exact>
+              <AddUser />
             </Route>
             <Route path="/me/update" exact>
               <EditProfile />

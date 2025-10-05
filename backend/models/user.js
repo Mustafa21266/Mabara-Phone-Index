@@ -11,11 +11,6 @@ const userSchema = new mongoose.Schema({
         required: [true, 'Please Enter your name!'],
         maxlength: [50, 'Name cannot exceed 50 characters']
     },
-    username: {
-        type: String,
-        required: [true, 'Please enter a username!'],
-        minLength: [3, 'Username cannot be less than 3 characters!']
-    },
     phoneNo: {
         type: String,
         required: [true, 'Please enter a phone number!'],
@@ -27,6 +22,16 @@ const userSchema = new mongoose.Schema({
         minLength: [6, 'Password cannot be less than 6 characters!'],
         select: false
     },
+        department: {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Department',
+            required: true
+        },
+        site: {
+            type: mongoose.Schema.ObjectId,
+            ref: 'Site',
+            required: true
+        },
     role: {
         type: String,
         // required: [true, 'Please enter a role!'],
@@ -34,7 +39,7 @@ const userSchema = new mongoose.Schema({
         //     values: ['it-manager','it-support','application-support','network-admin','system-admin','team-leader','it-manager'],
         //     message: 'Please select correct role'
         // },
-        default: 'it-support'
+        default: 'user'
     },
     createdAt: {
         type: Date,

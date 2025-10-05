@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const {
-    registerUser,
+    adduserUser,
     loginUser,
     logoutUser,
     editUserDetails,
@@ -12,7 +12,7 @@ const {
 
 const auth = require("../middlewares/auth");
 
-router.route('/register').post(registerUser)
+router.route('/adduser').post(adduserUser)
 router.route('/login').post(loginUser)
 router.route('/logout/:token').get(auth, logoutUser)
 router.route('/getUserDetails/:token').get(auth, getUserDetails)

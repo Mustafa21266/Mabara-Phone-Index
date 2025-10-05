@@ -20,8 +20,10 @@ class SharkHomepage extends Component {
       pinCreated: false,
       loading: true,
       extensions: [],
+      timetables: [],
       selectedSite: '',
       selectedSiteFloor: [],
+      selectedSiteDepartment: [],
       userPins: []
     };
     this.onAddPinHandler = this.onAddPinHandler.bind(this);
@@ -40,15 +42,23 @@ class SharkHomepage extends Component {
         selectedSiteFloor: store
         .getState()
         .floor.floors.filter(floor => floor.site === "68cbbe05c5b33217c0218714"),
+        selectedSiteDepartment: store
+        .getState()
+        .department.departments.filter(department => department.site === "68cbbe05c5b33217c0218714"),
         userPins: store
         .getState()
-        .pin.pins.filter(pin => store.getState().auth.user && pin.user === store.getState().auth.user._id)
+        .pin.pins.filter(pin => store.getState().auth.user && pin.user === store.getState().auth.user._id),
+        timetables: store
+        .getState()
+        .timetable.timetables.filter(timetable => timetable.department._id === store
+        .getState()
+        .department.departments.filter(department => department.site === "68cbbe05c5b33217c0218714")[0]._id)
         };
       });
       console.log(this.state.userPins)
       document.getElementById('sharkBtn').classList.add("active")
-      document.getElementById('capitalBtn').classList.remove("active")
       document.getElementById('gharbBtn').classList.remove("active")
+      document.getElementById('capitalBtn').classList.remove("active")
     }, 3000);
   }
   async onChangeHandler(e, site) {
@@ -203,6 +213,61 @@ class SharkHomepage extends Component {
                   <br></br>
                   <br></br>
             <div className="container-fluid" style={{backgroundColor: '#3357A0'}}>
+            <div
+              className="row animate__animated animate__fadeIn animate__slower animate__delay-1s"
+              style={{ padding: "30px" }}
+              dir="rtl"
+            >
+              <div className="col-12 col-lg-2 animate__animated animate__fadeIn animate__slower animate__delay-2s" dir="ltr">
+                <h1 style={{ textAlign: "center", color: 'white' }}>
+                  <i className="bi bi-option"></i>
+                </h1>
+                <h1 style={{ textAlign: "center", color: 'white' }}>الخيارات</h1>
+                <br></br>
+                <ul className="nav flex-column nav-pills nav-fill">
+                  <li className="nav-item">
+                    <a
+                      className="nav-link active"
+                      id="phoneExtenstions-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#phoneExtenstions"
+                      type="button"
+                      role="tab"
+                      aria-controls="phoneExtenstions"
+                      aria-selected="true"
+                      style={{color: 'white'}}
+                    >
+                      دليل الأرقام الداخلية
+                    </a>
+                  </li>
+                  <li className="nav-item">
+                    <a
+                      className="nav-link"
+                      id="onCallTables-tab"
+                      data-bs-toggle="tab"
+                      data-bs-target="#onCallTables"
+                      type="button"
+                      role="tab"
+                      aria-controls="onCallTables"
+                      aria-selected="false"
+                      style={{color: 'white'}}
+                    >
+                      جدول الاون كول
+                    </a>
+                  </li>
+                </ul>
+                <br></br>
+                <hr></hr>
+                <br></br>
+              </div>
+              <div className="col-12 col-lg-10">
+                <div className="tab-content" id="myTabContent">
+                  <div
+                    className="tab-pane fade show active"
+                    id="phoneExtenstions"
+                    role="tabpanel"
+                    aria-labelledby="phoneExtenstions-tab"
+                  >
               <div className="row animate__animated animate__fadeIn animate__slower animate__delay-1s">
                 <div className="col-12">
               <h1 className="d-block mx-auto text-center text-white">دليل تليفونات مبرة العصافرة</h1>
@@ -366,6 +431,151 @@ class SharkHomepage extends Component {
 </div>
               </dir>
               </dir>
+                    <br></br>
+                    <br></br>
+                  </div>
+                  <div
+                    className="tab-pane fade"
+                    id="onCallTables"
+                    role="tabpanel"
+                    aria-labelledby="onCallTables-tab"
+                  >
+            <dir className="row animate__animated animate__fadeIn animate__slower animate__delay-4s">
+                <dir className="col-12">
+                  <ul className="nav nav-tabs" id="myTab1" role="tablist"  dir="rtl">
+                    {this.state.selectedSiteDepartment.map((department,index) => {
+                      if(index === 0){
+                      return <li key={department._id} className="nav-item" role="presentation">
+    <button className="nav-link text-white active" id={department.nameEnglish + "-tab"} data-bs-toggle="tab" data-bs-target={`#${department.nameEnglish}`} type="button" role="tab" aria-controls={`${department.nameEnglish}`} aria-selected="true" onClick={(e) => {
+      this.setState({
+        timetables: store
+        .getState()
+        .timetable.timetables.filter(timetable => timetable.department._id === department._id)
+      })
+    }}>{`${department.nameArabic}`}</button>
+                        </li>
+                      }else {
+                      return <li key={department._id} className="nav-item" role="presentation">
+    <button className="nav-link text-white" id={department.nameEnglish + "-tab"} data-bs-toggle="tab" data-bs-target={`#${department.nameEnglish}`} type="button" role="tab" aria-controls={`${department.nameEnglish}`} aria-selected="true" onClick={(e) => {
+      this.setState({
+        timetables: store
+        .getState()
+        .timetable.timetables.filter(timetable => timetable.department._id === department._id)
+      })
+    }}>{`${department.nameArabic}`}</button>
+                        </li>
+                      }
+                    })}
+</ul>
+<div className="tab-content" id="myTabContent" dir="rtl">
+  {this.state.selectedSiteDepartment.map((department,index) => {
+    if(index === 0){
+      return <div key={department._id} className="tab-pane fade show active row d-flex justify-content-start" id={`${department.nameEnglish}`} role="tabpanel" aria-labelledby={department.nameEnglish + "-tab"}>
+        {this.state.timetables.map((timetable, inxx) => {
+          if(timetable.department._id === department._id){
+            return <table className="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">اليوم</th>
+      <th scope="col">من</th>
+      <th scope="col">إلى</th>
+      <th scope="col">الشخص</th>
+    </tr>
+  </thead>
+  <tbody>
+    {store
+        .getState()
+        .tableday.tabledays.filter(tableday => tableday.timetable._id === timetable._id).map((tableday, ix) => {
+          return <tr>
+      <th scope="row">{ix + 1}</th>
+      <td>{new Date(tableday.startDate).toDateString()}</td>
+      <td>{new Date(tableday.startTime).toTimeString().split(' ')[0]}</td>
+      <td>{new Date(tableday.endTime).toTimeString().split(' ')[0]}</td>
+      <td>
+        <p>{tableday.user.name}</p>
+        <hr></hr>
+        <p>{tableday.user.phoneNo}</p>
+        </td>
+    </tr>
+        })}
+  </tbody>
+</table>
+          }
+        })}
+        
+      </div>
+  }else {
+    return <div key={department._id} className="tab-pane fade row d-flex justify-content-start" id={`${department.nameEnglish}`} role="tabpanel" aria-labelledby={department.nameEnglish + "-tab"}>
+        {this.state.timetables.map((timetable, inxx) => {
+          if(timetable.department._id === department._id){
+            return <table className="table">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">اليوم</th>
+      <th scope="col">من</th>
+      <th scope="col">إلى</th>
+      <th scope="col">الشخص</th>
+    </tr>
+  </thead>
+  <tbody>
+    {store
+        .getState()
+        .tableday.tabledays.filter(tableday => tableday.timetable._id === timetable._id).map((tableday, ix) => {
+          return <tr>
+      <th scope="row">{ix + 1}</th>
+      <td>{new Date(tableday.startDate).toDateString()}</td>
+      <td>{new Date(tableday.startTime).toTimeString().split(' ')[0]}</td>
+      <td>{new Date(tableday.endTime).toTimeString().split(' ')[0]}</td>
+      <td>
+        <p>{tableday.user.name}</p>
+        <hr></hr>
+        <p>{tableday.user.phoneNo}</p>
+        </td>
+    </tr>
+        })}
+  </tbody>
+</table>
+          }
+        })}
+        
+      </div>
+  }              
+  })}
+</div>
+              </dir>
+              </dir>
+                    <br></br>
+                    <br></br>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
             </div>
           </Fragment>
         )}

@@ -1,4 +1,5 @@
 const TimeTable = require('../models/timetable');
+const TableDay = require('../models/tableday');
 const User = require('../models/user');
 const crypto = require('crypto');
 const cloudinary = require('cloudinary');
@@ -65,6 +66,7 @@ exports.deleteTimeTable = async (req, res, next) => {
     } else {
         let timetable = await TimeTable.findById(req.params.id)
         await TimeTable.findByIdAndDelete(req.params.id)
+        await TableDay.deleteMany({timetable: req.params.id })
         res.status(200).json({
             success: true,
             message: 'TimeTable Deleted Successfully!',

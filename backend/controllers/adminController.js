@@ -246,7 +246,7 @@ exports.getAllArticles = async (req, res, next) => {
 }
 //Get all users for ADMIN ONLY
 exports.getAllUsers = async (req, res, next) => {
-    const users = await User.find()
+    const users = await User.find().populate("site").populate("department")
         if(users){
             res.status(200).json({
                 success: true,

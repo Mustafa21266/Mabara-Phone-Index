@@ -61,13 +61,18 @@ class OPSharkDashboard extends Component {
           sort: "asc",
         },
         {
-          label: "إسم المستخدم",
-          field: "username",
+          label: "رقم التليفون",
+          field: "phoneNo",
           sort: "asc",
         },
         {
-          label: "البريد الإلكتروني",
-          field: "email",
+          label: "القسم",
+          field: "department",
+          sort: "asc",
+        },
+        {
+          label: "المكان",
+          field: "site",
           sort: "asc",
         },
         {
@@ -92,8 +97,9 @@ class OPSharkDashboard extends Component {
       data.rows = data.rows.concat({
         id: user._id,
         name: user.name,
-        username: user.username,
-        email: `${user.email}`,
+        phoneNo: user.phoneNo,
+        department: `${user.department.nameArabic + ' - ' + user.department.nameEnglish}`,
+        site: `${user.site.name}`,
         role: `${user.role}`,
         createdAt: String(user.createdAt).substring(0, 10),
         actions: (

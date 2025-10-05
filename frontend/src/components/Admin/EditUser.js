@@ -26,8 +26,19 @@ class EditUser extends Component {
         .getState()
         .auth.users.filter((user) => user._id === this.props.match.params.id)[0]
         .phoneNo,
-      department: "",
-      site: "",
+      department: store
+        .getState()
+        .auth.users.filter((user) => user._id === this.props.match.params.id)[0]
+        .department._id,
+      site: store
+        .getState()
+        .auth.users.filter((user) => user._id === this.props.match.params.id)[0]
+        .site._id,
+      departments: store.getState().department.departments.filter((department) => department.site === store
+        .getState()
+        .auth.users.filter((user) => user._id === this.props.match.params.id)[0]
+        .site._id),
+      sites: [],
       edited: false,
       loading: true,
       disableBtn: false,
@@ -36,11 +47,14 @@ class EditUser extends Component {
     this.checkPhoneNo = this.checkPhoneNo.bind(this);
   }
   componentDidMount() {
-    this.setState({ loading: false });
     setTimeout(() => {
       let input = document.querySelector("#phone");
       this.phoneInput = "";
-    }, 1000);
+      this.setState({ 
+        loading: false,
+        sites: store.getState().site.sites
+       });
+    }, 4000);
   }
   async onSubmitHandler(e) {
     e.preventDefault();
@@ -133,12 +147,12 @@ class EditUser extends Component {
                     )}
                     <div className="col-12 col-lg-6 d-block mx-auto" dir="rtl">
                       <div className="login-container">
-                        <h1 className="text-center">تعديل بيانات الحساب</h1>
+                        <h1 className="text-center text-white">تعديل بيانات الحساب</h1>
                         <br></br>
                         <form onSubmit={(e) => this.onSubmitHandler(e)}>
                           <div className="form-group">
                             <div className="mb-3 row">
-                        <label htmlhtmlFor="staticSite" className="col-sm-2 col-form-label text-center">الإسم</label>
+                        <label htmlFor="staticSite" className="col-sm-2 col-form-label text-center text-white">الإسم</label>
                         <div className="col-sm-10">
                             {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                             <input
@@ -160,24 +174,66 @@ class EditUser extends Component {
                           </div>
                           </div>
                           </div>
-                          <br></br>
-<div className="mb-3 row">
-                        <label htmlhtmlFor="staticDepartment" className="col-sm-2 col-form-label text-center">القسم</label>
-                        <div className="col-sm-10">
-                          <input type="text" readOnly className="form-control" id="staticDepartment" value={store.getState().auth.user.department.nameArabic + ' - ' + store.getState().auth.user.department.nameEnglish} style={{color:'black'}} />
-                        </div>
-                      </div>
-                                                <br></br>
-                      <div className="mb-3 row">
-                        <label htmlhtmlFor="staticSite" className="col-sm-2 col-form-label text-center">المكان</label>
-                        <div className="col-sm-10">
-                          <input type="text" readOnly className="form-control" id="staticSite" value={store.getState().auth.user.site.name} style={{color:'black'}} />
-                        </div>
-                      </div>
+                          
+                              <br></br>
+                                      <div className="form-group">
+                                        <div className="mb-3 row">
+                                        <label htmlFor="exampleInputExtensionDepartment1" className="col-sm-2 col-form-label text-center text-white">القسم</label>
+                                        <div className="col-sm-10">
+                            <select
+                              defaultValue={this.state.department}
+                              onChange={(e) =>
+                                this.setState({
+                                  department: e.target.value
+                                })
+                              }
+                              id="exampleInputExtensionDepartment1"
+                              className="form-select"
+                              aria-label="Default select example"
+                              name="department"
+                              required
+                            >
+                                {this.state.departments.map((department) => {
+                                    return <option value={department._id}>{department.nameArabic} - {department.nameEnglish}</option>
+                                })}
+                            </select>
+                                        </div>
+                                        </div>
+                                        {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
+                                      </div>
+                                      <br></br>
+                                      <div className="form-group">
+                                        <div className="mb-3 row">
+                                        <label htmlFor="exampleInputExtensionSite1" className="col-sm-2 col-form-label text-center text-white">المكان</label>
+                                        <div className="col-sm-10">
+                            <select
+                              defaultValue={this.state.site}
+                              onChange={(e) => {
+                                this.setState({
+                                  site: e.target.value,
+                                  departments: store.getState().department.departments.filter((department) => department.site === e.target.value)
+                                })
+                                }
+                              }
+                              id="exampleInputExtensionSite1"
+                              className="form-select"
+                              aria-label="Default select example"
+                              name="site"
+                              required
+                            >
+                                {this.state.sites.map((site) => {
+                                    return <option value={site._id}>{site.name}</option>
+                                })}
+                            </select>
+                                        </div>
+                                        </div>
+                                        {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
+                                      </div>
+                                      <br></br>                 
                           <br></br>
                           <div className="form-group">
                              <div className="mb-3 row">
-                        <label htmlhtmlFor="staticSite" className="col-sm-2 col-form-label text-center">رقم الموبايل</label>
+                        <label htmlhtmlFor="staticSite" className="col-sm-2 col-form-label text-center text-white">رقم الموبايل</label>
                         <div className="col-sm-10">
                             {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                             <input
@@ -185,7 +241,7 @@ class EditUser extends Component {
                               className="form-control"
                               placeholder="رقم الموبايل"
                               type="tel"
-                              style={{ borderRadius: "25px" }}
+                              style={{ borderRadius: "25px",textAlign: 'right' }}
                               name="phoneNo"
                               defaultValue={this.state.phoneNo}
                               onChange={(e) => this.checkPhoneNo(e)}
@@ -204,7 +260,7 @@ class EditUser extends Component {
                           <br></br>
                           <div className="form-group">
                         <div className="mb-3 row">
-                        <label htmlhtmlFor="staticSite" className="col-sm-2 col-form-label text-center">الصلاحيات</label>
+                        <label htmlhtmlFor="staticSite" className="col-sm-2 col-form-label text-center text-white">الصلاحيات</label>
                         <div className="col-sm-10">
                             {/* <label htmlFor="exampleInputEmail1">Email address</label> */}
                             <select
@@ -231,7 +287,7 @@ class EditUser extends Component {
                           <br></br>
                           <button
                             type="submit"
-                            className="btn btn-outline-primary d-block mx-auto"
+                            className="btn btn-outline-light d-block mx-auto"
                             style={{
                               borderRadius: "50px",
                               padding: "10px 30px",

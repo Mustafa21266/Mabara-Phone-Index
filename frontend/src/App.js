@@ -30,6 +30,8 @@ import "froala-editor/css/froala_editor.pkgd.min.css";
 // import 'font-awesome/css/font-awesome.css';
 import CreateArticle from "./components/Admin/CreateArticle";
 import EditArticle from "./components/Admin/EditArticle";
+import CreateTicket from "./components/Admin/CreateTicket";
+import EditTicket from "./components/Admin/EditTicket";
 import AllArticles from "./components/Article/AllArticles";
 import Article from "./components/Article/Article";
 import { getAllUsers, getUserDetails } from "./actions/adminActions";
@@ -62,6 +64,8 @@ import { getAllPins } from "./actions/pinActions";
 import { getAllDepartments } from "./actions/departmentActions";
 import { getAllTimeTables } from "./actions/timetableActions";
 import { getAllTableDays } from "./actions/tabledayActions";
+import { getAllTickets } from "./actions/ticketActions";
+import Ticket from "./components/Ticket/Ticket";
 // import { SIPProvider } from "react-sipjs";
 // import { ReactSipPhone } from 'react-sip-phone'
 // import 'react-sip-phone/dist/index.css'
@@ -91,7 +95,9 @@ class App extends Component {
                 store.dispatch(getAllUsers()).then((data) => {
                 store.dispatch(getAllTimeTables()).then((data) => {
                 store.dispatch(getAllTableDays()).then((data) => {
+                store.dispatch(getAllTickets()).then((data) => {
                 
+            })
             })
             })
             })
@@ -195,6 +201,12 @@ class App extends Component {
             <Route path="/admin/article/edit/:id" exact>
               <EditArticle />
             </Route>
+             <Route path="/admin/ticket/create" exact>
+              <CreateTicket />
+            </Route>
+            <Route path="/admin/ticket/edit/:id" exact>
+              <EditTicket />
+            </Route>
             <Route path="/admin/dashboard" exact>
               <Dashboard />
             </Route>
@@ -215,6 +227,9 @@ class App extends Component {
             </Route>
             <Route path="/article/:id" exact>
               <Article />
+            </Route>
+              <Route path="/ticket/:id" exact>
+              <Ticket />
             </Route>
             <ToastContainer autoClose={3000} />
             <Footer />

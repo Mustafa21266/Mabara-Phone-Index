@@ -21,4 +21,4 @@ const ticketImagesSchema = new mongoose.Schema({
 
 
 
-module.exports = mongoose.model('ArticleImages', ticketImagesSchema)
+module.exports = mongoose.model('TicketImages', ticketImagesSchema)

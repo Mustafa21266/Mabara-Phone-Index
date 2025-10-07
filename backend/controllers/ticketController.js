@@ -18,7 +18,7 @@ exports.createTicket = async (req, res, next) => {
         })
     } else {
         let ticket = await Ticket.create(req.body)
-        ticket = await Ticket.findById(ticket._id).populate('user')
+        ticket = await Ticket.findById(ticket._id).populate('user').populate('site').populate('department')
         res.status(200).json({
             success: true,
             message: 'Ticket Created Successfully!',
@@ -229,7 +229,7 @@ exports.deleteTicketImage = async (req, res, next) => {
 
 
 exports.getAllTickets = async (req, res, next) => {
-    const tickets = await Ticket.find().populate('user').sort({ 'createdAt': -1 })
+    const tickets = await Ticket.find().populate('user').populate('site').populate('department').sort({ 'createdAt': -1 })
     if(tickets){
         res.status(200).json({
             success: true,

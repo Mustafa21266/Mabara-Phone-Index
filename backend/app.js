@@ -41,6 +41,8 @@ const timetable = require("./routes/timetable");
 app.use("/api/v1", timetable);
 const tableday = require("./routes/tableday");
 app.use("/api/v1", tableday);
+const ticket = require("./routes/ticket");
+app.use("/api/v1", ticket)
 
 app.listen(PORT, (error) =>{
     if(!error)

@@ -10,6 +10,7 @@ import timetablesReducer from './reducers/timetableReducer';
 import tabledaysReducer from './reducers/tabledayReducer';
 import extensionReducer from './reducers/extensionReducer';
 import pinReducer from './reducers/pinReducer';
+import ticketReducer from './reducers/ticketReducer';
 const reducer = combineReducers({
     auth: userReducer,
     article: articleReducer,
@@ -19,7 +20,8 @@ const reducer = combineReducers({
     site: sitesReducer,
     department: departmentsReducer,
     timetable: timetablesReducer,
-    tableday: tabledaysReducer
+    tableday: tabledaysReducer,
+    ticket: ticketReducer
 })
 
 let initialState = {

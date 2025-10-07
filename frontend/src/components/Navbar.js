@@ -112,6 +112,8 @@ class Navbar extends Component {
           <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/department/create">قسم جديد</Link>
           <div className="dropdown-divider"></div>
           <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/timetable/create">جدول جديد</Link>
+                    <div className="dropdown-divider"></div>
+          <Link className="dropdown-item text-center ibm-plex-sans-arabic-semibold" to="/admin/ticket/create">تيكيت جديد</Link>
   </ul>
 </div>
   <div className="dropdown-divider"></div>

@@ -3,7 +3,9 @@ import {
     GET_ALL_TICKETS,
     UPDATE_TICKET,
     DELETE_TICKET,
-    SEARCH_TICKETS
+    SEARCH_TICKETS,
+    CHANGE_TICKET_STATUS,
+    CHANGE_TICKET_ASSIGNED
 } from "../constants/ticketConstants";
 
 const initialState = {
@@ -29,6 +31,30 @@ function ticketReducer(state = initialState, action) {
             })
         case UPDATE_TICKET:
             return Object.assign({}, state, {
+                success: action.payload.success,
+                message: action.payload.message,
+                tickets: state.tickets.map(ticket => {
+                    if (ticket._id === action.payload.ticket._id) {
+                        ticket = action.payload.ticket
+                        return ticket
+                    }
+                    return ticket
+                })
+            })
+        case CHANGE_TICKET_STATUS:
+             return Object.assign({}, state, {
+                success: action.payload.success,
+                message: action.payload.message,
+                tickets: state.tickets.map(ticket => {
+                    if (ticket._id === action.payload.ticket._id) {
+                        ticket = action.payload.ticket
+                        return ticket
+                    }
+                    return ticket
+                })
+            })
+        case CHANGE_TICKET_ASSIGNED:
+             return Object.assign({}, state, {
                 success: action.payload.success,
                 message: action.payload.message,
                 tickets: state.tickets.map(ticket => {

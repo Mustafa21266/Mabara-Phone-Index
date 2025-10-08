@@ -7,7 +7,9 @@ const {
     deleteTicketImage,
     editTicket,
     deleteTicket,
-    searchTickets
+    searchTickets,
+    changeTicketStatus,
+    changeTicketAssigned
 } = require('../controllers/ticketController');
 
 const fileUpload = require('express-fileupload');
@@ -17,6 +19,8 @@ const auth = require("../middlewares/auth");
 
 router.route('/admin/ticket/create').post(auth, createTicket)
 router.route('/admin/ticket/update/:id').put(auth, fileUpload, editTicket)
+router.route('/admin/ticket/status/change/:id').put(auth, changeTicketStatus)
+router.route('/admin/ticket/assigned/change/:id').put(auth, changeTicketAssigned)
 router.route('/admin/ticket/delete/:id').delete(auth, deleteTicket)
 router.route('/admin/ticket/images/upload/:id').post(auth, addTicketImage)
 router.route('/admin/ticket/images/delete/:id').post(auth, deleteTicketImage)

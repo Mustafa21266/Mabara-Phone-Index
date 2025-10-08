@@ -278,7 +278,7 @@ class EditUser extends Component {
                             >
                               <option value="user">user</option>
                               <option value="admin">admin</option>
-                              <option value="moderator">operator</option>
+                              <option value="operator">operator</option>
                             </select>
                             {/* <small id="emailHelp" className="form-text text-muted">We'll never share your email with anyone else.</small> */}
                           </div>

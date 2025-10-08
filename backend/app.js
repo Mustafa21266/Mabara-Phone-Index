@@ -43,6 +43,8 @@ const tableday = require("./routes/tableday");
 app.use("/api/v1", tableday);
 const ticket = require("./routes/ticket");
 app.use("/api/v1", ticket)
+const ticketHTML = require("./routes/ticketHTML");
+app.use("/api/v1", ticketHTML)
 
 app.listen(PORT, (error) =>{
     if(!error)

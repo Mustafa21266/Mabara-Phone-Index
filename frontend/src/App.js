@@ -65,6 +65,7 @@ import { getAllDepartments } from "./actions/departmentActions";
 import { getAllTimeTables } from "./actions/timetableActions";
 import { getAllTableDays } from "./actions/tabledayActions";
 import { getAllTickets } from "./actions/ticketActions";
+import { getAllTicketHTMLs } from "./actions/ticketHTMLActions";
 import Ticket from "./components/Ticket/Ticket";
 // import { SIPProvider } from "react-sipjs";
 // import { ReactSipPhone } from 'react-sip-phone'
@@ -96,7 +97,9 @@ class App extends Component {
                 store.dispatch(getAllTimeTables()).then((data) => {
                 store.dispatch(getAllTableDays()).then((data) => {
                 store.dispatch(getAllTickets()).then((data) => {
+                store.dispatch(getAllTicketHTMLs()).then((data) => {
                 
+            })
             })
             })
             })

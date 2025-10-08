@@ -271,7 +271,8 @@ class CreateTicket extends Component {
       this.formData.set("department", this.state.department);
       this.formData.set("site", this.state.site);
       this.formData.set("ticketNumber", store.getState().ticket.tickets.length + 1);
-      this.formData.set("user", store.getState().auth.user._id);
+      this.formData.set("createdBy", store.getState().auth.user._id);
+      this.formData.set("assignedTo", store.getState().auth.user._id);
       this.formData.set(
         "ticketHTML",
         document.getElementsByClassName("fr-element fr-view")[0].innerHTML

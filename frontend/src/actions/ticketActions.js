@@ -4,7 +4,9 @@ import {
     GET_ALL_TICKETS,
     UPDATE_TICKET,
     DELETE_TICKET,
-    SEARCH_TICKETS
+    SEARCH_TICKETS,
+    CHANGE_TICKET_STATUS,
+    CHANGE_TICKET_ASSIGNED
 } from '../constants/ticketConstants';
 // axios.defaults.withCredentials = true;
 import Cookies from 'js-cookie';
@@ -42,6 +44,50 @@ export const editTicket = (id,ticketData) => async (dispatch) => {
         const { data } = await axios.put(`http://localhost:8000/api/v1/admin/ticket/update/${id}`, ticketData, config)
         dispatch({
             type: UPDATE_TICKET,
+            payload: data
+        })
+        return data
+    } catch (err) {
+        
+        return { message: 'An error has occured' }
+    }
+
+};
+
+//Create an Ticket FOR ADMIN ONLY
+export const changeTicketStatus = (id,ticketData) => async (dispatch) => {
+    try {
+        const config = {
+            headers: {
+                'x-access-token': Cookies.get("token"),
+                                'Content-Type': 'application/json'
+            }
+        }
+        const { data } = await axios.put(`http://localhost:8000/api/v1/admin/ticket/status/change/${id}`, ticketData, config)
+        dispatch({
+            type: CHANGE_TICKET_STATUS,
+            payload: data
+        })
+        return data
+    } catch (err) {
+        
+        return { message: 'An error has occured' }
+    }
+
+};
+
+//Create an Ticket FOR ADMIN ONLY
+export const changeTicketAssigned = (id,ticketData) => async (dispatch) => {
+    try {
+        const config = {
+            headers: {
+                'x-access-token': Cookies.get("token"),
+                                'Content-Type': 'application/json'
+            }
+        }
+        const { data } = await axios.put(`http://localhost:8000/api/v1/admin/ticket/assigned/change/${id}`, ticketData, config)
+        dispatch({
+            type: CHANGE_TICKET_ASSIGNED,
             payload: data
         })
         return data

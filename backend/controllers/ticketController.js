@@ -18,7 +18,7 @@ exports.createTicket = async (req, res, next) => {
         })
     } else {
         let ticket = await Ticket.create(req.body)
-        ticket = await Ticket.findById(ticket._id).populate('user').populate('site').populate('department')
+        ticket = await Ticket.findById(ticket._id).populate('createdBy').populate('assignedTo').populate('site').populate('department')
         res.status(200).json({
             success: true,
             message: 'Ticket Created Successfully!',
@@ -103,6 +103,62 @@ exports.editTicket = async (req, res, next) => {
                 })
             })
         }
+
+    }
+}
+
+exports.changeTicketStatus = async (req, res, next) => {
+    const user = await User.findById(req.user._id)
+    if (!user || user.role !== 'admin') {
+        res.status(401).json({
+            success: false,
+            message: 'Unauthorized Action!',
+        })
+    } else {
+        console.log("asdasdasdasdasd")
+        let newData = {
+            status: req.body.status
+        }
+        let ticket = await Ticket.findByIdAndUpdate(req.params.id, newData, {
+            new: true,
+            runValidators: true,
+            useFindAndModify: false
+        })
+        ticket = await Ticket.findById(req.params.id).populate('createdBy').populate('assignedTo').populate('site').populate('department')
+        res.status(200).json({
+            success: true,
+            message: 'Ticket Status Changed Successfully!',
+            ticket
+        })
+        
+
+    }
+}
+
+exports.changeTicketAssigned = async (req, res, next) => {
+    const user = await User.findById(req.user._id)
+    if (!user || user.role !== 'admin') {
+        res.status(401).json({
+            success: false,
+            message: 'Unauthorized Action!',
+        })
+    } else {
+        console.log("asdasdasdasdasd")
+        let newData = {
+            assignedTo: req.body.assignedTo
+        }
+        let ticket = await Ticket.findByIdAndUpdate(req.params.id, newData, {
+            new: true,
+            runValidators: true,
+            useFindAndModify: false
+        })
+        ticket = await Ticket.findById(req.params.id).populate('createdBy').populate('assignedTo').populate('site').populate('department')
+        res.status(200).json({
+            success: true,
+            message: 'Ticket assignedTo Changed Successfully!',
+            ticket
+        })
+        
 
     }
 }
@@ -229,7 +285,7 @@ exports.deleteTicketImage = async (req, res, next) => {
 
 
 exports.getAllTickets = async (req, res, next) => {
-    const tickets = await Ticket.find().populate('user').populate('site').populate('department').sort({ 'createdAt': -1 })
+    const tickets = await Ticket.find().populate('createdBy').populate('assignedTo').populate('site').populate('department').sort({ 'createdAt': -1 })
     if(tickets){
         res.status(200).json({
             success: true,

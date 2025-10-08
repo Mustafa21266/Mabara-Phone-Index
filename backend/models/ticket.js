@@ -45,11 +45,17 @@ const ticketSchema = new mongoose.Schema({
             ref: 'Site',
             required: true
     },
-    user: {
+    createdBy: {
         type: mongoose.Schema.ObjectId,
         ref: 'User',
         // required: true
     },
+    assignedTo: {
+        type: mongoose.Schema.ObjectId,
+        ref: 'User',
+        // required: true
+    }
+    ,
     createdAt: {
         type: Date,
         default: Date.now,
